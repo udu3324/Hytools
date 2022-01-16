@@ -1,0 +1,67 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: "eclipse"
+apply plugin: 'com.github.johnrengelman.shadow'
+
+repositories {
+    maven { url 'https://repo.hypixel.net/repository/Hypixel/' }
+}
+
+version = "1.0"
+group= "com.udu3324.hytools" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "Hytools"
+
+minecraft {
+    version = "1.8.9-11.15.1.2318-1.8.9"
+    runDir = "run"
+    
+    mappings = "stable_22"
+}
+
+dependencies {
+    //for later on
+}
+
+shadowJar {
+    // Only shadow fluent-hc
+    dependencies {
+        //for later on
+    }
+    
+    classifier '' // Replace the default JAR
+}
+
+reobf {
+    shadowJar {} // Reobfuscate the shadowed JAR
+}
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
