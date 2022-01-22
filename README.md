@@ -2,7 +2,7 @@
 
 <img alt="GitHub" src="https://img.shields.io/github/license/udu3324/Hytools">  
 
-<img alt="GitHub issues" src="https://img.shields.io/github/issues/udu3324/Hytools">  
+<img alt="GitHub downloads" src="https://img.shields.io/github/downloads/udu3324/hytools/total">  
 
 <img alt="forge version support" src="https://img.shields.io/badge/mod%20loader-Forge 1.8.9-e04e14">  
 
