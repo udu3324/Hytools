@@ -34,5 +34,14 @@ change if you want nickalert on or off
 /hytools nickalert [on/off/toggle]
 ```
 
+## Build From Source
+If you want to build your own jar of Hytools, you can.
+1, Clone the repo
+2, Extract the zip
+3, Open a terminal and cd to the source code
+4, Run `gradlew build`
+5, Navigate to build/libs
+Done! You should now see 2 jars generated. The sources jar is for devs only and not for end users to put in the mods folder.
+
 ## Contribute
 You can contribute by starring the repo, reporting issues, and suggesting ideas.
