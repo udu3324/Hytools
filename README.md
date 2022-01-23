@@ -35,7 +35,7 @@ change if you want nickalert on or off
 ```
 
 ## Build From Source
-If you want to build your own jar of Hytools, you can.
+If you want to build your own jar of Hytools, you can.     
 1, Clone the repo    
 2, Extract the zip    
 3, Open a terminal and cd to the source code     
