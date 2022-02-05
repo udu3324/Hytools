@@ -16,6 +16,15 @@ import net.minecraftforge.fml.common.Loader;
 public class Config {
 	public static File configFile = new File(Loader.instance().getConfigDir(), "hytools.cfg");
     
+	public static Boolean isNotCurrentVersion() throws IOException {
+		BufferedReader brTest = new BufferedReader(new FileReader(configFile));
+		String text = brTest.readLine();
+		brTest.close();
+		
+		if (!text.contains(Reference.VERSION)) return true;
+		return false;
+	}
+	
 	public static String getValueFromConfig(String value) {
 		//example:
 		//getValueFromConfig("api-key") returns qergijoiwequjfboqwiuefnweiofnwe
@@ -69,7 +78,15 @@ public class Config {
 	    } catch (Exception e) {
 	    	Hytools.log.info("Problem writing file.");
 	    }
-		
+	}
+	
+	public static void delete() {
+		//deletes the config file
+		if (configFile.delete()) {
+			Hytools.log.info("Config file has been succesfully deleted.");
+		} else {
+			Hytools.log.info("Error! Config file couldn't be deleted!");
+		}
 	}
 
 	public static void create() {
@@ -86,15 +103,28 @@ public class Config {
 				w.write("# Party Guess Config" + System.lineSeparator());
 				w.write("party-guess_toggled: true" + System.lineSeparator());
 				w.write("party-guess-friendmsg_toggled: true" + System.lineSeparator());
+				w.write("party-guess-guildcheck_toggled: true" + System.lineSeparator());
 				w.write(System.lineSeparator());
 				w.write("# Nick Alert Config" + System.lineSeparator());
 				w.write("nick-alert_toggled: true" + System.lineSeparator());
+				w.write("nick-alert-hypixel-api_toggled: false" + System.lineSeparator());
 				w.close();
 				
-				Hytools.log.info("new config has been created");
+				Hytools.log.info("new config has been created (good)");
 			  } else {
 				//dont do anything if the config has alr been made
 			    Hytools.log.info("config already exists (good)");
+			    
+			    if (isNotCurrentVersion()) {
+			    	Hytools.log.info("config file is at the wrong version (bad)");
+			    	//delete and create the new one with the right version
+			    	String apiKey = getStoredAPIKey();
+			    	
+			    	delete();
+			    	create();
+			    	
+			    	setStoredAPIKey(apiKey);
+			    }
 			  }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -137,6 +167,19 @@ public class Config {
 		setValueFromConfig("party-guess-friendmsg_toggled", String.valueOf(bool));
 	}
 	
+	public static Boolean getPartyGuessGuild() {
+		String str = getValueFromConfig("party-guess-guildcheck_toggled");
+		if (str.equals("true")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static void setPartyGuessGuild(Boolean bool) {
+		setValueFromConfig("party-guess-guildcheck_toggled", String.valueOf(bool));
+	}
+	
 	public static Boolean getNickAlert() {
 		String str = getValueFromConfig("nick-alert_toggled");
 		if (str.equals("true")) {
@@ -148,5 +191,18 @@ public class Config {
 	
 	public static void setNickAlert(Boolean bool) {
 		setValueFromConfig("nick-alert_toggled", String.valueOf(bool));
+	}
+	
+	public static Boolean getNickAlertHypixelAPI() {
+		String str = getValueFromConfig("nick-alert-hypixel-api_toggled");
+		if (str.equals("true")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static void setNickAlertHypixelAPI(Boolean bool) {
+		setValueFromConfig("nick-alert-hypixel-api_toggled", String.valueOf(bool));
 	}
 }

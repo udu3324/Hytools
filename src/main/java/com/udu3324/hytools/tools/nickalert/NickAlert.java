@@ -21,7 +21,7 @@ public class NickAlert {
             con.setRequestMethod("GET");
 
             int responseCode = con.getResponseCode();
-            System.out.println("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + url);
+            Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + url);
             
             if (responseCode == 403) {
             	Hytools.sendMessage("\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
@@ -50,21 +50,29 @@ public class NickAlert {
 		try {
 			
 			uuid = UUID.get(username);
-			if (uuid.equals("Not a IGN or UUID!")) { //check if username is real first
+			if (uuid.equals("Not a IGN or UUID!")) {
+				//checks if username exists in minecraft api
 				Hytools.sendMessage("\u00A75" + username + " is a nicked user!");
 				return;
 			}
+			
+			if (!Config.getNickAlertHypixelAPI()) {
+	    		//this is to disable nick alert hypixel api if it's disabled in config
+				return;
+	    	}
+			
 			Boolean playerData;
 			
 			//return if api key set wrong
 			if (HypixelApiKey.apiKeySet) {
+				//checks if the player has any stored data
 				playerData = hasLoggedOntoHypixel(uuid);
 	        } else {
 	        	Hytools.sendMessage("\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
 	        	return;
 	        }
 			
-			if (!playerData) { //check if player joined hypixel
+			if (!playerData) {
 				return;
 			} else {
 				Hytools.sendMessage("\u00A75" + username + " is a nicked user!");

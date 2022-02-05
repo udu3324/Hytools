@@ -40,6 +40,7 @@ public class PartyGuess {
                         for (int i=0; i!=tempUserArray.size(); i++) {  //for each element add it to FriendCheck
                         	String ign = tempUserArray.get(i);
                         	FriendCheck.store(ign);
+                        	GuildCheck.store(ign);
                         }
                         
                         if (tempUserArray.size() == 2) { // user and user
@@ -62,6 +63,12 @@ public class PartyGuess {
                         String friendCheck = FriendCheck.reset();
                         if (!friendCheck.contains(" None matching..") && !friendCheck.equals("empty")) {
                         	Hytools.sendMessage("\u00A72" + friendCheck);
+                        }
+                        
+                        // guild check stuff
+                        String guildCheck = GuildCheck.reset();
+                        if (!(guildCheck == null)) {
+                        	Hytools.sendMessage("\u00A76" + guildCheck);
                         }
                     }
 
