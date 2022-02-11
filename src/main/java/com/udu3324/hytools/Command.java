@@ -31,15 +31,17 @@ public class Command extends CommandBase {
         collection.put("partyguess", "1");
         collection.put("partyguessfriends", "2");
         collection.put("partyguessguilds", "3");
-        collection.put("nickalert", "4");
-        collection.put("nickalerthypixelapi", "4");
+        collection.put("gamerestyle", "4");
+        collection.put("nickalert", "5");
+        collection.put("nickalerthypixelapi", "6");
 
         if (args.length < 1) {
             sender.addChatMessage(new ChatComponentText("\n" + EnumChatFormatting.GOLD + "[+]= Hytools v" + Reference.VERSION + " by udu3324 =[+]\n"
             		+ EnumChatFormatting.GOLD + "Check out my GitHub! https://github.com/udu3324 \n\n"
             		+ EnumChatFormatting.DARK_AQUA + "/hytools partyguess [toggle/on/off] [toggled|" + Config.getPartyGuess() + "]\n"
-            		+ EnumChatFormatting.DARK_GREEN + "/hytools partyguessfriends [toggle/on/off] [toggled|" + Config.getPartyGuessFriend() +"] \n"
+            		+ EnumChatFormatting.DARK_GREEN + "/hytools partyguessfriends [toggle/on/off] [toggled|" + Config.getPartyGuessFriend() +"]\n"
             		+ EnumChatFormatting.GOLD + "/hytools partyguessguilds [toggle/on/off] [toggled|" + Config.getPartyGuessGuild() + "]\n"
+            		+ EnumChatFormatting.BLUE + "/hytools gamerestyle [toggle/on/off] [toggled|" + Config.getGameRestyle() + "]\n"
             		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalert [toggle/on/off] [toggled|" + Config.getNickAlert() + "]\n"
             		+ EnumChatFormatting.GRAY + "Using Hypixel API for NickAlert is in the grey area of being allowed. " + EnumChatFormatting.BOLD + "Use at your own risk.\n"
             		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalerthypixelapi [toggle/on/off] [toggled|" + Config.getNickAlertHypixelAPI() + "]"));
@@ -64,6 +66,12 @@ public class Command extends CommandBase {
         		}
             } else if (command.equals("PARTYGUESSGUILDS")) {
             	if (Config.getPartyGuessGuild()) {
+            		data = "ON";
+        		} else {
+        			data = "OFF";
+        		}
+            } else if (command.equals("GAMERESTYLE")) {
+            	if (Config.getGameRestyle()) {
             		data = "ON";
         		} else {
         			data = "OFF";
@@ -150,6 +158,20 @@ public class Command extends CommandBase {
             			data = "OFF";
             		} else { //would be off
             			Config.setPartyGuessGuild(true);
+            			data = "ON";
+            		}
+            	}
+            } else if (command.equals("GAMERESTYLE")) {
+            	if (data.equals("ON")) {
+            		Config.setGameRestyle(true);
+            	} else if (data.equals("OFF")) {
+            		Config.setGameRestyle(false);
+            	} else if (data.equals("TOGGLE")) {
+            		if (Config.getGameRestyle()) {
+            			Config.setGameRestyle(false);
+            			data = "OFF";
+            		} else { //would be off
+            			Config.setGameRestyle(true);
             			data = "ON";
             		}
             	}

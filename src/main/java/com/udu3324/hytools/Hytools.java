@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
 
 import com.udu3324.hytools.hyapi.HypixelApiKey;
 import com.udu3324.hytools.mcapi.UUID;
+import com.udu3324.hytools.tools.gamerestyle.GameRestyle;
 import com.udu3324.hytools.tools.nickalert.NickAlert;
 import com.udu3324.hytools.tools.partyguess.PartyGuess;
 
@@ -73,7 +74,7 @@ public class Hytools {
 	
 	@SubscribeEvent
     public void onWorldLoaded(EntityJoinWorldEvent event) {
-		if (!doOnceOnWorldLoaded) {
+		if (!doOnceOnWorldLoaded) { //prevents infinite loop
 			return;
 		}
 		// if statements have to be seperate or else serverIP could be null and crash mc
@@ -97,6 +98,21 @@ public class Hytools {
         
         doOnceOnWorldLoaded = false;
     }
+	
+	public static void runPaGuNiAl(final String filtered) {
+        Matcher noSpace = Pattern.compile("^ ").matcher(filtered);
+        
+		if (!noSpace.find()) {
+        	PartyGuess.guessMessageParty(filtered);
+        	
+        	new Thread(new Runnable() {
+        	     @Override
+        	     public void run() {
+        	    	 NickAlert.checkIfNicked(filtered); 
+        	     }
+        	}).start();
+        }
+	}
 
     @SubscribeEvent
     public void onPlayerChat(ClientChatReceivedEvent event) {
@@ -111,6 +127,7 @@ public class Hytools {
 		}
     	
         final String filtered = event.message.getUnformattedText();
+        final String unfiltered = event.message.getFormattedText();
         
         //get the new api key in chat and prevent client from seeing it on the first time
         Matcher m = Pattern.compile("^Your new API key is ").matcher(filtered);
@@ -126,20 +143,21 @@ public class Hytools {
         	}
         }
         
-        Matcher m1 = Pattern.compile("(?=.* has joined \\().*(?=.*\\)!$)").matcher(filtered);
-        Matcher m2 = Pattern.compile("^ ").matcher(filtered);
+        Matcher gameStarts = Pattern.compile("(?=.*^The game starts in )(?=.* seconds!$)").matcher(filtered);
+	    Matcher gameStarts2 = Pattern.compile("(?=.*^The game starts in )(?=.* second!$)").matcher(filtered);
+	    
+	    Matcher playerLeave = Pattern.compile(" has quit!$").matcher(filtered);
+        Matcher playerJoin = Pattern.compile("(?=.* has joined \\().*(?=.*\\)!$)").matcher(filtered);
         
-        if (m1.find() && !m2.find()) {
-        	PartyGuess.guessMessageParty(filtered);
-        	
-        	//create a new thread or else partyguess wont work :/
-        	//if you know how to solve this issue, dm me on discord please <3 (_._#3324)
-        	new Thread(new Runnable() {
-        	     @Override
-        	     public void run() {
-        	    	 NickAlert.checkIfNicked(filtered); 
-        	     }
-        	}).start();
+        if (gameStarts.find() || gameStarts2.find()) {
+        	event.setCanceled(GameRestyle.startsIn(filtered));
+        } else if (playerJoin.find()) {
+        	runPaGuNiAl(filtered);
+        	event.setCanceled(GameRestyle.joinMSG(unfiltered));
+        } else if (playerLeave.find()) {
+        	event.setCanceled(GameRestyle.leaveMSG(unfiltered));
+        } else if (filtered.equals("We don't have enough players! Start cancelled.")) {
+        	event.setCanceled(GameRestyle.startCanceled());
         }
     }
 }
