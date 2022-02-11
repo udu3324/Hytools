@@ -15,7 +15,7 @@ A mod that has useful tools for Hypixel. Credit to the modding community for hel
 A tool that looks at chat and guesses players that are in a party. PartyGuess also checks if the first player in that party is friends with anyone else in the party. This tool works about **90%** of the time. This could fail if Hypixel decides to join everyone at the same time.      
 ![](https://cdn.discordapp.com/attachments/697141987219865706/939448531834515477/WOMoDyAAAAAElFTkSuQmCC.png)
 
-**GameRestyle**
+**GameRestyle**    
 A tool that changes join, leave, and game start messages to look better.    
 ![](https://cdn.discordapp.com/attachments/697141987219865706/941488168899850311/unknown.png)
 
