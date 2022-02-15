@@ -105,9 +105,6 @@ public class Config {
 				w.write("party-guess-friendmsg_toggled: true" + System.lineSeparator());
 				w.write("party-guess-guildcheck_toggled: true" + System.lineSeparator());
 				w.write(System.lineSeparator());
-				w.write("# Game Restyle Config" + System.lineSeparator());
-				w.write("game-restyle_toggled: true" + System.lineSeparator());
-				w.write(System.lineSeparator());
 				w.write("# Nick Alert Config" + System.lineSeparator());
 				w.write("nick-alert_toggled: true" + System.lineSeparator());
 				w.write("nick-alert-hypixel-api_toggled: false" + System.lineSeparator());
@@ -185,19 +182,6 @@ public class Config {
 	
 	public static Boolean getNickAlert() {
 		String str = getValueFromConfig("nick-alert_toggled");
-		if (str.equals("true")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public static void setGameRestyle(Boolean bool) {
-		setValueFromConfig("game-restyle_toggled", String.valueOf(bool));
-	}
-	
-	public static Boolean getGameRestyle() {
-		String str = getValueFromConfig("game-restyle_toggled");
 		if (str.equals("true")) {
 			return true;
 		} else {

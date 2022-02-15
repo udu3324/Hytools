@@ -28,7 +28,6 @@ import java.util.regex.Pattern;
 
 import com.udu3324.hytools.hyapi.HypixelApiKey;
 import com.udu3324.hytools.mcapi.UUID;
-import com.udu3324.hytools.tools.gamerestyle.GameRestyle;
 import com.udu3324.hytools.tools.nickalert.NickAlert;
 import com.udu3324.hytools.tools.partyguess.PartyGuess;
 
@@ -74,7 +73,7 @@ public class Hytools {
 	
 	@SubscribeEvent
     public void onWorldLoaded(EntityJoinWorldEvent event) {
-		if (!doOnceOnWorldLoaded) { //prevents infinite loop
+		if (!doOnceOnWorldLoaded) {
 			return;
 		}
 		// if statements have to be seperate or else serverIP could be null and crash mc
@@ -98,22 +97,18 @@ public class Hytools {
         
         doOnceOnWorldLoaded = false;
     }
-	
-	public static void runPaGuNiAl(final String filtered) {
-        Matcher noSpace = Pattern.compile("^ ").matcher(filtered);
-        
-		if (!noSpace.find()) {
-        	PartyGuess.guessMessageParty(filtered);
-        	
-        	new Thread(new Runnable() {
-        	     @Override
-        	     public void run() {
-        	    	 NickAlert.checkIfNicked(filtered); 
-        	     }
-        	}).start();
-        }
-	}
 
+	void runTools(final String filtered, final Boolean bool) {
+		PartyGuess.guessMessageParty(filtered, bool);
+    	
+    	new Thread(new Runnable() {
+    	     @Override
+    	     public void run() {
+    	    	 NickAlert.checkIfNicked(filtered, bool); 
+    	     }
+    	}).start();
+	}
+	
     @SubscribeEvent
     public void onPlayerChat(ClientChatReceivedEvent event) {
     	if (!isOnHypixel) { //stop if not on hypixel
@@ -127,7 +122,6 @@ public class Hytools {
 		}
     	
         final String filtered = event.message.getUnformattedText();
-        final String unfiltered = event.message.getFormattedText();
         
         //get the new api key in chat and prevent client from seeing it on the first time
         Matcher m = Pattern.compile("^Your new API key is ").matcher(filtered);
@@ -143,21 +137,20 @@ public class Hytools {
         	}
         }
         
-        Matcher gameStarts = Pattern.compile("(?=.*^The game starts in )(?=.* seconds!$)").matcher(filtered);
-	    Matcher gameStarts2 = Pattern.compile("(?=.*^The game starts in )(?=.* second!$)").matcher(filtered);
-	    
-	    Matcher playerLeave = Pattern.compile(" has quit!$").matcher(filtered);
-        Matcher playerJoin = Pattern.compile("(?=.* has joined \\().*(?=.*\\)!$)").matcher(filtered);
+        Matcher joined = Pattern.compile("(?=.* has joined \\()(?=.*\\)!$)").matcher(filtered);
+        Matcher noFrontSpace = Pattern.compile("^ ").matcher(filtered);
         
-        if (gameStarts.find() || gameStarts2.find()) {
-        	event.setCanceled(GameRestyle.startsIn(filtered));
-        } else if (playerJoin.find()) {
-        	runPaGuNiAl(filtered);
-        	event.setCanceled(GameRestyle.joinMSG(unfiltered));
-        } else if (playerLeave.find()) {
-        	event.setCanceled(GameRestyle.leaveMSG(unfiltered));
-        } else if (filtered.equals("We don't have enough players! Start cancelled.")) {
-        	event.setCanceled(GameRestyle.startCanceled());
+        Matcher hytillities = Pattern.compile("(?=.*^\\+ \\()(?=.*\\) )").matcher(filtered);
+        
+        int countOfSpaces = filtered.length() - filtered.replace(" ", "").length();
+        
+        System.out.println("filtered length: " + filtered.length());
+        if (joined.find() && !noFrontSpace.find() && countOfSpaces == 3) {
+        	System.out.println("filtered length: " + filtered.length());
+        	runTools(filtered, false);
+        } else if (hytillities.find() && !noFrontSpace.find() && countOfSpaces == 2) {
+        	System.out.println("filtered length: " + filtered.length());
+        	runTools(filtered, true);
         }
     }
 }

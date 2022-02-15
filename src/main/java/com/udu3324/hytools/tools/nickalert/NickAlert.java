@@ -38,13 +38,18 @@ public class NickAlert {
         return false;
     }
 	
-	public static void checkIfNicked(String message) {
+	public static void checkIfNicked(String message, Boolean hytillities) {
 		if (!Config.getNickAlert()) {
     		//this is to disable nick alert if it's disabled in config
 			return;
     	}
 		
-		String username = message.substring(0, message.indexOf(" "));
+		String username;
+        if (hytillities) {
+        	username = message.substring(message.indexOf(" ", 3) + 1, message.length());
+        } else {
+        	username = message.substring(0, message.indexOf(" "));
+        }
 		
 		String uuid = null;
 		try {

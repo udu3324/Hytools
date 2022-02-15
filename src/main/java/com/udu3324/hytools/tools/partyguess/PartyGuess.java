@@ -19,14 +19,19 @@ public class PartyGuess {
     // time delay when the code resets
     public static int delay = 10; //ms
 
-    public static void guessMessageParty(String message) {
+    public static void guessMessageParty(String message, Boolean hytillities) {
     	if (!Config.getPartyGuess()) {
     		//this is to disable party guess if it's disabled in config
     		return;
     	}
     	
-        String username = message.substring(0, message.indexOf(" "));
-        
+        String username;
+        if (hytillities) {
+        	username = message.substring(message.indexOf(" ", 3) + 1, message.length());
+        } else {
+        	username = message.substring(0, message.indexOf(" "));
+        }
+    
         if (doOnceBeforeTimeReset) {
             tempUserArray.clear();
 
