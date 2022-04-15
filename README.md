@@ -23,7 +23,7 @@ A tool that changes join, leave, and game start messages to look better.
 **NickAlert**  
 A tool that alerts if someone joined is nicked. This tool **will not reveal the person** behind the nick, but will just alert it in chat. This tool will half of the time. (uses mc api to check if username exists) You can enable NickAlertHypixelAPI to get more accuracy. (using hypixel api for nickalert is in the gray zone of being allowed. use at your own risk)    
 ![](https://cdn.discordapp.com/attachments/626565405930160148/932033762508816454/unknown.png)
-![](https://media.discordapp.net/attachments/956773599644090379/964661459214794792/unknown.png)
+![](https://media.discordapp.net/attachments/956773599644090379/964672960873000980/unknown.png)
 
 ## Installation
 Make sure you have [Forge 1.8.9](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html) installed. You can install the latest version of Hytools by clicking [here](https://github.com/udu3324/Hytools/releases/latest) and clicking on the jar.    
