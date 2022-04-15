@@ -53,7 +53,6 @@ public class GuildCheck {
         	return null;
         }
 		
-		System.out.println("guildInfo1 " + guildInfo);
 		
 		//check if guildInfo is not null or empty
 		if (guildInfo == null) {
@@ -65,7 +64,6 @@ public class GuildCheck {
 		String guildName = guildInfo.get(0);
 		guildInfo.remove(0);
 		
-		System.out.println("guildInfo2 " + guildInfo);
 		
 		ArrayList<String> uuidOfSameGuild = checkIfAnyStringInArrayMatch(guildInfo, uuidArray);
 		
@@ -78,13 +76,11 @@ public class GuildCheck {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("uuidOfSameGuild " + uuidOfSameGuild);
 		
 		//convert arraylist to string and replace , with and
 		String playerList = uuidOfSameGuild.toString().replace(",", " and").replace("[", "").replace("]", "");
 		String returningString = null;
 		
-		System.out.println("playerList " + playerList);
 		try {
 			returningString = IGN.get(firstUUID) + " is in the same guild as " + playerList + ". (" + guildName + ")";
 			
@@ -96,7 +92,6 @@ public class GuildCheck {
 		}
 		
 		onlyDoOnce = true;
-		System.out.println("returningString " + returningString);
 		return returningString;
 	}
 	public static void store(String username) {

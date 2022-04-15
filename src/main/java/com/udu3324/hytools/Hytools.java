@@ -142,15 +142,30 @@ public class Hytools {
         
         Matcher hytillities = Pattern.compile("(?=.*^\\+ \\()(?=.*\\) )").matcher(filtered);
         
+        String str = filtered.replaceAll(" ", "");
+        
+        Matcher duels = Pattern.compile("^Opponent:").matcher(str);
+        
         int countOfSpaces = filtered.length() - filtered.replace(" ", "").length();
         
-        System.out.println("filtered length: " + filtered.length());
         if (joined.find() && !noFrontSpace.find() && countOfSpaces == 3) {
-        	System.out.println("filtered length: " + filtered.length());
         	runTools(filtered, false);
         } else if (hytillities.find() && !noFrontSpace.find() && countOfSpaces == 2) {
-        	System.out.println("filtered length: " + filtered.length());
+        	//player using hytillities! adjust for it
         	runTools(filtered, true);
+        } else if (duels.find()) {
+        	//for duel games
+        	
+        	//remove opponent
+        	str = str.substring(9);
+        	
+        	//remove rank prefix (if it has one)
+        	if (str.indexOf(']') != -1) {
+        		str = str.substring(str.indexOf(']'));
+        	}
+        	
+        	//pass it on to nickalert
+        	runTools(str, false);
         }
     }
 }

@@ -48,7 +48,11 @@ public class NickAlert {
         if (hytillities) {
         	username = message.substring(message.indexOf(" ", 3) + 1, message.length());
         } else {
-        	username = message.substring(0, message.indexOf(" "));
+        	if (message.indexOf(" ") != -1) {
+        		username = message.substring(0, message.indexOf(" "));
+        	} else {
+        		username = message;
+        	}
         }
 		
 		String uuid = null;
