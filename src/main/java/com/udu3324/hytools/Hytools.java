@@ -161,7 +161,7 @@ public class Hytools {
         	
         	//remove rank prefix (if it has one)
         	if (str.indexOf(']') != -1) {
-        		str = str.substring(str.indexOf(']'));
+        		str = str.substring(str.indexOf(']') + 1);
         	}
         	
         	//pass it on to nickalert
