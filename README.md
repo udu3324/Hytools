@@ -16,10 +16,6 @@ A mod that has useful tools for Hypixel. Credit to the modding community for hel
 A tool that looks at chat and guesses players that are in a party. PartyGuess also checks if the first player in that party is friends with anyone else in the party. This tool works about **90%** of the time. This could fail if Hypixel decides to join everyone at the same time.      
 ![](https://cdn.discordapp.com/attachments/697141987219865706/939448531834515477/WOMoDyAAAAAElFTkSuQmCC.png)
 
-**GameRestyle**    
-A tool that changes join, leave, and game start messages to look better.    
-![](https://cdn.discordapp.com/attachments/697141987219865706/941488168899850311/unknown.png)
-
 **NickAlert**  
 A tool that alerts if someone joined is nicked. This tool **will not reveal the person** behind the nick, but will just alert it in chat. This tool will half of the time. (uses mc api to check if username exists) You can enable NickAlertHypixelAPI to get more accuracy. (using hypixel api for nickalert is in the gray zone of being allowed. use at your own risk)    
 ![](https://cdn.discordapp.com/attachments/626565405930160148/932033762508816454/unknown.png)
