@@ -22,7 +22,7 @@ body:
   - type: checkboxes
     id: prerequisites
     attributes:
-      label: Before submitting a bug report
+      label: Before submitting a feature request
       options:
         - label: |
             This feature wasn't already requested.
