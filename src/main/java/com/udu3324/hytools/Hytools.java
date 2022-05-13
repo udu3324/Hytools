@@ -147,6 +147,11 @@ public class Hytools {
         Matcher duels = Pattern.compile("^Opponent:").matcher(str);
         
         int countOfSpaces = filtered.length() - filtered.replace(" ", "").length();
+
+		//return if message contains obfuscation text formatting
+		if (event.message.getFormattedText().contains("\u00A7k")) {
+			return;
+		}
         
         if (joined.find() && !noFrontSpace.find() && countOfSpaces == 3) {
         	runTools(filtered, false);
