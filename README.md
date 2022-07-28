@@ -22,6 +22,7 @@ A tool that alerts if someone joined is nicked. This tool **will not reveal the 
 ![](https://media.discordapp.net/attachments/956773599644090379/964672960873000980/unknown.png)
 
 ## Installation
+Use the mod at your own risk. (this applies to all mods for hypixel)         
 Make sure you have [Forge 1.8.9](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html) installed. You can install the latest version of Hytools by clicking [here](https://github.com/udu3324/Hytools/releases/latest) and clicking on the jar.    
 Go to your mods folder (.minecraft/mods) and drag Hytools-#.#.#.jar into it. Tada! Hytools is installed.
 
