@@ -69,6 +69,7 @@ public class Hytools {
         
         // register commands
         ClientCommandHandler.instance.registerCommand(new Command());
+		ClientCommandHandler.instance.registerCommand(new FCheck());
     }
 	
 	@SubscribeEvent

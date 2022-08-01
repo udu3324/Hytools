@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.udu3324.hytools.Hytools;
 
 public class FriendsOfUUID {
+    //FriendsOfUUID.get(uuid) returns a arraylist of uuids of the friends of uuid provided
     static int countOccurrences(String str, String word) {
         int lastIndex = 0;
         int count = 0;

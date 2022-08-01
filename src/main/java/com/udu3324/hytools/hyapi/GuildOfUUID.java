@@ -11,6 +11,7 @@ import com.udu3324.hytools.Config;
 import com.udu3324.hytools.Hytools;
 
 public class GuildOfUUID {
+    //GuildOfUUID.get(uuid) returns a arraylist of the guild they're in + the people in the guild
 	static int countOccurrences(String str, String word) {
         int lastIndex = 0;
         int count = 0;

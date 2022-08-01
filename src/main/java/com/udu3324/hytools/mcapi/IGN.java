@@ -8,6 +8,7 @@ import java.net.URL;
 import com.udu3324.hytools.Hytools;
 
 public class IGN {
+    //IGN.get(str) returns ign from uuid or ign
     public static String get(String str) throws Exception {
         String url = "https://api.mojang.com/users/profiles/minecraft/" + str;
         URL obj = new URL(url);

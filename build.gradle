@@ -19,7 +19,7 @@ repositories {
     maven { url 'https://repo.hypixel.net/repository/Hypixel/' }
 }
 
-version = "1.3.2"
+version = "1.4"
 group= "com.udu3324.hytools" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Hytools"
 
