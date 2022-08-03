@@ -10,20 +10,29 @@ import java.util.ArrayList;
 import com.udu3324.hytools.Hytools;
 
 public class RankOfUUID {
+    // RankOfUUID.get(uuid) returns the UUID's rank color
+    // returns default color even if api key is not valid
+
+    static String symbol = "\u00a7";
+
     public static String get(String UUID) {
         String rank = "";
 
         try {
-            String url = "https://api.hypixel.net/player?key=" + HypixelApiKey.apiKey + "&uuid=" + UUID;
-            URL obj = new URL(url);
+            URL obj = new URL("https://api.hypixel.net/player?key=" + HypixelApiKey.apiKey + "&uuid=" + UUID);
+
+            // get player's data url
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
 
             int responseCode = con.getResponseCode();
-            Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + url);
+            Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode
+                    + " | URL Requested " + obj.toString());
+
+            // return if response is not 200 (ok)
             if (responseCode != 200) {
-                Hytools.log.info("Not a valid API key!");
-                return "\u00a77";
+                Hytools.log.info("RankOfUUID.java | Not a valid API key!");
+                return symbol + "7";
             }
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
@@ -35,37 +44,26 @@ public class RankOfUUID {
             in.close();
 
             String raw = response.toString();
-            
-            if (raw.indexOf("\"rank\":\"ADMIN\"") != -1) {
-                rank = "\u00a7c";
-            } else if (raw.indexOf("\"rank\":\"GAME_MASTER\"") != -1) {
-                rank = "\u00A72";
-            } else if (raw.indexOf("\"rank\":\"YOUTUBER\"") != -1) {
-                rank = "\u00a7c";
-            } else if (raw.indexOf("\"monthlyPackageRank\":\"SUPERSTAR\"") != -1) {
-                rank = "\u00A76";
-            } else if (raw.indexOf("\"newPackageRank\":\"MVP_PLUS\"") != -1) {
-                rank = "\u00a7b";
-            } else if (raw.indexOf("\"newPackageRank\":\"MVP\"") != -1) {
-                rank = "\u00a7b";
-            } else if (raw.indexOf("\"newPackageRank\":\"VIP_PLUS\"") != -1) {
-                rank = "\u00a7a";
-            } else if (raw.indexOf("\"newPackageRank\":\"VIP\"") != -1) {
-                rank = "\u00a7a";
-            } else if (raw.indexOf("\"packageRank\":\"SUPERSTAR\"") != -1) {
-                rank = "\u00A76";
-            } else if (raw.indexOf("\"packageRank\":\"MVP_PLUS\"") != -1) {
-                rank = "\u00a7b";
-            } else if (raw.indexOf("\"packageRank\":\"MVP\"") != -1) {
-                rank = "\u00a7b";
-            } else if (raw.indexOf("\"packageRank\":\"VIP_PLUS\"") != -1) {
-                rank = "\u00a7a";
-            } else if (raw.indexOf("\"packageRank\":\"VIP\"") != -1) {
-                rank = "\u00a7a";
-            } else {
-                rank = "\u00a77";
-            }
-            
+
+            // parse response and return rank color
+            if (raw.indexOf("\"rank\":\"ADMIN\"") != -1)
+                rank = symbol + "c";
+            else if (raw.indexOf("\"rank\":\"GAME_MASTER\"") != -1)
+                rank = symbol + "2";
+            else if (raw.indexOf("\"rank\":\"YOUTUBER\"") != -1)
+                rank = symbol + "c";
+            else if (raw.indexOf("\"monthlyPackageRank\":\"SUPERSTAR\"") != -1 || raw.indexOf("\"packageRank\":\"SUPERSTAR\"") != -1)
+                rank = symbol + "6";
+            else if (raw.indexOf("\"newPackageRank\":\"MVP_PLUS\"") != -1 || raw.indexOf("\"packageRank\":\"MVP_PLUS\"") != -1)
+                rank = symbol + "b";
+            else if (raw.indexOf("\"newPackageRank\":\"MVP\"") != -1 || raw.indexOf("\"packageRank\":\"MVP\"") != -1)
+                rank = symbol + "b";
+            else if (raw.indexOf("\"newPackageRank\":\"VIP_PLUS\"") != -1  || raw.indexOf("\"packageRank\":\"VIP_PLUS\"") != -1)
+                rank = symbol + "a";
+            else if (raw.indexOf("\"newPackageRank\":\"VIP\"") != -1 || raw.indexOf("\"packageRank\":\"VIP\"") != -1)
+                rank = symbol + "a";
+            else
+                rank = symbol + "7";
         } catch (IOException e) {
             e.printStackTrace();
         }

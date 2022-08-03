@@ -29,16 +29,17 @@ public class PartyGuess {
         }
 
         String username;
+        //set username depending on if user is using hytilities
         if (hytillities) {
             username = message.substring(message.indexOf(" ", 3) + 1, message.length());
         } else {
-            if (message.indexOf(" ") != -1) {
+            if (message.indexOf(" ") != -1)
                 username = message.substring(0, message.indexOf(" "));
-            } else {
+            else
                 username = message;
-            }
         }
 
+        //run once and start timer 
         if (doOnceBeforeTimeReset) {
             tempUserArray.clear();
 
@@ -48,7 +49,8 @@ public class PartyGuess {
                     // after delay, allow array to clear again and send chat msg (if there's more
                     // than one user stored)
                     if (tempUserArray.size() > 1) {
-                        for (int i = 0; i != tempUserArray.size(); i++) { // for each element add it to FriendCheck
+                        // for each user in array, add it to the checks
+                        for (int i = 0; i != tempUserArray.size(); i++) {
                             String ign = tempUserArray.get(i);
                             FriendCheck.store(ign);
                             GuildCheck.store(ign);
@@ -64,11 +66,15 @@ public class PartyGuess {
                             e.printStackTrace();
                         }
 
+                        //create a string of the array and remove []
                         String raw = tempUserArray.toString().replace("[", "").replace("]", "");
 
-                        if (tempUserArray.size() == 2) { // user and user
+                        // user and user string if theres only 2 people
+                        if (tempUserArray.size() == 2) {
                             raw = raw.replace(",", "\u00A73 and");
-                        } else if (tempUserArray.size() >= 3) { // user, user and user
+                        } else if (tempUserArray.size() >= 3) {
+                            // user, user and user string if theres more than 3 people
+
                             // get the pos/index of the last comma in msg
                             int lastComma = raw.lastIndexOf(",");
 
@@ -81,15 +87,15 @@ public class PartyGuess {
 
                         Hytools.sendMessage("\u00A73" + raw + "\u00A73 are most likely in a party.");
 
-                        // friend check stuff
+                        // friend check
                         String friendCheck = FriendCheck.reset();
-                        if (!friendCheck.contains("None matching") && !friendCheck.equals("empty")) {
+                        if (friendCheck != null) {
                             Hytools.sendMessage("\u00A72" + friendCheck);
                         }
 
-                        // guild check stuff
+                        // guild check
                         String guildCheck = GuildCheck.reset();
-                        if (!(guildCheck == null)) {
+                        if (guildCheck != null) {
                             Hytools.sendMessage("\u00A76" + guildCheck);
                         }
                     }

@@ -9,17 +9,21 @@ import com.udu3324.hytools.Hytools;
 
 public class IGN {
     //IGN.get(str) returns ign from uuid or ign
+    //returns "Not a IGN or UUID!" when str is not uuid or ign
     public static String get(String str) throws Exception {
-        String url = "https://api.mojang.com/users/profiles/minecraft/" + str;
-        URL obj = new URL(url);
-        if (url.contains(" ") || url.contains(">")) {
+        if (str.contains(" ") || str.contains(">"))
             return "Not a IGN or UUID!";
-        }
+        
+        URL obj = new URL("https://api.mojang.com/users/profiles/minecraft/" + str);
+        
+        //request for the url
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
 
         int responseCode = con.getResponseCode();
-        Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + url);
+        Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + obj.toString());
+
+        //only return if response is not 200 (ok)
         if (responseCode != 200) {
             Hytools.log.info("Not a IGN! Now trying UUID.");
             return uuidToIGN(str);
@@ -30,6 +34,9 @@ public class IGN {
             while ((inputLine = in.readLine()) != null) {
                 response2.append(inputLine);
             }
+            in.close();
+
+            //filter through response and get ign in json
             int idIndex = response2.indexOf("\"name\":\"") + 8;
             int id2Index = response2.indexOf("\",\"id\":\"");
             response2 = new StringBuilder(response2.substring(idIndex, id2Index));
@@ -39,29 +46,32 @@ public class IGN {
     }
 
     private static String uuidToIGN(String str) throws Exception {
-        String url = "https://sessionserver.mojang.com/session/minecraft/profile/" + str;
-        URL obj = new URL(url);
+        URL obj = new URL("https://sessionserver.mojang.com/session/minecraft/profile/" + str);
+
+        //request for the url
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
 
         int responseCode = con.getResponseCode();
-        Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + url);
-        if (responseCode != 200) {
+        Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + obj.toString());
+
+        //only return if response is not 200 (ok)
+        if (responseCode != 200)
             return "Not a IGN or UUID!";
-        }
+        
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuilder response2 = new StringBuilder();
         while ((inputLine = in.readLine()) != null) {
             response2.append(inputLine);
         }
+        in.close();
 
+        //filter through json to get ign
         int idIndex = response2.indexOf("\"name\" : \"") + 10;
         int id2Index = response2.indexOf("\",  \"", idIndex + 1);
         response2 = new StringBuilder(response2.substring(idIndex, id2Index));
 
-
-        in.close();
         return response2.toString();
     }
 }

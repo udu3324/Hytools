@@ -35,7 +35,7 @@ public class FCheck extends CommandBase {
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         if (args.length < 2) {
             sender.addChatMessage(new ChatComponentText(
-                    "\n" + EnumChatFormatting.RED + "Too little arguments! You probably have a typo."));
+                    "\n" + EnumChatFormatting.RED + "Not enough arguments! You probably have a typo."));
             return;
         }
 
@@ -63,6 +63,7 @@ public class FCheck extends CommandBase {
                         // get the friends of player1
                         ArrayList<String> listOfFriends = FriendsOfUUID.get(uuid1);
                         if (listOfFriends == null) {
+                            Hytools.log.info("FCheck.java | Not a valid API key!");
                             Hytools.sendMessage(
                                     "\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
                             return;

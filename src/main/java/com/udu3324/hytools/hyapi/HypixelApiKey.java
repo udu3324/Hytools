@@ -12,45 +12,50 @@ public class HypixelApiKey {
 	public static String apiKey;
 	public static Boolean apiKeySet = false;
 	
-    public static Boolean setKey(String key) {
-    	Boolean setCorrectly = null;
+    // setKey() sets the hypixel api key in config and updates it realtime for the other mods
+    public static Boolean setKey(String key, boolean sendMessageInChat) {
+        boolean result = false;
         try {
-            String url = "https://api.hypixel.net/key?key=" + key;
-            URL obj = new URL(url);
+            URL obj = new URL("https://api.hypixel.net/key?key=" + key);
 
+            //request for url to check if the key setting is working
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
 
             int responseCode = con.getResponseCode();
-            Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + url);
+            Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + obj.toString());
 
+            //if response code is not 200 (ok) then the api key is not set correctly
             if (responseCode != 200) {
-                Hytools.log.info("Not a valid API key!");
-                setCorrectly = false;
+                Hytools.log.info("HypixelApiKey.java | Not a valid API key!");
+                Hytools.sendMessage("\u00A74\u00A7lERROR! API key from /api new did not work.");
+                apiKeySet = false;
                 return false;
             }
 
+            //since key has been confirmed working, return in chat and set it
             apiKey = key;
             apiKeySet = true;
             
+            if (sendMessageInChat)
+                Hytools.sendMessage("\u00A72Hypixel API Key has been succesfully set in Hytools.");
+
             Hytools.log.info("HypixelApiKey has been successfully set.");
             Config.setStoredAPIKey(key);
-            setCorrectly = true;
-            return true;
+            result = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
-		return setCorrectly;
+        return result;
     }
     
+    // setKeyFromConf() sets key from config only if the key in config is functional
     public static Boolean setKeyFromConf() {
-    	String apiKeyFromConf = Config.getStoredAPIKey();
-    	
-    	if (setKey(apiKeyFromConf)) {
+    	if (setKey(Config.getStoredAPIKey(), false)) {
     		Hytools.log.info("since the api key from config is correct, /api new has been skipped. ");
     		return true;
-    	}
-    	
-		return false;
+    	} else {
+            return false;
+        }
     }
 }

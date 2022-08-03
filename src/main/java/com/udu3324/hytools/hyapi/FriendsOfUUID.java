@@ -32,17 +32,22 @@ public class FriendsOfUUID {
         ArrayList<String> fSL = new ArrayList<String>();
 
         try {
-            String url = "https://api.hypixel.net/friends?key=" + HypixelApiKey.apiKey + "&uuid=" + UUID;
-            URL obj = new URL(url);
+            URL obj = new URL("https://api.hypixel.net/friends?key=" + HypixelApiKey.apiKey + "&uuid=" + UUID);
+
+            //request for player's friends using uuid url
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
 
             int responseCode = con.getResponseCode();
-            Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + url);
+            Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + obj.toString());
+
+            //return only if response is not 200 (ok)
             if (responseCode != 200) {
-                Hytools.log.info("Not a valid API key!");
+                Hytools.log.info("FriendsOfUUID.java | Not a valid API key!");
                 return null;
             }
+
+            //turn response into a string
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
 
@@ -53,18 +58,22 @@ public class FriendsOfUUID {
             in.close();
 
             String raw = response.toString();
+
+            //parse json response of uuids
             int occurrencesOfUUIDSender = countOccurrences(raw, "uuidSender");
             int occurrencesOfUUIDReceiver = countOccurrences(raw, "uuidReceiver");
             int temp1 = 0;
             int temp2 = 0;
 
+            //for each friend request that has been sent and accepted
             while (temp1 != occurrencesOfUUIDSender) {
                 int startOfUUID = raw.indexOf("\",\"uuidSender\":\"", temp2) + 16;
                 int endOfUUID = startOfUUID + 32;
 
                 String uuid = raw.substring(startOfUUID, endOfUUID);
 
-                if (!uuid.equals(UUID)) { //if uuid does not equal the starting uuid
+                //only add the uuid if its not the player getting friends of
+                if (!uuid.equals(UUID)) {
                     fSL.add(uuid);
                 }
                 temp1++;
@@ -75,13 +84,15 @@ public class FriendsOfUUID {
             temp1 = 0;
             temp2 = 0;
 
+            //for each friend request that has been recieved and accepted
             while (temp1 != occurrencesOfUUIDReceiver) {
                 int startOfUUID = raw.indexOf("\",\"uuidReceiver\":\"", temp2) + 18;
                 int endOfUUID = startOfUUID + 32;
 
                 String uuid = raw.substring(startOfUUID, endOfUUID);
 
-                if (!uuid.equals(UUID)) { //if uuid does not equal the starting uuid
+                //only add the uuid if its not the player getting friends of
+                if (!uuid.equals(UUID)) {
                     fSL.add(uuid);
                 }
                 temp1++;

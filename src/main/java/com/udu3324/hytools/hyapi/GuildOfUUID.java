@@ -12,6 +12,8 @@ import com.udu3324.hytools.Hytools;
 
 public class GuildOfUUID {
     //GuildOfUUID.get(uuid) returns a arraylist of the guild they're in + the people in the guild
+
+    //countOccurrences(String str, String word) counts the occurrences of a word in a string
 	static int countOccurrences(String str, String word) {
         int lastIndex = 0;
         int count = 0;
@@ -33,14 +35,14 @@ public class GuildOfUUID {
     	ArrayList<String> finalList = new ArrayList<String>();
     	
         try {
-        	String url = "https://api.hypixel.net/guild?key=" + HypixelApiKey.apiKey + "&player=" + UUID;
-            URL obj = new URL(url);
+            URL obj = new URL("https://api.hypixel.net/guild?key=" + HypixelApiKey.apiKey + "&player=" + UUID);
 
+            //request for the guild of player uuid url
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
 
             int responseCode = con.getResponseCode();
-            Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + url);
+            Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + obj.toString());
 
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
@@ -54,9 +56,8 @@ public class GuildOfUUID {
             String raw = response.toString();
             
             //check if player is in a guild
-            if (raw.contains("{\"success\":true,\"guild\":null}")) {
+            if (raw.contains("{\"success\":true,\"guild\":null}"))
             	return null;
-            }
             
             //first, add the guild name to the arrayList
             int indexOfGuildName = raw.indexOf("\",\"name\":\"") + 10;

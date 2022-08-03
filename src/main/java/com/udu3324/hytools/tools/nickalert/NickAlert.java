@@ -13,24 +13,29 @@ import com.udu3324.hytools.hyapi.HypixelApiKey;
 import com.udu3324.hytools.mcapi.UUID;
 
 public class NickAlert {
+	//hasLoggedOntoHypixel() returns if uuid has logged onto hypixel
+	//returns false if api key is not set right
 	static Boolean hasLoggedOntoHypixel(String UUID) {
         try {
-            String url = "https://api.hypixel.net/player?key=" + Config.getStoredAPIKey() + "&uuid=" + UUID;
-            URL obj = new URL(url);
+            URL obj = new URL("https://api.hypixel.net/player?key=" + Config.getStoredAPIKey() + "&uuid=" + UUID);
+
+			//get player's data using uuid
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
 
             int responseCode = con.getResponseCode();
-            Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + url);
+            Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + obj.toString());
             
             if (responseCode == 403) {
-            	Hytools.sendMessage("\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
+				Hytools.log.info("NickAlert.java | Not a valid API key!");
+            	Hytools.sendMessage("\u00A74\u00A7lFATAL ERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
             	return false;
             }
-            String bR;
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            bR = in.readLine();
+            String bR = in.readLine();
             in.close();
+
+			//return boolean if response says player has not logged on hypixel yet
             return bR.equals("{\"success\":true,\"player\":null}");
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,25 +44,24 @@ public class NickAlert {
     }
 	
 	public static void checkIfNicked(String message, Boolean hytillities) {
-		if (!Config.getNickAlert()) {
-    		//this is to disable nick alert if it's disabled in config
+		//disable nick alert if it's disabled in config
+		if (!Config.getNickAlert())
 			return;
-    	}
-		
+    	
 		String username;
+		//set username based of if player is using hytilities
         if (hytillities) {
         	username = message.substring(message.indexOf(" ", 3) + 1, message.length());
         } else {
-        	if (message.indexOf(" ") != -1) {
+        	if (message.indexOf(" ") != -1)
         		username = message.substring(0, message.indexOf(" "));
-        	} else {
+        	else
         		username = message;
-        	}
         }
 		
 		String uuid = null;
 		try {
-			
+			//simply check if the user exists in minecraft's database
 			uuid = UUID.get(username);
 			if (uuid.equals("Not a IGN or UUID!")) {
 				//checks if username exists in minecraft api
@@ -65,29 +69,18 @@ public class NickAlert {
 				return;
 			}
 			
-			if (!Config.getNickAlertHypixelAPI()) {
-	    		//this is to disable nick alert hypixel api if it's disabled in config
+			//disable nick alert hypixel api below if disabled in config
+			if (!Config.getNickAlertHypixelAPI())
 				return;
-	    	}
 			
-			Boolean playerData;
-			
-			//return if api key set wrong
+			//check if user has logged on before
 			if (HypixelApiKey.apiKeySet) {
-				//checks if the player has any stored data
-				playerData = hasLoggedOntoHypixel(uuid);
+				if (hasLoggedOntoHypixel(uuid))
+					Hytools.sendMessage("\u00A75" + username + " is a nicked user!");
 	        } else {
+				Hytools.log.info("NickAlert.java | Not a valid API key!");
 	        	Hytools.sendMessage("\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
-	        	return;
 	        }
-			
-			if (!playerData) {
-				return;
-			} else {
-				Hytools.sendMessage("\u00A75" + username + " is a nicked user!");
-				return;
-			}
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -9,17 +9,21 @@ import com.udu3324.hytools.Hytools;
 
 public class UUID {
     //UUID.get(str) returns uuid from uuid or ign
+    //returns "Not a IGN or UUID!" when str is not uuid or ign
     public static String get(String str) throws Exception {
-        String url = "https://api.mojang.com/users/profiles/minecraft/" + str;
-        URL obj = new URL(url);
-        if (url.contains(" ") || url.contains(">")) {
+        if (str.contains(" ") || str.contains(">"))
             return "Not a IGN or UUID!";
-        }
+
+        URL obj = new URL("https://api.mojang.com/users/profiles/minecraft/" + str);
+        
+        //request for url
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
 
         int responseCode = con.getResponseCode();
-        Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + url);
+        Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + obj.toString());
+
+        //only return if response is not 200 (ok)
         if (responseCode != 200) {
             Hytools.log.info("Not a IGN! Now trying UUID.");
             return uuidToIGN(str);
@@ -31,24 +35,24 @@ public class UUID {
             response2.append(inputLine);
         }
         in.close();
+
+        //parse json response for uuid
         int idIndex = response2.indexOf("\",\"id\":\"") + 8;
-        response2 = new StringBuilder(response2.substring(idIndex, idIndex + 32));
-        return response2.toString();
+        return new StringBuilder(response2.substring(idIndex, idIndex + 32)).toString();
     }
 
     private static String uuidToIGN(String str) throws Exception {
-        String url = "https://sessionserver.mojang.com/session/minecraft/profile/" + str;
-        URL obj = new URL(url);
+        URL obj = new URL("https://sessionserver.mojang.com/session/minecraft/profile/" + str);
+        //request for url
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
 
         int responseCode = con.getResponseCode();
-        Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + url);
-        if (responseCode != 200) {
+        Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + obj.toString());
+        //if str returns 200, it is a correct uuid
+        if (responseCode != 200)
             return "Not a IGN or UUID!";
-        } else {
-            str = str.replace("-", "");
-            return str;
-        }
+        else
+            return str.replace("-", "");
     }
 }

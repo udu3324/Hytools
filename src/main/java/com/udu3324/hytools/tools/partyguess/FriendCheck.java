@@ -39,13 +39,13 @@ public class FriendCheck {
     public static String reset() {
     	if (!Config.getPartyGuessFriend()) {
     		//this is to disable party guess friends if it's disabled in config
-    		return "empty";
+    		return null;
     	}
     	
         int numOfUUIDS = uuidArray.size();
         if (numOfUUIDS == 1) {
         	uuidArray.clear();
-            return "No users in party to check for friends.";
+            return null;
         }
         ArrayList<String> matchingFriendInParty = new ArrayList<String>();
         String uuidFriendsWith = "";
@@ -54,35 +54,41 @@ public class FriendCheck {
         ArrayList<String> fOUUID = new ArrayList<String>();
         
         String currentUUID = uuidArray.get(0);
+        //return if hypixel api key not set properly
         if (HypixelApiKey.apiKeySet) {
         	fOUUID = FriendsOfUUID.get(currentUUID);
         } else {
+            Hytools.log.info("FriendCheck.java | Not a valid API key!");
         	Hytools.sendMessage("\u00A74\u00A7lERROR! (friends couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
         	uuidArray.clear();
-        	return "empty";
+        	return null;
         }
 
-        if (fOUUID == null) { //if the uuid is not real/empty
+        //return if friends of uuid is empty/not real
+        if (fOUUID == null || fOUUID.size() == 0) {
         	uuidArray.clear();
-        	return "empty";
+        	return null;
         }
-        
-        if (fOUUID.size() == 0) { 
-        	uuidArray.clear();
-            return "empty";
-        }
+
         matchingFriendInParty = checkIfAnyStringInArrayMatch(fOUUID, uuidArray);
+        uuidArray.clear();
+
+        //return if no friends in party
+        if (matchingFriendInParty.get(0).contains("None matching."))
+            return null;
+    
         uuidFriendsWith = currentUUID;
-        //turn uuids into usernames
+
+        //turn uuids into usernames (colored)
         try {
             uuidFriendsWith = RankOfUUID.get(uuidFriendsWith) + IGN.get(uuidFriendsWith);
         } catch (Exception e) {
             e.printStackTrace();
         }
         
-        uuidArray.clear();
-        return uuidFriendsWith + matchingFriendInParty.toString().replace("[", "\u00A72 is friends with ").replace("]", "").replace(",", "\u00A72 and") + "\u00A72.";
+        return uuidFriendsWith + matchingFriendInParty.toString().replace("[", "\u00A72 is friends with ").replace("]", "").replace(",", "\u00A72, ") + "\u00A72.";
     }
+
     public static void store(String username) {
     	if (!Config.getPartyGuessFriend()) {
     		//this is to disable party guess friends if it's disabled in config

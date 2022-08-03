@@ -27,8 +27,6 @@ public class Command extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-		System.out.println(args.toString());
-		
         collection.put("partyguess", "1");
         collection.put("partyguessfriends", "2");
         collection.put("partyguessguilds", "3");

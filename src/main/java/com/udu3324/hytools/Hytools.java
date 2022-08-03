@@ -35,11 +35,11 @@ import com.udu3324.hytools.tools.partyguess.PartyGuess;
 public class Hytools {
 	
 	boolean isOnHypixel = false;
-	boolean doOnce = true;
-	boolean doOnce2 = true;
+	boolean requestApiKeyOnce = true;
+	boolean showAPIKey = false;
 	boolean doOnceOnWorldLoaded = true;
 	
-	boolean skipAPINewKeyProcess = false;
+	boolean configAPIKeySet = false;
 	
 	public static Logger log;
 
@@ -74,16 +74,16 @@ public class Hytools {
 	
 	@SubscribeEvent
     public void onWorldLoaded(EntityJoinWorldEvent event) {
-		if (!doOnceOnWorldLoaded) {
+		if (!doOnceOnWorldLoaded)
 			return;
-		}
-		// if statements have to be seperate or else serverIP could be null and crash mc
-        if (!Minecraft.getMinecraft().isSingleplayer()) { //is multi-player
+
+		// if minecraft world is multiplayer & server ip is hypixel.net
+        if (!Minecraft.getMinecraft().isSingleplayer()) {
         	String serverIP = Minecraft.getMinecraft().getCurrentServerData().serverIP;
-        	if (serverIP.toLowerCase().contains("hypixel.net")) { //if is on hypixel
-        		isOnHypixel = true;
-        		
-        		skipAPINewKeyProcess = HypixelApiKey.setKeyFromConf();
+        	if (serverIP.toLowerCase().contains("hypixel.net")) { 
+        		configAPIKeySet = HypixelApiKey.setKeyFromConf();
+				showAPIKey = true;
+				isOnHypixel = true;
         	} else {
         		isOnHypixel = false;
         	}
@@ -92,8 +92,8 @@ public class Hytools {
     	}
         
         //TEMP!!! REMOVE AFTER DEVELOPMENT
-        skipAPINewKeyProcess = HypixelApiKey.setKeyFromConf();
-        isOnHypixel = true;
+        //configAPIKeySet = HypixelApiKey.setKeyFromConf();
+        //isOnHypixel = true;
         //TEMP!!! REMOVE AFTER DEVELOPMENT
         
         doOnceOnWorldLoaded = false;
@@ -112,66 +112,61 @@ public class Hytools {
 	
     @SubscribeEvent
     public void onPlayerChat(ClientChatReceivedEvent event) {
-    	if (!isOnHypixel) { //stop if not on hypixel
+		//stop if not on hypixel
+    	if (!isOnHypixel)
     		return;
-    	}
+    	
+		//return if message contains obfuscation
+		if (event.message.getFormattedText().contains("\u00A7k"))
+			return;
     	
     	//request for new api key
-    	if (doOnce && !skipAPINewKeyProcess) {
+    	if (requestApiKeyOnce && !configAPIKeySet) {
 			Minecraft.getMinecraft().thePlayer.sendChatMessage("/api new");
-			doOnce = false;
+			requestApiKeyOnce = false;
 		}
     	
         final String filtered = event.message.getUnformattedText();
         
-        //get the new api key in chat and prevent client from seeing it on the first time
+        //recieve messages from command "/api new" and parse
         Matcher m = Pattern.compile("^Your new API key is ").matcher(filtered);
         if (m.find() && filtered.length() == 56) {
-        	String key = filtered.substring(20);
+        	HypixelApiKey.setKey(filtered.substring(20), true);
         	
-        	HypixelApiKey.setKey(key);
-        	
-        	//allows new api keys to be seen in chat after it was requested by hytools
-        	if (doOnce2) {
+        	//allow new api keys to be seen in chat after requested
+        	if (!showAPIKey) {
         		event.setCanceled(true);
-        		doOnce2 = false;
+        		showAPIKey = true;
         	}
         }
         
+		//check chat messages for regex
+		String filterSpaces = filtered.replaceAll(" ", "");
+
+		Matcher hytillities = Pattern.compile("(?=.*^\\+ \\()(?=.*\\) )").matcher(filtered);
+
         Matcher joined = Pattern.compile("(?=.* has joined \\()(?=.*\\)!$)").matcher(filtered);
         Matcher noFrontSpace = Pattern.compile("^ ").matcher(filtered);
-        
-        Matcher hytillities = Pattern.compile("(?=.*^\\+ \\()(?=.*\\) )").matcher(filtered);
-        
-        String str = filtered.replaceAll(" ", "");
-        
-        Matcher duels = Pattern.compile("^Opponent:").matcher(str);
+        Matcher duels = Pattern.compile("^Opponent:").matcher(filterSpaces);
         
         int countOfSpaces = filtered.length() - filtered.replace(" ", "").length();
-
-		//return if message contains obfuscation text formatting
-		if (event.message.getFormattedText().contains("\u00A7k")) {
-			return;
-		}
         
         if (joined.find() && !noFrontSpace.find() && countOfSpaces == 3) {
         	runTools(filtered, false);
         } else if (hytillities.find() && !noFrontSpace.find() && countOfSpaces == 2) {
-        	//player using hytillities! adjust for it
+        	//player is using hytillities! adjust for it
         	runTools(filtered, true);
         } else if (duels.find()) {
-        	//for duel games
-        	
         	//remove opponent
-        	str = str.substring(9);
+        	filterSpaces = filterSpaces.substring(9);
         	
         	//remove rank prefix (if it has one)
-        	if (str.indexOf(']') != -1) {
-        		str = str.substring(str.indexOf(']') + 1);
+        	if (filterSpaces.indexOf(']') != -1) {
+        		filterSpaces = filterSpaces.substring(filterSpaces.indexOf(']') + 1);
         	}
         	
         	//pass it on to nickalert
-        	runTools(str, false);
+        	runTools(filterSpaces, false);
         }
     }
 }

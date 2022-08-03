@@ -49,6 +49,7 @@ public class GuildCheck {
 		if (HypixelApiKey.apiKeySet) {
 			 guildInfo = GuildOfUUID.get(firstUUID);
         } else {
+			Hytools.log.info("GuildCheck.java | Not a valid API key!");
         	Hytools.sendMessage("\u00A74\u00A7lERROR! (guild info couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
         	uuidArray.clear();
         	return null;
