@@ -6,6 +6,7 @@ import com.udu3324.hytools.Config;
 import com.udu3324.hytools.Hytools;
 import com.udu3324.hytools.hyapi.FriendsOfUUID;
 import com.udu3324.hytools.hyapi.HypixelApiKey;
+import com.udu3324.hytools.hyapi.RankOfUUID;
 import com.udu3324.hytools.mcapi.IGN;
 import com.udu3324.hytools.mcapi.UUID;
 
@@ -22,7 +23,7 @@ public class FriendCheck {
 
                 //turn uuid into ign
                 try {
-                    uuidCheckingWith = IGN.get(uuidCheckingWith);
+                    uuidCheckingWith = RankOfUUID.get(uuidCheckingWith) + IGN.get(uuidCheckingWith);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -74,13 +75,13 @@ public class FriendCheck {
         uuidFriendsWith = currentUUID;
         //turn uuids into usernames
         try {
-            uuidFriendsWith = IGN.get(uuidFriendsWith);
+            uuidFriendsWith = RankOfUUID.get(uuidFriendsWith) + IGN.get(uuidFriendsWith);
         } catch (Exception e) {
             e.printStackTrace();
         }
         
         uuidArray.clear();
-        return uuidFriendsWith + matchingFriendInParty.toString().replace("[", " is friends with ").replace("]", "").replace(",", " and") + ".";
+        return uuidFriendsWith + matchingFriendInParty.toString().replace("[", "\u00A72 is friends with ").replace("]", "").replace(",", "\u00A72 and") + "\u00A72.";
     }
     public static void store(String username) {
     	if (!Config.getPartyGuessFriend()) {

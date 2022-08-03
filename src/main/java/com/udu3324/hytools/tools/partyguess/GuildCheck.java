@@ -7,6 +7,7 @@ import com.udu3324.hytools.Hytools;
 import com.udu3324.hytools.hyapi.FriendsOfUUID;
 import com.udu3324.hytools.hyapi.GuildOfUUID;
 import com.udu3324.hytools.hyapi.HypixelApiKey;
+import com.udu3324.hytools.hyapi.RankOfUUID;
 import com.udu3324.hytools.mcapi.IGN;
 import com.udu3324.hytools.mcapi.UUID;
 
@@ -70,7 +71,7 @@ public class GuildCheck {
 		//convert each element to a username
 		for (int i=0; i!=uuidOfSameGuild.size(); i++) {
 			try {
-				uuidOfSameGuild.set(i, IGN.get(uuidOfSameGuild.get(i)));
+				uuidOfSameGuild.set(i, RankOfUUID.get(uuidOfSameGuild.get(i)) + IGN.get(uuidOfSameGuild.get(i)));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -82,7 +83,7 @@ public class GuildCheck {
 		String returningString = null;
 		
 		try {
-			returningString = IGN.get(firstUUID) + " is in the same guild as " + playerList + ". (" + guildName + ")";
+			returningString = RankOfUUID.get(firstUUID) + IGN.get(firstUUID) + "\u00A76 is in the same guild as " + playerList + "\u00A76. (" + guildName + ")";
 			
 			if (playerList.equals(IGN.get(firstUUID))) returningString = null;
 			if (playerList.equals("")) returningString = null;
