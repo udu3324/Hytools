@@ -5,7 +5,6 @@ import com.udu3324.hytools.Hytools;
 import com.udu3324.hytools.hyapi.RankOfUUID;
 import com.udu3324.hytools.mcapi.UUID;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;

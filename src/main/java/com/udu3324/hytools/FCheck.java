@@ -2,9 +2,6 @@ package com.udu3324.hytools;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.udu3324.hytools.hyapi.FriendsOfUUID;
 import com.udu3324.hytools.hyapi.RankOfUUID;
@@ -18,8 +15,6 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
 public class FCheck extends CommandBase {
-
-    private HashMap<String, String> collection = new HashMap<String, String>();
 
     @Override
     public String getCommandName() {

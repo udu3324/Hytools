@@ -3,7 +3,6 @@ package com.udu3324.hytools.hyapi;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.UUID;
 
 import com.udu3324.hytools.Config;
 import com.udu3324.hytools.Hytools;

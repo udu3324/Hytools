@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.udu3324.hytools.Config;
 import com.udu3324.hytools.Hytools;
-import com.udu3324.hytools.hyapi.FriendsOfUUID;
 import com.udu3324.hytools.hyapi.GuildOfUUID;
 import com.udu3324.hytools.hyapi.HypixelApiKey;
 import com.udu3324.hytools.hyapi.RankOfUUID;

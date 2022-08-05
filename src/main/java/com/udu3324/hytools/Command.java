@@ -1,9 +1,6 @@
 package com.udu3324.hytools;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
