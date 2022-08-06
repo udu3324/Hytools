@@ -24,16 +24,18 @@ public class Command extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+		//put the commands in the collection
         collection.put("partyguess", "1");
         collection.put("partyguessfriends", "2");
         collection.put("partyguessguilds", "3");
         collection.put("nickalert", "4");
         collection.put("nickalerthypixelapi", "5");
 
+		// /hytools
         if (args.length < 1) {
             sender.addChatMessage(new ChatComponentText("\n" + EnumChatFormatting.GOLD + "[+]= Hytools v" + Reference.VERSION + " by udu3324 =[+]\n"
             		+ EnumChatFormatting.GOLD + "Check out my GitHub! https://github.com/udu3324 \n\n"
-					+ EnumChatFormatting.GREEN + "/fcheck (player1) (player2) - checks if player 1 is friends with player 2\n"
+					+ EnumChatFormatting.GREEN + "/fcheck (player1) (player2) - checks player's friend\n"
             		+ EnumChatFormatting.DARK_AQUA + "/hytools partyguess [toggle/on/off] [toggled|" + Config.getPartyGuess() + "]\n"
             		+ EnumChatFormatting.DARK_GREEN + "/hytools partyguessfriends [toggle/on/off] [toggled|" + Config.getPartyGuessFriend() +"] \n"
             		+ EnumChatFormatting.GOLD + "/hytools partyguessguilds [toggle/on/off] [toggled|" + Config.getPartyGuessGuild() + "]\n"
@@ -43,40 +45,36 @@ public class Command extends CommandBase {
             return;
         }
         
+		// /hytools ??? (get tool toggled)
         if (args.length == 1) {
         	String command = args[0].toUpperCase();
             String data;
             
             if (command.equals("PARTYGUESS")) {
-            	if (Config.getPartyGuess()) {
+            	if (Config.getPartyGuess()) 
             		data = "ON";
-        		} else {
+        		else 
         			data = "OFF";
-        		}
             } else if (command.equals("PARTYGUESSFRIENDS")) {
-            	if (Config.getPartyGuessFriend()) {
+            	if (Config.getPartyGuessFriend())
             		data = "ON";
-        		} else {
+        		else
         			data = "OFF";
-        		}
             } else if (command.equals("PARTYGUESSGUILDS")) {
-            	if (Config.getPartyGuessGuild()) {
+            	if (Config.getPartyGuessGuild())
             		data = "ON";
-        		} else {
+        		else
         			data = "OFF";
-        		}
             } else if (command.equals("NICKALERT")) { 
-            	if (Config.getNickAlert()) {
+            	if (Config.getNickAlert())
             		data = "ON";
-        		} else {
+        		else 
         			data = "OFF";
-        		}
             } else if (command.equals("NICKALERTHYPIXELAPI")) { 
-            	if (Config.getNickAlertHypixelAPI()) {
+            	if (Config.getNickAlertHypixelAPI())
             		data = "ON";
-        		} else {
+        		else
         			data = "OFF";
-        		}
             } else {
             	sender.addChatMessage(new ChatComponentText("\n" + EnumChatFormatting.RED + command + 
             			" doesn't exist in Hytools! "));
@@ -88,7 +86,7 @@ public class Command extends CommandBase {
             return;
         }
 
-
+		// /hytools ??? ??? (toggle a tool)
         if (args.length == 2) {
             String command = args[0].toLowerCase();
             String data = args[1].toLowerCase();
@@ -185,6 +183,7 @@ public class Command extends CommandBase {
                     EnumChatFormatting.GREEN + command + " is now set to " + data + "."));
         }
         
+		// /hytools ??? ??? ??? (invalid command)
         if (args.length >= 3) {
             sender.addChatMessage(new ChatComponentText("\n" + EnumChatFormatting.RED + "Too many arguments! You probably have a typo."));
             return;

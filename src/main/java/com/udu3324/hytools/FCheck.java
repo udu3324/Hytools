@@ -1,7 +1,6 @@
 package com.udu3324.hytools;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.udu3324.hytools.hyapi.FriendsOfUUID;
 import com.udu3324.hytools.hyapi.RankOfUUID;
@@ -28,12 +27,14 @@ public class FCheck extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+        // /fcheck (invalid)
         if (args.length < 2) {
             sender.addChatMessage(new ChatComponentText(
                     "\n" + EnumChatFormatting.RED + "Not enough arguments! You probably have a typo."));
             return;
         }
 
+        // /fcheck ???? ????
         if (args.length == 2) {
             final String player1 = args[0];
             final String player2 = args[1];
@@ -65,11 +66,10 @@ public class FCheck extends CommandBase {
                         }
 
                         // return result of player2 is found in friends list of player1
-                        if (listOfFriends.contains(uuid2)) {
+                        if (listOfFriends.contains(uuid2))
                             Hytools.sendMessage("\u00A7A" + RankOfUUID.get(uuid1) + IGN.get(uuid1) + "\u00A7A is friends with " + RankOfUUID.get(uuid2) + IGN.get(uuid2) + "\u00A7A.");
-                        } else {
+                        else
                             Hytools.sendMessage("\u00A7C" + RankOfUUID.get(uuid1) + IGN.get(uuid1) + "\u00A7C is not friends with " + RankOfUUID.get(uuid2) + IGN.get(uuid2) + "\u00A7C.");
-                        }
                     } catch (Exception e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();

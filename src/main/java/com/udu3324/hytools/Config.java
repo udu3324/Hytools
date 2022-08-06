@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Loader;
 public class Config {
 	public static File configFile = new File(Loader.instance().getConfigDir(), "hytools.cfg");
     
+	//returns if config is not the current version
 	public static Boolean isNotCurrentVersion() throws IOException {
 		BufferedReader brTest = new BufferedReader(new FileReader(configFile));
 		String text = brTest.readLine();
@@ -20,11 +21,9 @@ public class Config {
 		if (!text.contains(Reference.VERSION)) return true;
 		return false;
 	}
-	
+
+	//example: getValueFromConfig("api-key") returns "thisIsTheApiKey"
 	public static String getValueFromConfig(String value) {
-		//example:
-		//getValueFromConfig("api-key") returns qergijoiwequjfboqwiuefnweiofnwe
-		
 		String data = null;
 		try {
 			BufferedReader file = new BufferedReader(new FileReader(configFile));
@@ -47,11 +46,9 @@ public class Config {
 		
 		return data;
 	}
-	
+
+	//example: setValueFromConfig("api-key", "thisIsTheApiKey")
 	public static void setValueFromConfig(String value, String data) {
-		//example:
-		//setValueFromConfig("api-key", "qergijoiwequjfboqwiuefnweiofnwe")
-		
 		try {
 			// input the (modified) file content to the StringBuffer "input"
 	        BufferedReader file = new BufferedReader(new FileReader(configFile));
@@ -75,16 +72,16 @@ public class Config {
 	    	Hytools.log.info("Problem writing file.");
 	    }
 	}
-	
+
+	//delete the config file
 	public static void delete() {
-		//deletes the config file
-		if (configFile.delete()) {
+		if (configFile.delete())
 			Hytools.log.info("Config file has been succesfully deleted.");
-		} else {
+		else
 			Hytools.log.info("Error! Config file couldn't be deleted!");
-		}
 	}
 
+	//create a config file
 	public static void create() {
 		try {
 			if (configFile.createNewFile()) {
@@ -128,7 +125,7 @@ public class Config {
 		}
 	}
 	
-	// premade methods to do the ones above automatically
+	// hypixel api key
 	public static String getStoredAPIKey() {
 		return getValueFromConfig("api-key");
 	}
@@ -137,6 +134,7 @@ public class Config {
 		setValueFromConfig("api-key", key);
 	}
 	
+	// party guess
 	public static Boolean getPartyGuess() {
 		String str = getValueFromConfig("party-guess_toggled");
 		if (str.equals("true")) {
@@ -150,6 +148,7 @@ public class Config {
 		setValueFromConfig("party-guess_toggled", String.valueOf(bool));
 	}
 	
+	// party guess friend
 	public static Boolean getPartyGuessFriend() {
 		String str = getValueFromConfig("party-guess-friendmsg_toggled");
 		if (str.equals("true")) {
@@ -158,44 +157,44 @@ public class Config {
 			return false;
 		}
 	}
-	
+
 	public static void setPartyGuessFriend(Boolean bool) {
 		setValueFromConfig("party-guess-friendmsg_toggled", String.valueOf(bool));
 	}
 	
+	// party guess guild
 	public static Boolean getPartyGuessGuild() {
 		String str = getValueFromConfig("party-guess-guildcheck_toggled");
-		if (str.equals("true")) {
+		if (str.equals("true"))
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 	
 	public static void setPartyGuessGuild(Boolean bool) {
 		setValueFromConfig("party-guess-guildcheck_toggled", String.valueOf(bool));
 	}
-	
+
+	// nick alert
 	public static Boolean getNickAlert() {
 		String str = getValueFromConfig("nick-alert_toggled");
-		if (str.equals("true")) {
+		if (str.equals("true"))
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 	
 	public static void setNickAlert(Boolean bool) {
 		setValueFromConfig("nick-alert_toggled", String.valueOf(bool));
 	}
 	
+	// nick alert hypixel api
 	public static Boolean getNickAlertHypixelAPI() {
 		String str = getValueFromConfig("nick-alert-hypixel-api_toggled");
-		if (str.equals("true")) {
+		if (str.equals("true"))
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 	
 	public static void setNickAlertHypixelAPI(Boolean bool) {

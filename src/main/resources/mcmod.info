@@ -1,6 +1,5 @@
-[
-{
-  "modid": "HT",
+[{
+  "modid": "Hytools",
   "name": "Hytools",
   "description": "A mod that has useful tools for Hypixel.",
   "version": "0",
@@ -12,5 +11,4 @@
   "logoFile": "logo.png",
   "screenshots": [],
   "dependencies": []
-}
-]
+}]

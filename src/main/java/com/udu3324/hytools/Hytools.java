@@ -133,27 +133,24 @@ public class Hytools {
 		//check chat messages for regex
 		String filterSpaces = filtered.replaceAll(" ", "");
 
-		Matcher hytillities = Pattern.compile("(?=.*^\\+ \\()(?=.*\\) )").matcher(filtered);
+		// ^\+ \([0-9]+\/[0-9]+\) [a-zA-Z0-9_]{1,16}$ | "+ (23/24) NintendoOS"
+		Matcher hytillitiesJoined = Pattern.compile("^\\+ \\([0-9]+\\/[0-9]+\\) [a-zA-Z0-9_]{1,16}$").matcher(filtered);
 
-        Matcher joined = Pattern.compile("(?=.* has joined \\()(?=.*\\)!$)").matcher(filtered);
-        Matcher noFrontSpace = Pattern.compile("^ ").matcher(filtered);
+		// ^[a-zA-Z0-9_]{1,16} has joined \([0-9]+/[0-9]+\)!$ | "NintendoOS has joined (1/16)!"
+        Matcher joined = Pattern.compile("^[a-zA-Z0-9_]{1,16} has joined \\([0-9]+/[0-9]+\\)!$").matcher(filtered);
         Matcher duels = Pattern.compile("^Opponent:").matcher(filterSpaces);
         
-        int countOfSpaces = filtered.length() - filtered.replace(" ", "").length();
-        
-        if (joined.find() && !noFrontSpace.find() && countOfSpaces == 3) {
+        if (joined.find()) {
         	runTools(filtered, false);
-        } else if (hytillities.find() && !noFrontSpace.find() && countOfSpaces == 2) {
-        	//player is using hytillities! adjust for it
+        } else if (hytillitiesJoined.find()) {
         	runTools(filtered, true);
         } else if (duels.find()) {
         	//remove opponent
         	filterSpaces = filterSpaces.substring(9);
         	
         	//remove rank prefix (if it has one)
-        	if (filterSpaces.indexOf(']') != -1) {
+        	if (filterSpaces.indexOf(']') != -1)
         		filterSpaces = filterSpaces.substring(filterSpaces.indexOf(']') + 1);
-        	}
         	
         	//pass it on to nickalert
         	runTools(filterSpaces, false);
