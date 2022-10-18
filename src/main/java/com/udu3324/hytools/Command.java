@@ -8,6 +8,8 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
+import com.udu3324.hytools.hyapi.HypixelApiKey;
+
 public class Command extends CommandBase {
 
     private HashMap<String, String> collection = new HashMap<String, String>();
@@ -30,18 +32,21 @@ public class Command extends CommandBase {
         collection.put("partyguessguilds", "3");
         collection.put("nickalert", "4");
         collection.put("nickalerthypixelapi", "5");
+		collection.put("setapikey", "6");
+		collection.put("autofetchapikey", "7");
 
 		// /hytools
         if (args.length < 1) {
-            sender.addChatMessage(new ChatComponentText("\n" + EnumChatFormatting.GOLD + "[+]= Hytools v" + Reference.VERSION + " by udu3324 =[+]\n"
-            		+ EnumChatFormatting.GOLD + "Check out my GitHub! https://github.com/udu3324 \n\n"
+            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "[+]= Hytools v" + Reference.VERSION + " by udu3324 =[+]\n\n"
 					+ EnumChatFormatting.GREEN + "/fcheck (player1) (player2) - checks player's friend\n"
-            		+ EnumChatFormatting.DARK_AQUA + "/hytools partyguess [toggle/on/off] [toggled|" + Config.getPartyGuess() + "]\n"
-            		+ EnumChatFormatting.DARK_GREEN + "/hytools partyguessfriends [toggle/on/off] [toggled|" + Config.getPartyGuessFriend() +"] \n"
-            		+ EnumChatFormatting.GOLD + "/hytools partyguessguilds [toggle/on/off] [toggled|" + Config.getPartyGuessGuild() + "]\n"
-            		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalert [toggle/on/off] [toggled|" + Config.getNickAlert() + "]\n"
+					+ EnumChatFormatting.RED + "/hytools setAPIKey - Sets the api key manually\n"
+					+ EnumChatFormatting.RED + "/hytools autoFetchAPIKey [toggled|" + Config.getAutoFetchAPIKey() + "]\n"
+            		+ EnumChatFormatting.DARK_AQUA + "/hytools partyguess [toggled|" + Config.getPartyGuess() + "]\n"
+            		+ EnumChatFormatting.DARK_GREEN + "/hytools partyguessfriends [toggled|" + Config.getPartyGuessFriend() +"] \n"
+            		+ EnumChatFormatting.GOLD + "/hytools partyguessguilds [toggled|" + Config.getPartyGuessGuild() + "]\n"
+            		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalert [toggled|" + Config.getNickAlert() + "]\n"
             		+ EnumChatFormatting.GRAY + "Using Hypixel API for NickAlert is in the grey area of being allowed. " + EnumChatFormatting.BOLD + "Use at your own risk.\n"
-            		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalerthypixelapi [toggle/on/off] [toggled|" + Config.getNickAlertHypixelAPI() + "]"));
+            		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalerthypixelapi [toggled|" + Config.getNickAlertHypixelAPI() + "]"));
             return;
         }
         
@@ -75,13 +80,21 @@ public class Command extends CommandBase {
             		data = "ON";
         		else
         			data = "OFF";
+            } else if (command.equals("AUTOFETCHAPIKEY")) { 
+            	if (Config.getAutoFetchAPIKey())
+            		data = "ON";
+        		else
+        			data = "OFF";
+            } else if (command.equals("SETAPIKEY")) { 
+            	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "You are missing the api key in this command!"));
+                return;
             } else {
-            	sender.addChatMessage(new ChatComponentText("\n" + EnumChatFormatting.RED + command + 
+            	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + command + 
             			" doesn't exist in Hytools! "));
                 return;
             }
             
-        	sender.addChatMessage(new ChatComponentText("\n" + EnumChatFormatting.GREEN + command + 
+        	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + command + 
         			" is currently set to " + data + "."));
             return;
         }
@@ -89,22 +102,28 @@ public class Command extends CommandBase {
 		// /hytools ??? ??? (toggle a tool)
         if (args.length == 2) {
             String command = args[0].toLowerCase();
-            String data = args[1].toLowerCase();
+            String data = args[1].toUpperCase();
             String collec = collection.get(command);
+			
             if (collec == null) {
                 sender.addChatMessage(new ChatComponentText(
                         EnumChatFormatting.RED + command + " is not a valid command. Do /hytools for help!"));
                 return;
             }
+
+			command = command.toUpperCase();
+
+			// handle true or false as toggling
+			if (data.equals("TRUE")) {
+				data = "ON";
+			} else if (data.equals("FALSE"))
+				data = "OFF";
             
-            if (!data.equals("toggle") && !data.equals("on") && !data.equals("off")) {
+            if (!data.equals("TOGGLE") && !data.equals("ON") && !data.equals("OFF") && !command.equals("SETAPIKEY")) {
             	sender.addChatMessage(new ChatComponentText(
-                        EnumChatFormatting.RED + "Invalid 2nd argument! Make sure its either toggle, off, or on."));
+                        EnumChatFormatting.RED + "Invalid 2nd argument! Make sure its either toggle, on, or off."));
             	return;
             }
-            
-            command = command.toUpperCase();
-            data = data.toUpperCase();
             
             if (command.equals("PARTYGUESS")) {
             	if (data.equals("ON")) {
@@ -176,16 +195,36 @@ public class Command extends CommandBase {
             			data = "ON";
             		}
             	}
-            }
+            } else if (command.equals("AUTOFETCHAPIKEY")) { 
+            	if (data.equals("ON")) {
+            		Config.setAutoFetchAPIKey(true);
+            	} else if (data.equals("OFF")) {
+            		Config.setAutoFetchAPIKey(false);
+            	} else if (data.equals("TOGGLE")) {
+            		if (Config.getAutoFetchAPIKey()) {
+            			Config.setAutoFetchAPIKey(false);
+            			data = "OFF";
+            		} else { //would be off
+            			Config.setAutoFetchAPIKey(true);
+            			data = "ON";
+            		}
+            	}
+            } else if (command.equals("SETAPIKEY")) {
+				if (HypixelApiKey.setKey(data, false)) {
+					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "The Hypixel API key has been set sucessfully for Hytools."));
+				} else {
+					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "The Hypixel API key provided is invalid!"));
+				}
+			}
             
             //commands that are successful end up here
             sender.addChatMessage(new ChatComponentText(
-                    EnumChatFormatting.GREEN + command + " is now set to " + data + "."));
+                    EnumChatFormatting.GREEN + command + " is now set to " + data.toLowerCase() + "."));
         }
         
 		// /hytools ??? ??? ??? (invalid command)
         if (args.length >= 3) {
-            sender.addChatMessage(new ChatComponentText("\n" + EnumChatFormatting.RED + "Too many arguments! You probably have a typo."));
+            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Too many arguments! You probably have a typo."));
             return;
         }
 

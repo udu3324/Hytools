@@ -27,7 +27,8 @@ public class HypixelApiKey {
             //if response code is not 200 (ok) then the api key is not set correctly
             if (responseCode != 200) {
                 Hytools.log.info("HypixelApiKey.java | Not a valid API key!");
-                Hytools.sendMessage("\u00A74\u00A7lERROR! API key from /api new did not work.");
+                if (sendMessageInChat)
+                    Hytools.sendMessage("\u00A74\u00A7lERROR! API key from /api new did not work.");
                 apiKeySet = false;
                 return false;
             }

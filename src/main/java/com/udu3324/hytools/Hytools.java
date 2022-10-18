@@ -110,13 +110,15 @@ public class Hytools {
 		if (event.message.getFormattedText().contains("\u00A7k"))
 			return;
     	
+		log.info(Config.getAutoFetchAPIKey());
+
     	//request for new api key
-    	if (requestApiKeyOnce && !configAPIKeySet) {
+    	if (Config.getAutoFetchAPIKey() && requestApiKeyOnce && !configAPIKeySet) {
 			Minecraft.getMinecraft().thePlayer.sendChatMessage("/api new");
 			requestApiKeyOnce = false;
 		}
     	
-        final String filtered = event.message.getUnformattedText();
+        String filtered = event.message.getUnformattedText();
         
         //recieve messages from command "/api new" and parse
         Matcher m = Pattern.compile("^Your new API key is ").matcher(filtered);

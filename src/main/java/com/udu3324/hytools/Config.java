@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.util.ArrayList;
+
 import net.minecraftforge.fml.common.Loader;
 
 public class Config {
@@ -50,26 +52,44 @@ public class Config {
 	//example: setValueFromConfig("api-key", "thisIsTheApiKey")
 	public static void setValueFromConfig(String value, String data) {
 		try {
-			// input the (modified) file content to the StringBuffer "input"
-	        BufferedReader file = new BufferedReader(new FileReader(configFile));
-	        StringBuffer inputBuffer = new StringBuffer();
-	        String line;
+			// get the lines in the config
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(configFile));
 
-	        while ((line = file.readLine()) != null) {
-	            if (line.contains(value)) {
-	            	line = value + ": " + data;
-		        }
-	            inputBuffer.append(line);
-	            inputBuffer.append('\n');
-	        }
-	        file.close();
+            ArrayList<String> lines = new ArrayList<String>();
 
-	        // write the new string with the replaced line OVER the same file
-	        FileOutputStream fileOut = new FileOutputStream(configFile);
-	        fileOut.write(inputBuffer.toString().getBytes());
-	        fileOut.close();
+            String l;
+            while ((l = bufferedReader.readLine()) != null) {
+				lines.add(l);
+            }
+            bufferedReader.close();
+
+			// modify the values from the config
+			for (int i = 0; i < lines.size(); i++) {
+				String line = lines.get(i);
+
+				// dont parse comments
+				if (!line.contains("#") && line.length() > 1 && line.contains(":")) {
+					// if line (value: data) -> substring to : (value) -> equals value
+					if (value.equals(line.substring(0, line.indexOf(":")))) {
+						// its the line being modified
+						lines.set(i, value + ": " + data);
+					}
+				}
+			}
+
+	        // write the lines to the config
+			configFile.createNewFile();
+
+			FileWriter writer = new FileWriter(configFile);
+
+            //write array back to new file
+            for (int i = 0; i < lines.size(); i++) {
+				writer.write(lines.get(i) + System.lineSeparator());
+			}
+
+            writer.close();
 	    } catch (Exception e) {
-	    	Hytools.log.info("Problem writing file.");
+	    	Hytools.log.info("Problem writing file. " + e);
 	    }
 	}
 
@@ -92,6 +112,7 @@ public class Config {
 				w.write(System.lineSeparator());
 				w.write("# Hypixel API Key" + System.lineSeparator());
 				w.write("api-key: empty" + System.lineSeparator());
+				w.write("auto-fetch-api-key: true" + System.lineSeparator());
 				w.write(System.lineSeparator());
 				w.write("# Party Guess Config" + System.lineSeparator());
 				w.write("party-guess_toggled: true" + System.lineSeparator());
@@ -132,6 +153,19 @@ public class Config {
 	
 	public static void setStoredAPIKey(String key) {
 		setValueFromConfig("api-key", key);
+	}
+
+	public static Boolean getAutoFetchAPIKey() {
+		String str = getValueFromConfig("auto-fetch-api-key");
+		if (str.equals("true")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static void setAutoFetchAPIKey(Boolean bool) {
+		setValueFromConfig("auto-fetch-api-key", String.valueOf(bool));
 	}
 	
 	// party guess
