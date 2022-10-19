@@ -25,7 +25,7 @@ public class UUID {
 
         //only return if response is not 200 (ok)
         if (responseCode != 200) {
-            Hytools.log.info("Not a IGN! Now trying UUID.");
+            Hytools.log.info("不是IGN! 现在尝试UUID.");
             return uuidToIGN(str);
         }
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));

@@ -26,7 +26,7 @@ public class NickAlert {
             Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + obj.toString());
             
             if (responseCode == 403) {
-				Hytools.log.info("NickAlert.java | Not a valid API key!");
+				Hytools.log.info("NickAlert.java | 不是一个有效的API密钥!");
             	Hytools.sendMessage("\u00A74\u00A7lFATAL ERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
             	return false;
             }
@@ -62,9 +62,9 @@ public class NickAlert {
 		try {
 			//simply check if the user exists in minecraft's database
 			uuid = UUID.get(username);
-			if (uuid.equals("Not a IGN or UUID!")) {
+			if (uuid.equals("不是IGN或UUID!")) {
 				//checks if username exists in minecraft api
-				Hytools.sendMessage("\u00A75" + username + " is a nicked user!");
+				Hytools.sendMessage("\u00A75" + username + " 是nick用户!");
 				return;
 			}
 			
@@ -75,9 +75,9 @@ public class NickAlert {
 			//check if user has logged on before
 			if (HypixelApiKey.apiKeySet) {
 				if (hasLoggedOntoHypixel(uuid))
-					Hytools.sendMessage("\u00A75" + username + " is a nicked user!");
+					Hytools.sendMessage("\u00A75" + username + " 是nick用户!");
 	        } else {
-				Hytools.log.info("NickAlert.java | Not a valid API key!");
+				Hytools.log.info("NickAlert.java | 不是一个有效的API密钥!");
 	        	Hytools.sendMessage("\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
 	        }
 		} catch (Exception e) {

@@ -52,7 +52,7 @@ public class Hytools {
 	
 	@EventHandler
     public void init(FMLInitializationEvent event) {
-		log.info("Hytools v" + Reference.VERSION + " has loaded! (by udu3324)");
+		log.info("Hytools v" + Reference.VERSION + " 已加载! (by udu3324,汉化by wateTina)");
 		
         // register subscribe events
         MinecraftForge.EVENT_BUS.register(this);
@@ -121,7 +121,7 @@ public class Hytools {
         String filtered = event.message.getUnformattedText();
         
         //recieve messages from command "/api new" and parse
-        Matcher m = Pattern.compile("^Your new API key is ").matcher(filtered);
+        Matcher m = Pattern.compile("^您的新 API 密钥是 ").matcher(filtered);
         if (m.find() && filtered.length() == 56) {
         	HypixelApiKey.setKey(filtered.substring(20), true);
         	
@@ -139,8 +139,8 @@ public class Hytools {
 		Matcher hytillitiesJoined = Pattern.compile("^\\+ \\([0-9]+\\/[0-9]+\\) [a-zA-Z0-9_]{1,16}$").matcher(filtered);
 
 		// ^[a-zA-Z0-9_]{1,16} has joined \([0-9]+/[0-9]+\)!$ | "NintendoOS has joined (1/16)!"
-        Matcher joined = Pattern.compile("^[a-zA-Z0-9_]{1,16} has joined \\([0-9]+/[0-9]+\\)!$").matcher(filtered);
-        Matcher duels = Pattern.compile("^Opponent:").matcher(filterSpaces);
+        Matcher joined = Pattern.compile("^[a-zA-Z0-9_]{1,16} 已加入 \\([0-9]+/[0-9]+\\)!$").matcher(filtered);
+        Matcher duels = Pattern.compile("^对手:").matcher(filterSpaces);
         
         if (joined.find()) {
         	runTools(filtered, false);

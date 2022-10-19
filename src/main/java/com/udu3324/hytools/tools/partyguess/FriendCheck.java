@@ -31,7 +31,7 @@ public class FriendCheck {
             }
         }
         if (matched.size() == 0) {
-            matched.add("None matching.");
+            matched.add("无人匹配.");
             return matched;
         }
         return matched;
@@ -58,8 +58,8 @@ public class FriendCheck {
         if (HypixelApiKey.apiKeySet) {
         	fOUUID = FriendsOfUUID.get(currentUUID);
         } else {
-            Hytools.log.info("FriendCheck.java | Not a valid API key!");
-        	Hytools.sendMessage("\u00A74\u00A7lERROR! (friends couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
+            Hytools.log.info("FriendCheck.java | 不是一个有效的API密钥!");
+        	Hytools.sendMessage("\u00A74\u00A7错误! (好友不在身边) API密钥还没有被设置。Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
         	uuidArray.clear();
         	return null;
         }
@@ -74,7 +74,7 @@ public class FriendCheck {
         uuidArray.clear();
 
         //return if no friends in party
-        if (matchingFriendInParty.get(0).contains("None matching."))
+        if (matchingFriendInParty.get(0).contains("无人匹配."))
             return null;
     
         uuidFriendsWith = currentUUID;
@@ -86,7 +86,7 @@ public class FriendCheck {
             e.printStackTrace();
         }
         
-        return uuidFriendsWith + matchingFriendInParty.toString().replace("[", "\u00A72 is friends with ").replace("]", "").replace(",", "\u00A72, ") + "\u00A72.";
+        return uuidFriendsWith + matchingFriendInParty.toString().replace("[", "\u00A72 是好友 ").replace("]", "").replace(",", "\u00A72, ") + "\u00A72.";
     }
 
     public static void store(String username) {
