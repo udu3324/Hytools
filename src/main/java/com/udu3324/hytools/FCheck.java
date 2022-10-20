@@ -10,6 +10,7 @@ import com.udu3324.hytools.mcapi.UUID;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
@@ -30,7 +31,7 @@ public class FCheck extends CommandBase {
         // /fcheck (invalid)
         if (args.length < 2) {
             sender.addChatMessage(new ChatComponentText(
-                    "\n" + EnumChatFormatting.RED + "Not enough arguments! You probably have a typo."));
+                    "\n" + EnumChatFormatting.RED + I18n.format("check.Tanear")));
             return;
         }
 
