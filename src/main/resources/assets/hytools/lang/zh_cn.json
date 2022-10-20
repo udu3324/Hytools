@@ -1,0 +1,6 @@
+{
+"check.Tanearq":"check.Tanearq=没有足够的论据！你可能打错了。",
+"check.Tanearw":"check.Tanearw=争论太多了！你可能打错了。",
+"comd.setapikey":"comd.setapikey=该命令中缺少api！",
+"fcheck.error":"§4§l错误！（无法获取玩家数据）尚未设置 API 密钥。请按照以下操作来修复此问题。"
+}

@@ -11,6 +11,7 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
@@ -31,7 +32,7 @@ public class FCheck extends CommandBase {
         // /fcheck (invalid)
         if (args.length < 2) {
             sender.addChatMessage(new ChatComponentText(
-                    "\n" + EnumChatFormatting.RED + I18n.format("check.Tanearq")));
+                    "\n" + EnumChatFormatting.RED + TextComponentTranslation("check.Tanearq")));
             return;
         }
 
@@ -61,8 +62,7 @@ public class FCheck extends CommandBase {
                         ArrayList<String> listOfFriends = FriendsOfUUID.get(uuid1);
                         if (listOfFriends == null) {
                             Hytools.log.info("FCheck.java | Not a valid API key!");
-                            Hytools.sendMessage(
-                                    "\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
+                            Hytools.sendMessage(new TextComponentTranslation("fcheck.error"));
                             return;
                         }
 
@@ -81,7 +81,7 @@ public class FCheck extends CommandBase {
 
         if (args.length >= 3) {
             sender.addChatMessage(new ChatComponentText(
-                    "\n" + EnumChatFormatting.RED + I18n.format("check.Tanearw")));
+                    "\n" + EnumChatFormatting.RED + TextComponentTranslation("check.Tanearw")));
             return;
         }
 

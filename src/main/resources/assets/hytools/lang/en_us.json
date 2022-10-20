@@ -1,0 +1,6 @@
+{
+ "check.Tanearq" : "Not enough arguments! You probably have a typo.",
+ "check.Tanearw" : "Too many arguments! You probably have a typo.",
+ "comd.setapikey":"You are missing the api key in this command!",
+ "":"\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this."
+}
