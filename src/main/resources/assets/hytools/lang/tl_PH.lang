@@ -1,0 +1,15 @@
+comd.setapikey=You are missing the api key in this command!
+comd.doesn=doesn't exist in Hytools!
+comd.currently=is currently set to
+comd.i2a=Invalid 2nd argument! Make sure its either toggle, on, or off.
+comd.ncmd=is not a valid command. Do /hytools for help!
+comd.apiset=The Hypixel API key has been set sucessfully for Hytools.
+comd.apiad=The Hypixel API key provided is invalid!
+comd.setn=is now set to
+comd.mas=Too many arguments! You probably have a typo.
+fc.nop=is not a real player.
+fc.niu=Not a IGN or UUID!
+fc.api=FCheck.java | Not a valid API key!
+fc.sta=§4§lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do §c§l/api new§4§l to fix this.
+fc.Tanearq = Not enough arguments! You probably have a typo.
+fc.Tanearw = Too many arguments! You probably have a typo.
