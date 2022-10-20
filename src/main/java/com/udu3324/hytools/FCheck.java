@@ -31,7 +31,7 @@ public class FCheck extends CommandBase {
         // /fcheck (invalid)
         if (args.length < 2) {
             sender.addChatMessage(new ChatComponentText(
-                    "\n" + EnumChatFormatting.RED + I18n.format("check.Tanear1")));
+                    "\n" + EnumChatFormatting.RED + I18n.format("check.Tanearq")));
             return;
         }
 
@@ -81,7 +81,7 @@ public class FCheck extends CommandBase {
 
         if (args.length >= 3) {
             sender.addChatMessage(new ChatComponentText(
-                    "\n" + EnumChatFormatting.RED + I18n.format("check.Tanear2")));
+                    "\n" + EnumChatFormatting.RED + I18n.format("check.Tanearw")));
             return;
         }
 
