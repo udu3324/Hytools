@@ -91,12 +91,12 @@ public class Command extends CommandBase {
                 return;
             } else {
             	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + command + 
-            			" doesn't exist in Hytools! "));
+            			I18n.format("comd.doesn")));
                 return;
             }
             
         	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + command + 
-        			" is currently set to " + data + "."));
+        			I18n.format("comd.currently") + data + "."));
             return;
         }
 
@@ -108,7 +108,7 @@ public class Command extends CommandBase {
 			
             if (collec == null) {
                 sender.addChatMessage(new ChatComponentText(
-                        EnumChatFormatting.RED + command + " is not a valid command. Do /hytools for help!"));
+                        EnumChatFormatting.RED + command + I18n.format("comd.ncmd")));
                 return;
             }
 
@@ -122,7 +122,7 @@ public class Command extends CommandBase {
             
             if (!data.equals("TOGGLE") && !data.equals("ON") && !data.equals("OFF") && !command.equals("SETAPIKEY")) {
             	sender.addChatMessage(new ChatComponentText(
-                        EnumChatFormatting.RED + "Invalid 2nd argument! Make sure its either toggle, on, or off."));
+                        EnumChatFormatting.RED + I18n.format("comd.i2a")));
             	return;
             }
             
@@ -212,20 +212,20 @@ public class Command extends CommandBase {
             	}
             } else if (command.equals("SETAPIKEY")) {
 				if (HypixelApiKey.setKey(data, false)) {
-					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "The Hypixel API key has been set sucessfully for Hytools."));
+					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + I18n.format("comd.apiset")));
 				} else {
-					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "The Hypixel API key provided is invalid!"));
+					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("comd.apiad")));
 				}
 			}
             
             //commands that are successful end up here
             sender.addChatMessage(new ChatComponentText(
-                    EnumChatFormatting.GREEN + command + " is now set to " + data.toLowerCase() + "."));
+                    EnumChatFormatting.GREEN + command + I18n.format("comd.setn") + data.toLowerCase() + "."));
         }
         
 		// /hytools ??? ??? ??? (invalid command)
         if (args.length >= 3) {
-            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Too many arguments! You probably have a typo."));
+            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("comd.mas")));
             return;
         }
 
