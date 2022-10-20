@@ -86,7 +86,7 @@ public class Command extends CommandBase {
         		else
         			data = "OFF";
             } else if (command.equals("SETAPIKEY")) { 
-            	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "You are missing the api key in this command!"));
+            	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("comd.setapikey")"You are missing the api key in this command!"));
                 return;
             } else {
             	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + command + 
