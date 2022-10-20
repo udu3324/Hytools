@@ -26,9 +26,9 @@ public class HypixelApiKey {
 
             //if response code is not 200 (ok) then the api key is not set correctly
             if (responseCode != 200) {
-                Hytools.log.info("HypixelApiKey.java | 不是一个有效的API密钥!");
+                Hytools.log.info("HypixelApiKey.java | Not a valid API key!");
                 if (sendMessageInChat)
-                    Hytools.sendMessage("\u00A74\u00A7lERROR! 来自/api new的API密钥不工作.");
+                    Hytools.sendMessage("\u00A74\u00A7lERROR! API key from /api new did not work.");
                 apiKeySet = false;
                 return false;
             }
@@ -38,9 +38,9 @@ public class HypixelApiKey {
             apiKeySet = true;
             
             if (sendMessageInChat)
-                Hytools.sendMessage("\u00A72在Hytools中已经成功地设置了Hypixel的API密钥。.");
+                Hytools.sendMessage("\u00A72Hypixel API Key has been succesfully set in Hytools.");
 
-            Hytools.log.info("HypixelApiKey已被成功设置.");
+            Hytools.log.info("HypixelApiKey has been successfully set.");
             Config.setStoredAPIKey(key);
             result = true;
         } catch (IOException e) {
@@ -52,7 +52,7 @@ public class HypixelApiKey {
     // setKeyFromConf() sets key from config only if the key in config is functional
     public static Boolean setKeyFromConf() {
     	if (setKey(Config.getStoredAPIKey(), false)) {
-    		Hytools.log.info("由于配置中的api密钥是正确的,/api new被跳过了。. ");
+    		Hytools.log.info("since the api key from config is correct, /api new has been skipped. ");
     		return true;
     	} else {
             return false;

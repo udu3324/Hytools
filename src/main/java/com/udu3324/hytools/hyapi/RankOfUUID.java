@@ -31,7 +31,7 @@ public class RankOfUUID {
 
             // return if response is not 200 (ok)
             if (responseCode != 200) {
-                Hytools.log.info("RankOfUUID.java | 不是一个有效的API密钥!");
+                Hytools.log.info("RankOfUUID.java | Not a valid API key!");
                 return symbol + "7";
             }
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));

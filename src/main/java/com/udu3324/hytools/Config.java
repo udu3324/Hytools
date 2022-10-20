@@ -43,7 +43,7 @@ public class Config {
 	        
 	        file.close();
 		} catch (Exception e) {
-			Hytools.log.info("读取文件有问题.");
+			Hytools.log.info("Problem reading file.");
 		}
 		
 		return data;
@@ -89,16 +89,16 @@ public class Config {
 
             writer.close();
 	    } catch (Exception e) {
-	    	Hytools.log.info("写入文件有问题. " + e);
+	    	Hytools.log.info("Problem writing file. " + e);
 	    }
 	}
 
 	//delete the config file
 	public static void delete() {
 		if (configFile.delete())
-			Hytools.log.info("配置文件已被成功删除.");
+			Hytools.log.info("Config file has been succesfully deleted.");
 		else
-			Hytools.log.info("错误! 配置文件不能被删除!");
+			Hytools.log.info("Error! Config file couldn't be deleted!");
 	}
 
 	//create a config file
@@ -124,13 +124,13 @@ public class Config {
 				w.write("nick-alert-hypixel-api_toggled: false" + System.lineSeparator());
 				w.close();
 				
-				Hytools.log.info("已经创建了新的配置(好)");
+				Hytools.log.info("new config has been created (good)");
 			  } else {
 				//dont do anything if the config has alr been made
-			    Hytools.log.info("配置已经存在(好)");
+			    Hytools.log.info("config already exists (good)");
 			    
 			    if (isNotCurrentVersion()) {
-			    	Hytools.log.info("配置文件在错误的版本(坏)");
+			    	Hytools.log.info("config file is at the wrong version (bad)");
 			    	//delete and create the new one with the right version
 			    	String apiKey = getStoredAPIKey();
 			    	

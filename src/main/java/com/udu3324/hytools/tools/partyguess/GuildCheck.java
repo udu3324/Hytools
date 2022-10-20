@@ -48,8 +48,8 @@ public class GuildCheck {
 		if (HypixelApiKey.apiKeySet) {
 			 guildInfo = GuildOfUUID.get(firstUUID);
         } else {
-			Hytools.log.info("GuildCheck.java | 不是一个有效的API密钥!");
-        	Hytools.sendMessage("\u00A74\u00A7错误! (无法获取公会信息) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
+			Hytools.log.info("GuildCheck.java | Not a valid API key!");
+        	Hytools.sendMessage("\u00A74\u00A7lERROR! (guild info couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
         	uuidArray.clear();
         	return null;
         }
@@ -83,7 +83,7 @@ public class GuildCheck {
 		String returningString = null;
 		
 		try {
-			returningString = RankOfUUID.get(firstUUID) + IGN.get(firstUUID) + "\u00A76 是在同一个工会的 " + playerList + "\u00A76. (" + guildName + ")";
+			returningString = RankOfUUID.get(firstUUID) + IGN.get(firstUUID) + "\u00A76 is in the same guild as " + playerList + "\u00A76. (" + guildName + ")";
 			
 			if (playerList.equals(IGN.get(firstUUID))) returningString = null;
 			if (playerList.equals("")) returningString = null;

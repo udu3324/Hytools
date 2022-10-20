@@ -43,7 +43,7 @@ public class FriendsOfUUID {
 
             //return only if response is not 200 (ok)
             if (responseCode != 200) {
-                Hytools.log.info("FriendsOfUUID.java | 不是一个有效的API密钥!");
+                Hytools.log.info("FriendsOfUUID.java | Not a valid API key!");
                 return null;
             }
 

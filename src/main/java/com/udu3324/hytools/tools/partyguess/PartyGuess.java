@@ -70,7 +70,7 @@ public class PartyGuess {
 
                         // user and user string if theres only 2 people
                         if (tempUserArray.size() == 2) {
-                            raw = raw.replace(",", "\u00A73 和");
+                            raw = raw.replace(",", "\u00A73 and");
                         } else if (tempUserArray.size() >= 3) {
                             // user, user and user string if theres more than 3 people
 
@@ -80,11 +80,11 @@ public class PartyGuess {
                             // delete comma and replace with and
                             StringBuilder newString = new StringBuilder(raw);
                             newString.deleteCharAt(lastComma);
-                            newString.replace(lastComma, lastComma, "\u00A73 和");
+                            newString.replace(lastComma, lastComma, "\u00A73 and");
                             raw = newString.toString();
                         }
 
-                        Hytools.sendMessage("\u00A73" + raw + "\u00A73 最有可能是在组队中.");
+                        Hytools.sendMessage("\u00A73" + raw + "\u00A73 are most likely in a party.");
 
                         // friend check
                         String friendCheck = FriendCheck.reset();
@@ -99,7 +99,7 @@ public class PartyGuess {
                         }
                     }
 
-                    Hytools.log.info("重置组队猜测 " + tempUserArray.toString());
+                    Hytools.log.info("Reset party guess " + tempUserArray.toString());
 
                     doOnceBeforeTimeReset = true;
                 }
@@ -112,7 +112,7 @@ public class PartyGuess {
         }
 
         tempUserArray.add(username);
-        Hytools.log.info("将用户添加到数组中" + tempUserArray.toString());
+        Hytools.log.info("Added user to array" + tempUserArray.toString());
         return;
     }
 }
