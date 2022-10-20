@@ -52,7 +52,7 @@ public class FCheck extends CommandBase {
                         }
 
                         String uuid2 = UUID.get(player2);
-                        if (uuid2.equals(I18n.format("fc.niu")) {
+                        if (uuid2.equals(I18n.format("fc.niu"))) {
                             Hytools.sendMessage("\u00A7C" + player2 + I18n.format("fc.nop"));
                             return;
                         }
