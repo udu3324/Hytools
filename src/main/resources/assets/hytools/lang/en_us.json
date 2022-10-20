@@ -1,3 +1,4 @@
 {
-    "check.Tanear":"Not enough arguments! You probably have a typo."
+    "check.Tanear1":"Not enough arguments! You probably have a typo.",
+    "check.Tanear2":"Too many arguments! You probably have a typo."
 }

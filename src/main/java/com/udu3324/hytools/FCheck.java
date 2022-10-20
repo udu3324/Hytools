@@ -31,7 +31,7 @@ public class FCheck extends CommandBase {
         // /fcheck (invalid)
         if (args.length < 2) {
             sender.addChatMessage(new ChatComponentText(
-                    "\n" + EnumChatFormatting.RED + I18n.format("check.Tanear")));
+                    "\n" + EnumChatFormatting.RED + I18n.format("check.Tanear1")));
             return;
         }
 
@@ -44,7 +44,7 @@ public class FCheck extends CommandBase {
                 @Override
                 public void run() {
                     try {
-                        // check both players to see if they're real
+                        // 检查两个玩家，看看他们是不是真的
                         String uuid1 = UUID.get(player1);
                         if (uuid1.equals("Not a IGN or UUID!")) {
                             Hytools.sendMessage("\u00A7C" + player1 + " is not a real player.");
@@ -57,7 +57,7 @@ public class FCheck extends CommandBase {
                             return;
                         }
 
-                        // get the friends of player1
+                        // 获取玩家1的好友
                         ArrayList<String> listOfFriends = FriendsOfUUID.get(uuid1);
                         if (listOfFriends == null) {
                             Hytools.log.info("FCheck.java | Not a valid API key!");
@@ -81,7 +81,7 @@ public class FCheck extends CommandBase {
 
         if (args.length >= 3) {
             sender.addChatMessage(new ChatComponentText(
-                    "\n" + EnumChatFormatting.RED + "Too many arguments! You probably have a typo."));
+                    "\n" + EnumChatFormatting.RED + I18n.format("check.Tanear2")));
             return;
         }
 
