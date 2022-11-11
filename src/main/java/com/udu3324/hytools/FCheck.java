@@ -31,7 +31,7 @@ public class FCheck extends CommandBase {
         // /fcheck (invalid)
         if (args.length < 2) {
             sender.addChatMessage(new ChatComponentText(
-                    "\n" + EnumChatFormatting.RED + I18n.format("fc.Tanearq")));
+                    "\n" + EnumChatFormatting.RED + I18n.format("fcheck.Tanearq")));
             return;
         }
 
@@ -46,23 +46,23 @@ public class FCheck extends CommandBase {
                     try {
                         // 检查两个玩家，看看他们是不是真的
                         String uuid1 = UUID.get(player1);
-                        if (uuid1.equals(I18n.format("fc.niu"))) {
-                            Hytools.sendMessage("\u00A7C" + player1 + I18n.format("fc.nop"));
+                        if (uuid1.equals(I18n.format("fcheck.niu"))) {
+                            Hytools.sendMessage("\u00A7C" + player1 + I18n.format("fcheck.nop"));
                             return;
                         }
 
                         String uuid2 = UUID.get(player2);
-                        if (uuid2.equals(I18n.format("fc.niu"))) {
-                            Hytools.sendMessage("\u00A7C" + player2 + I18n.format("fc.nop"));
+                        if (uuid2.equals(I18n.format("fcheck.niu"))) {
+                            Hytools.sendMessage("\u00A7C" + player2 + I18n.format("fcheck.nop"));
                             return;
                         }
 
                         // 获取玩家1的好友
                         ArrayList<String> listOfFriends = FriendsOfUUID.get(uuid1);
                         if (listOfFriends == null) {
-                            Hytools.log.info(I18n.format("fc.api"));
+                            Hytools.log.info(I18n.format("fcheck.api"));
                             Hytools.sendMessage(
-                                    I18n.format("fc.sta"));
+                                    I18n.format("fcheck.sta"));
                             return;
                         }
 
@@ -81,7 +81,7 @@ public class FCheck extends CommandBase {
 
         if (args.length >= 3) {
             sender.addChatMessage(new ChatComponentText(
-                    "\n" + EnumChatFormatting.RED + I18n.format("fc.Tanearw")));
+                    "\n" + EnumChatFormatting.RED + I18n.format("fcheck.Tanearw")));
             return;
         }
 
