@@ -38,7 +38,8 @@ public class Command extends CommandBase {
 
 		// /hytools
         if (args.length < 1) {
-            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "[+]= Hytools v" + Reference.VERSION + " by udu3324 =[+]\n\n"
+            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "[+]= Hytools v" + Reference.VERSION + " by udu3324 =[+]\n"
+                                                        +"Add I18n by: lroj, original: wateTina\n\n"
 					+ EnumChatFormatting.GREEN + "/fcheck (player1) (player2) - "+I18n.format("command.help1")+"\n"
 					+ EnumChatFormatting.RED + "/hytools setAPIKey - "+I18n.format("command.help2")+"\n"
 					+ EnumChatFormatting.RED + "/hytools autoFetchAPIKey [toggled|" + Config.getAutoFetchAPIKey() + "]\n"
