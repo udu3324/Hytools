@@ -65,6 +65,10 @@ processResources {
         exclude 'mcmod.info'
     }
 }
-tasks.withType(JavaCompile) {
-options.encoding = "UTF-8"
+tasks.withType(JavaCompile).configureEach {
+   it.options.encoding = 'UTF-8'
+
+   if (targetVersion.isJava9Compatible()) {
+   it.options.release = Integer.parseInt(targetVersion.getMajorVersion())
+   }
 }

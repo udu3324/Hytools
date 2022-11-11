@@ -6,7 +6,7 @@ on:
     # - cron: '*/5 * * * *'
     # 表达式生成  https://crontab.guru/
     - cron: '0 */24 * * *'
-    
+
     #inputs:
     #  days:
     #    description: 'Number of days.'
@@ -27,4 +27,4 @@ jobs:
           token: ${{ github.token }}
           repository: ${{ github.repository }}
           retain_days: 0
-          keep_minimum_runs: 3
+          keep_minimum_runs: 2
