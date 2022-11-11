@@ -39,14 +39,14 @@ public class Command extends CommandBase {
 		// /hytools
         if (args.length < 1) {
             sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "[+]= Hytools v" + Reference.VERSION + " by udu3324 =[+]\n\n"
-					+ EnumChatFormatting.GREEN + "/fcheck (player1) (player2) - checks player's friend\n"
-					+ EnumChatFormatting.RED + "/hytools setAPIKey - Sets the api key manually\n"
+					+ EnumChatFormatting.GREEN + "/fcheck (player1) (player2) - "+I18n.format("command.help1")+"\n"
+					+ EnumChatFormatting.RED + "/hytools setAPIKey - "+I18n.format("command.help2")+"\n"
 					+ EnumChatFormatting.RED + "/hytools autoFetchAPIKey [toggled|" + Config.getAutoFetchAPIKey() + "]\n"
             		+ EnumChatFormatting.DARK_AQUA + "/hytools partyguess [toggled|" + Config.getPartyGuess() + "]\n"
             		+ EnumChatFormatting.DARK_GREEN + "/hytools partyguessfriends [toggled|" + Config.getPartyGuessFriend() +"] \n"
             		+ EnumChatFormatting.GOLD + "/hytools partyguessguilds [toggled|" + Config.getPartyGuessGuild() + "]\n"
             		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalert [toggled|" + Config.getNickAlert() + "]\n"
-            		+ EnumChatFormatting.GRAY + "Using Hypixel API for NickAlert is in the grey area of being allowed. " + EnumChatFormatting.BOLD + "Use at your own risk.\n"
+            		+ EnumChatFormatting.GRAY + I18n.format("command.help8.1") + EnumChatFormatting.BOLD + I18n.format("command.help8.2")
             		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalerthypixelapi [toggled|" + Config.getNickAlertHypixelAPI() + "]"));
             return;
         }
