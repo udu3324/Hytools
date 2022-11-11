@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.common.Loader;
 
 public class Config {
@@ -124,13 +125,13 @@ public class Config {
 				w.write("nick-alert-hypixel-api_toggled: false" + System.lineSeparator());
 				w.close();
 				
-				Hytools.log.info("new config has been created (good)");
+				Hytools.log.info(I18n.format("config.new"));
 			  } else {
 				//dont do anything if the config has alr been made
-			    Hytools.log.info("config already exists (good)");
+			    Hytools.log.info(I18n.format("config.exist"));
 			    
 			    if (isNotCurrentVersion()) {
-			    	Hytools.log.info("config file is at the wrong version (bad)");
+			    	Hytools.log.info(I18n.format("config.bed"));
 			    	//delete and create the new one with the right version
 			    	String apiKey = getStoredAPIKey();
 			    	
