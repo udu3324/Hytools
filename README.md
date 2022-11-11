@@ -58,7 +58,7 @@ A tool that alerts if someone joined is nicked. This tool **will not reveal the 
   
 ## Translations
 
-We have a [Crowdin project](https://crowdin.com/project/wurst7) for translations. You can also submit translations here on GitHub, but Crowdin is preferred since it makes it much easier to resolve issues.
+We have a [Crowdin project](https://crowdin.com/project/slimefunaddon) for translations. You can also submit translations here on GitHub, but Crowdin is preferred since it makes it much easier to resolve issues.
 
 ## Installation
 
