@@ -46,7 +46,7 @@ public class Command extends CommandBase {
             		+ EnumChatFormatting.DARK_GREEN + "/hytools partyguessfriends [toggled|" + Config.getPartyGuessFriend() +"] \n"
             		+ EnumChatFormatting.GOLD + "/hytools partyguessguilds [toggled|" + Config.getPartyGuessGuild() + "]\n"
             		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalert [toggled|" + Config.getNickAlert() + "]\n"
-            		+ EnumChatFormatting.GRAY + I18n.format("command.help8.1") + EnumChatFormatting.BOLD + I18n.format("command.help8.2")
+            		+ EnumChatFormatting.GRAY + I18n.format("command.help8.1") + EnumChatFormatting.BOLD + I18n.format("command.help8.2")+"\n"
             		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalerthypixelapi [toggled|" + Config.getNickAlertHypixelAPI() + "]"));
             return;
         }
@@ -87,16 +87,16 @@ public class Command extends CommandBase {
         		else
         			data = "OFF";
             } else if (command.equals("SETAPIKEY")) { 
-            	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("comd.setapikey")));
+            	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("command.setapikey")));
                 return;
             } else {
             	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + command + 
-            			I18n.format("comd.doesn")));
+            			I18n.format("command.doesn")));
                 return;
             }
             
         	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + command + 
-        			I18n.format("comd.currently") + data + "."));
+        			I18n.format("command.currently") + data + "."));
             return;
         }
 
@@ -108,7 +108,7 @@ public class Command extends CommandBase {
 			
             if (collec == null) {
                 sender.addChatMessage(new ChatComponentText(
-                        EnumChatFormatting.RED + command + I18n.format("comd.ncmd")));
+                        EnumChatFormatting.RED + command + I18n.format("command.ncmd")));
                 return;
             }
 
@@ -122,7 +122,7 @@ public class Command extends CommandBase {
             
             if (!data.equals("TOGGLE") && !data.equals("ON") && !data.equals("OFF") && !command.equals("SETAPIKEY")) {
             	sender.addChatMessage(new ChatComponentText(
-                        EnumChatFormatting.RED + I18n.format("comd.i2a")));
+                        EnumChatFormatting.RED + I18n.format("command.i2a")));
             	return;
             }
             
@@ -212,20 +212,20 @@ public class Command extends CommandBase {
             	}
             } else if (command.equals("SETAPIKEY")) {
 				if (HypixelApiKey.setKey(data, false)) {
-					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + I18n.format("comd.apiset")));
+					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + I18n.format("command.apiset")));
 				} else {
-					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("comd.apiad")));
+					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("command.apiad")));
 				}
 			}
             
             //commands that are successful end up here
             sender.addChatMessage(new ChatComponentText(
-                    EnumChatFormatting.GREEN + command + I18n.format("comd.setn") + data.toLowerCase() + "."));
+                    EnumChatFormatting.GREEN + command + I18n.format("command.setn") + data.toLowerCase() + "."));
         }
         
 		// /hytools ??? ??? ??? (invalid command)
         if (args.length >= 3) {
-            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("comd.mas")));
+            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("command.mas")));
             return;
         }
 
