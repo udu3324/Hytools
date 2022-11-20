@@ -10,6 +10,7 @@ import com.udu3324.hytools.mcapi.UUID;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
@@ -30,7 +31,7 @@ public class FCheck extends CommandBase {
         // /fcheck (invalid)
         if (args.length < 2) {
             sender.addChatMessage(new ChatComponentText(
-                    "\n" + EnumChatFormatting.RED + "Not enough arguments! You probably have a typo."));
+                    "\n" + EnumChatFormatting.RED + I18n.format("fcheck.Tanearq")));
             return;
         }
 
@@ -43,33 +44,33 @@ public class FCheck extends CommandBase {
                 @Override
                 public void run() {
                     try {
-                        // check both players to see if they're real
+                        // 检查两个玩家，看看他们是不是真的
                         String uuid1 = UUID.get(player1);
-                        if (uuid1.equals("Not a IGN or UUID!")) {
-                            Hytools.sendMessage("\u00A7C" + player1 + " is not a real player.");
+                        if (uuid1.equals(I18n.format("fcheck.niu"))) {
+                            Hytools.sendMessage("\u00A7C" + player1 + I18n.format("fcheck.nop"));
                             return;
                         }
 
                         String uuid2 = UUID.get(player2);
-                        if (uuid2.equals("Not a IGN or UUID!")) {
-                            Hytools.sendMessage("\u00A7C" + player2 + " is not a real player.");
+                        if (uuid2.equals(I18n.format("fcheck.niu"))) {
+                            Hytools.sendMessage("\u00A7C" + player2 + I18n.format("fcheck.nop"));
                             return;
                         }
 
-                        // get the friends of player1
+                        // 获取玩家1的好友
                         ArrayList<String> listOfFriends = FriendsOfUUID.get(uuid1);
                         if (listOfFriends == null) {
-                            Hytools.log.info("FCheck.java | Not a valid API key!");
+                            Hytools.log.info(I18n.format("fcheck.api"));
                             Hytools.sendMessage(
-                                    "\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
+                                    I18n.format("fcheck.sta"));
                             return;
                         }
 
                         // return result of player2 is found in friends list of player1
                         if (listOfFriends.contains(uuid2))
-                            Hytools.sendMessage("\u00A7A" + RankOfUUID.get(uuid1) + IGN.get(uuid1) + "\u00A7A is friends with " + RankOfUUID.get(uuid2) + IGN.get(uuid2) + "\u00A7A.");
+                            Hytools.sendMessage("\u00A7A" + RankOfUUID.get(uuid1) + IGN.get(uuid1) + I18n.format("fcheck.yes") + RankOfUUID.get(uuid2) + IGN.get(uuid2) + "\u00A7A.");
                         else
-                            Hytools.sendMessage("\u00A7C" + RankOfUUID.get(uuid1) + IGN.get(uuid1) + "\u00A7C is not friends with " + RankOfUUID.get(uuid2) + IGN.get(uuid2) + "\u00A7C.");
+                            Hytools.sendMessage("\u00A7C" + RankOfUUID.get(uuid1) + IGN.get(uuid1) + I18n.format("fcheck.not") + RankOfUUID.get(uuid2) + IGN.get(uuid2) + "\u00A7C.");
                     } catch (Exception e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -80,7 +81,7 @@ public class FCheck extends CommandBase {
 
         if (args.length >= 3) {
             sender.addChatMessage(new ChatComponentText(
-                    "\n" + EnumChatFormatting.RED + "Too many arguments! You probably have a typo."));
+                    "\n" + EnumChatFormatting.RED + I18n.format("fcheck.Tanearw")));
             return;
         }
 

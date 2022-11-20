@@ -4,6 +4,7 @@ import com.udu3324.hytools.Config;
 import com.udu3324.hytools.Hytools;
 import com.udu3324.hytools.hyapi.RankOfUUID;
 import com.udu3324.hytools.mcapi.UUID;
+import net.minecraft.client.resources.I18n;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -84,7 +85,7 @@ public class PartyGuess {
                             raw = newString.toString();
                         }
 
-                        Hytools.sendMessage("\u00A73" + raw + "\u00A73 are most likely in a party.");
+                        Hytools.sendMessage("\u00A73" + raw + "\u00A73 "+ I18n.format("partyguess.party"));
 
                         // friend check
                         String friendCheck = FriendCheck.reset();
@@ -112,7 +113,7 @@ public class PartyGuess {
         }
 
         tempUserArray.add(username);
-        Hytools.log.info("Added user to array" + tempUserArray.toString());
+        Hytools.log.info(I18n.format("partyguess.username") + tempUserArray.toString());
         return;
     }
 }

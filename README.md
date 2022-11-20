@@ -9,6 +9,10 @@
 
   
 
+<a title="Crowdin" target="_blank" href="https://crowdin.com/project/slimefunaddon"><img src="https://badges.crowdin.net/slimefunaddon/localized.svg"></a>
+
+  
+
 <img  alt="GitHub downloads"  src="https://img.shields.io/github/downloads/udu3324/hytools/total">
 
   
@@ -52,6 +56,9 @@ A tool that alerts if someone joined is nicked. This tool **will not reveal the 
 ![](https://media.discordapp.net/attachments/956773599644090379/964672960873000980/unknown.png)
 
   
+## Translations
+
+We have a [Crowdin project](https://crowdin.com/project/slimefunaddon) for translations. You can also submit translations here on GitHub, but Crowdin is preferred since it makes it much easier to resolve issues.
 
 ## Installation
 

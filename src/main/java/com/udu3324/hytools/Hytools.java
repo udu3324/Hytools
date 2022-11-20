@@ -1,5 +1,6 @@
 package com.udu3324.hytools;
 
+import net.minecraft.client.resources.I18n;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.client.Minecraft;
@@ -121,7 +122,7 @@ public class Hytools {
         String filtered = event.message.getUnformattedText();
         
         //recieve messages from command "/api new" and parse
-        Matcher m = Pattern.compile("^Your new API key is ").matcher(filtered);
+        Matcher m = Pattern.compile(I18n.format("hytools.api.new")).matcher(filtered);
         if (m.find() && filtered.length() == 56) {
         	HypixelApiKey.setKey(filtered.substring(20), true);
         	
