@@ -81,8 +81,8 @@ public class Hytools {
     	}
         
         //TEMP!!! REMOVE AFTER DEVELOPMENT
-        //configAPIKeySet = HypixelApiKey.setKeyFromConf();
-        //isOnHypixel = true;
+        configAPIKeySet = HypixelApiKey.setKeyFromConf();
+        isOnHypixel = true;
         //TEMP!!! REMOVE AFTER DEVELOPMENT
         
         doOnceOnWorldLoaded = false;
