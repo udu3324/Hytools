@@ -12,32 +12,17 @@ import java.util.TimerTask;
 
 public class PartyGuess {
 
-    // bool is used for guessMessageParty to do something once
-    // when adding users to array
     public static boolean doOnceBeforeTimeReset = true;
 
     // this array list contains the users in the time period
     public static ArrayList<String> tempUserArray = new ArrayList<String>();
 
-    // time delay when the code resets
+    // time period for how many users can join
     public static int delay = 10; // ms
 
-    public static void guessMessageParty(String message, Boolean hytillities) {
-        if (!Config.getPartyGuess()) {
-            // this is to disable party guess if it's disabled in config
-            return;
-        }
-
-        String username;
-        //set username depending on if user is using hytilities
-        if (hytillities) {
-            username = message.substring(message.indexOf(" ", 3) + 1, message.length());
-        } else {
-            if (message.indexOf(" ") != -1)
-                username = message.substring(0, message.indexOf(" "));
-            else
-                username = message;
-        }
+    public static void guessMessageParty(String username) {
+        //if tool is toggled off, dont run it
+        if (!Config.getPartyGuess()) return;
 
         //run once and start timer 
         if (doOnceBeforeTimeReset) {
@@ -89,15 +74,11 @@ public class PartyGuess {
 
                         // friend check
                         String friendCheck = FriendCheck.reset();
-                        if (friendCheck != null) {
-                            Hytools.sendMessage("\u00A72" + friendCheck);
-                        }
-
+                        if (friendCheck != null) Hytools.sendMessage("\u00A72" + friendCheck);
+                        
                         // guild check
                         String guildCheck = GuildCheck.reset();
-                        if (guildCheck != null) {
-                            Hytools.sendMessage("\u00A76" + guildCheck);
-                        }
+                        if (guildCheck != null) Hytools.sendMessage("\u00A76" + guildCheck);
                     }
 
                     Hytools.log.info("Reset party guess " + tempUserArray.toString());

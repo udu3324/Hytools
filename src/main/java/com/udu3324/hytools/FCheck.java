@@ -68,9 +68,9 @@ public class FCheck extends CommandBase {
 
                         // return result of player2 is found in friends list of player1
                         if (listOfFriends.contains(uuid2))
-                            Hytools.sendMessage("\u00A7A" + RankOfUUID.get(uuid1) + IGN.get(uuid1) + I18n.format("fcheck.yes") + RankOfUUID.get(uuid2) + IGN.get(uuid2) + "\u00A7A.");
+                            Hytools.sendMessage("\u00A7A" + RankOfUUID.get(uuid1) + IGN.get(uuid1) + "\u00A7A" + I18n.format("fcheck.yes") + RankOfUUID.get(uuid2) + IGN.get(uuid2) + "\u00A7A.");
                         else
-                            Hytools.sendMessage("\u00A7C" + RankOfUUID.get(uuid1) + IGN.get(uuid1) + I18n.format("fcheck.not") + RankOfUUID.get(uuid2) + IGN.get(uuid2) + "\u00A7C.");
+                            Hytools.sendMessage("\u00A7C" + RankOfUUID.get(uuid1) + IGN.get(uuid1) + "\u00A7C" + I18n.format("fcheck.not") + RankOfUUID.get(uuid2) + IGN.get(uuid2) + "\u00A7C.");
                     } catch (Exception e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();

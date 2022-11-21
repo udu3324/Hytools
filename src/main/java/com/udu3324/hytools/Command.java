@@ -38,8 +38,8 @@ public class Command extends CommandBase {
 
 		// /hytools
         if (args.length < 1) {
-            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "[+]= Hytools v" + Reference.VERSION + " by udu3324 =[+]\n"
-                                                        +"Add I18n by: lroj, original: wateTina\n\n"
+            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "[+]= Hytools v" + Reference.VERSION + " =[+]\n"
+					+ EnumChatFormatting.GOLD + "Credits: Mod-udu3324 I18n-lroj Original-wateTina\n\n"
 					+ EnumChatFormatting.GREEN + "/fcheck (player1) (player2) - "+I18n.format("command.help1")+"\n"
 					+ EnumChatFormatting.RED + "/hytools setAPIKey - "+I18n.format("command.help2")+"\n"
 					+ EnumChatFormatting.RED + "/hytools autoFetchAPIKey [toggled|" + Config.getAutoFetchAPIKey() + "]\n"
@@ -47,12 +47,12 @@ public class Command extends CommandBase {
             		+ EnumChatFormatting.DARK_GREEN + "/hytools partyguessfriends [toggled|" + Config.getPartyGuessFriend() +"] \n"
             		+ EnumChatFormatting.GOLD + "/hytools partyguessguilds [toggled|" + Config.getPartyGuessGuild() + "]\n"
             		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalert [toggled|" + Config.getNickAlert() + "]\n"
-            		+ EnumChatFormatting.GRAY + I18n.format("command.help8.1") + EnumChatFormatting.BOLD + I18n.format("command.help8.2")+"\n"
+            		+ EnumChatFormatting.GRAY + I18n.format("command.help8.1") + " " + EnumChatFormatting.BOLD + I18n.format("command.help8.2")+"\n"
             		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalerthypixelapi [toggled|" + Config.getNickAlertHypixelAPI() + "]"));
             return;
         }
         
-		// /hytools ??? (get tool toggled)
+		// /hytools ??? (get if the tool is toggled)
         if (args.length == 1) {
         	String command = args[0].toUpperCase();
             String data;
@@ -91,13 +91,13 @@ public class Command extends CommandBase {
             	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("command.setapikey")));
                 return;
             } else {
-            	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + command + 
+            	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + command + " " + 
             			I18n.format("command.doesn")));
                 return;
             }
             
-        	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + command + 
-        			I18n.format("command.currently") + data + "."));
+        	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + command.toUpperCase() + " " + 
+        				I18n.format("command.currently") + " " + data.toLowerCase() + "."));
             return;
         }
 
@@ -221,7 +221,7 @@ public class Command extends CommandBase {
             
             //commands that are successful end up here
             sender.addChatMessage(new ChatComponentText(
-                    EnumChatFormatting.GREEN + command + I18n.format("command.setn") + data.toLowerCase() + "."));
+                    EnumChatFormatting.GREEN + command + " " + I18n.format("command.setn") + " " + data.toLowerCase() + "."));
         }
         
 		// /hytools ??? ??? ??? (invalid command)
@@ -229,13 +229,11 @@ public class Command extends CommandBase {
             sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("command.mas")));
             return;
         }
-
     }
 
     @Override
     public boolean canCommandSenderUseCommand(ICommandSender sender) {
         return true;
-
     }
     
     @Override
