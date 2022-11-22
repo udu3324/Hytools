@@ -2,11 +2,9 @@ package com.udu3324.hytools;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 
 import net.minecraft.client.resources.I18n;

@@ -27,7 +27,6 @@ public class Hytools {
 	
 	boolean isOnHypixel = false;
 	boolean requestApiKeyOnce = true;
-	boolean showAPIKey = false;
 	boolean doOnceOnWorldLoaded = true;
 	
 	boolean configAPIKeySet = false;
@@ -43,12 +42,12 @@ public class Hytools {
     	Config.create();
     }
     
+	//sends a message to the user (not to the server)
 	public static void sendMessage(String text) {
         ClientChatReceivedEvent event = new ClientChatReceivedEvent((byte) 1, new ChatComponentText(text));
         MinecraftForge.EVENT_BUS.post(event); // Let other mods pick up the new message
-        if (!event.isCanceled()) {
+        if (!event.isCanceled())
             Minecraft.getMinecraft().thePlayer.addChatMessage(event.message); // Just for logs
-        }
     }
 	
 	@EventHandler
@@ -73,7 +72,6 @@ public class Hytools {
         	String serverIP = Minecraft.getMinecraft().getCurrentServerData().serverIP;
         	if (serverIP.toLowerCase().contains("hypixel.net")) { 
         		configAPIKeySet = HypixelApiKey.setKeyFromConf();
-				showAPIKey = true;
 				isOnHypixel = true;
         	} else {
         		isOnHypixel = false;
@@ -83,64 +81,66 @@ public class Hytools {
     	}
         
         //TEMP!!! REMOVE AFTER DEVELOPMENT
-        //configAPIKeySet = HypixelApiKey.setKeyFromConf();
-        //isOnHypixel = true;
+        configAPIKeySet = HypixelApiKey.setKeyFromConf();
+        isOnHypixel = true;
         //TEMP!!! REMOVE AFTER DEVELOPMENT
         
         doOnceOnWorldLoaded = false;
     }
 
-	void runTools(final String filtered, final Boolean bool) {
-		PartyGuess.guessMessageParty(filtered, bool);
+	void runTools(final String filtered, final Boolean hytillities) {
+		String user;
+        //parse username depending on if user is using hytilities
+        if (hytillities) {
+            user = filtered.substring(filtered.indexOf(" ", 3) + 1, filtered.length());
+        } else {
+            if (filtered.indexOf(" ") != -1)
+				user = filtered.substring(0, filtered.indexOf(" "));
+            else
+				user = filtered;
+        }
+
+		final String username = user;
+
+		PartyGuess.guessMessageParty(username);
     	
-    	new Thread(new Runnable() {
-    	     @Override
-    	     public void run() {
-    	    	 NickAlert.checkIfNicked(filtered, bool); 
-    	     }
-    	}).start();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				NickAlert.run(username);
+			}
+	   }).start();
 	}
 	
     @SubscribeEvent
     public void onPlayerChat(ClientChatReceivedEvent event) {
 		//stop if not on hypixel
-    	if (!isOnHypixel)
-    		return;
+    	if (!isOnHypixel) return;
     	
 		//return if message contains obfuscation
-		if (event.message.getFormattedText().contains("\u00A7k"))
-			return;
-    	
-		log.info(Config.getAutoFetchAPIKey());
+		if (event.message.getFormattedText().contains("\u00A7k")) return;
 
-    	//request for new api key
+    	//request for new api key if allowed
     	if (Config.getAutoFetchAPIKey() && requestApiKeyOnce && !configAPIKeySet) {
 			Minecraft.getMinecraft().thePlayer.sendChatMessage("/api new");
 			requestApiKeyOnce = false;
 		}
     	
+		//get chat without the formatting (color codes)
         String filtered = event.message.getUnformattedText();
         
         //recieve messages from command "/api new" and parse
         Matcher m = Pattern.compile(I18n.format("hytools.api.new")).matcher(filtered);
-        if (m.find() && filtered.length() == 56) {
+        if (m.find() && filtered.length() == 56)
         	HypixelApiKey.setKey(filtered.substring(20), true);
-        	
-        	//allow new api keys to be seen in chat after requested
-        	if (!showAPIKey) {
-        		event.setCanceled(true);
-        		showAPIKey = true;
-        	}
-        }
-        
-		//check chat messages for regex
-		String filterSpaces = filtered.replaceAll(" ", "");
 
 		// ^\+ \([0-9]+\/[0-9]+\) [a-zA-Z0-9_]{1,16}$ | "+ (23/24) NintendoOS"
 		Matcher hytillitiesJoined = Pattern.compile("^\\+ \\([0-9]+\\/[0-9]+\\) [a-zA-Z0-9_]{1,16}$").matcher(filtered);
-
 		// ^[a-zA-Z0-9_]{1,16} has joined \([0-9]+/[0-9]+\)!$ | "NintendoOS has joined (1/16)!"
         Matcher joined = Pattern.compile("^[a-zA-Z0-9_]{1,16} has joined \\([0-9]+/[0-9]+\\)!$").matcher(filtered);
+
+		//check chat messages for regex
+		String filterSpaces = filtered.replaceAll(" ", "");
         Matcher duels = Pattern.compile("^Opponent:").matcher(filterSpaces);
         
         if (joined.find()) {

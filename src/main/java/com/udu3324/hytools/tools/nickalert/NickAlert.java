@@ -1,7 +1,6 @@
 package com.udu3324.hytools.tools.nickalert;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -11,79 +10,70 @@ import com.udu3324.hytools.Hytools;
 import com.udu3324.hytools.hyapi.HypixelApiKey;
 import com.udu3324.hytools.mcapi.UUID;
 
-public class NickAlert {
-	//hasLoggedOntoHypixel() returns if uuid has logged onto hypixel
-	//returns false if api key is not set right
-	static Boolean hasLoggedOntoHypixel(String UUID) {
-        try {
-            URL obj = new URL("https://api.hypixel.net/player?key=" + Config.getStoredAPIKey() + "&uuid=" + UUID);
-
-			//get player's data using uuid
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            con.setRequestMethod("GET");
-
-            int responseCode = con.getResponseCode();
-            Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode + " | URL Requested " + obj.toString());
-            
-            if (responseCode == 403) {
-				Hytools.log.info("NickAlert.java | Not a valid API key!");
-            	Hytools.sendMessage("\u00A74\u00A7lFATAL ERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
-            	return false;
-            }
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String bR = in.readLine();
-            in.close();
-
-			//return boolean if response says player has not logged on hypixel yet
-            return bR.equals("{\"success\":true,\"player\":null}");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-	
-	public static void checkIfNicked(String message, Boolean hytillities) {
-		//disable nick alert if it's disabled in config
+public class NickAlert extends Thread {
+	public static void run(String username) {
+		// if tool is toggled off, dont run it
 		if (!Config.getNickAlert())
 			return;
-    	
-		String username;
-		//set username based of if player is using hytilities
-        if (hytillities) {
-        	username = message.substring(message.indexOf(" ", 3) + 1, message.length());
-        } else {
-        	if (message.indexOf(" ") != -1)
-        		username = message.substring(0, message.indexOf(" "));
-        	else
-        		username = message;
-        }
-		
+
 		String uuid = null;
+
 		try {
-			//simply check if the user exists in minecraft's database
+			// check if the user exists in minecraft's database
 			uuid = UUID.get(username);
+
+			// broken wifi or something
+			if (uuid == null) return;
+
 			if (uuid.equals("Not a IGN or UUID!")) {
-				//checks if username exists in minecraft api
+				// checks if username exists in minecraft api
 				Hytools.sendMessage("\u00A75" + username + " is a nicked user!");
 				return;
 			}
-			
-			//disable nick alert hypixel api below if disabled in config
-			if (!Config.getNickAlertHypixelAPI())
-				return;
-			
-			//check if user has logged on before
+
+			// dont use hypixel api if it's toggled off
+			if (!Config.getNickAlertHypixelAPI()) return;
+
+			// check if user has logged on before
 			if (HypixelApiKey.apiKeySet) {
-				if (hasLoggedOntoHypixel(uuid))
+				boolean joinedHypixel = true;
+
+				URL obj = new URL("https://api.hypixel.net/player?key=" + Config.getStoredAPIKey() + "&uuid=" + uuid);
+
+				// get player's data using uuid
+				HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+				con.setRequestMethod("GET");
+
+				int responseCode = con.getResponseCode();
+				Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode
+						+ " | URL Requested " + obj.toString());
+
+				if (responseCode == 403) {
+					Hytools.log.info("NickAlert.java | Not a valid API key!");
+					Hytools.sendMessage(
+							"\u00A74\u00A7lFATAL ERROR! (this shouldn't even be possible, contact me on discord _._#3324) (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
+					joinedHypixel = true;
+					return;
+				}
+
+				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String bR = in.readLine();
+				in.close();
+
+				// if it contains the string below, the player hasn't joined hypixel before
+				joinedHypixel = bR.equals("{\"success\":true,\"player\":null}");
+				// if it returns anything else, the player has joined before
+
+				if (!joinedHypixel)
 					Hytools.sendMessage("\u00A75" + username + " is a nicked user!");
-	        } else {
+			} else {
 				Hytools.log.info("NickAlert.java | Not a valid API key!");
-	        	Hytools.sendMessage("\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
-	        }
+				Hytools.sendMessage(
+						"\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return;
 	}
 }
