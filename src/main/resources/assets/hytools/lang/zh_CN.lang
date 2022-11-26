@@ -1,3 +1,8 @@
+error.api=错误！来自/api new的API密钥不起作用
+nickalert.error=§4§l致命错误！（这甚至是不可能的，请通过Discord：_._#3324 与我联系）（无法获取玩家数据）API 密钥尚未设置。请执行 §c§l/api new§4§l 来解决此问题。
+nickalert.error1=§4§l错误！（无法获取玩家数据）API 密钥尚未设置。请执行 §c§l/api new§4§l 来解决此问题。
+friends.error=§4§l错误！（无法获取好友）API 密钥尚未设置。请执行 §c§l/api new§4§l 来解决此问题。
+guild.error=§4§l错误！（无法获取公会信息）API 密钥尚未设置。请执行 §c§l/api new§4§l 来解决此问题。
 command.setapikey=该命令中缺少api！
 command.doesn=不存在于Hytools中！
 command.currently=目前被设置为
