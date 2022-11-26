@@ -1,3 +1,8 @@
+error.api=ERROR! API key from /api new did not work.
+nickalert.error=\u00A74\u00A7lFATAL ERROR! (this shouldn't even be possible, contact me on discord _._#3324) (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this
+nickalert.error1=\u00A74\u00A7lERROR! (无法获取玩家数据) API密钥尚未设置。 请执行§c§l/api new§4§l 来解决这个问题。 Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
+friends.error=\u00A74\u00A7lERROR! (friends couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
+guild.error=\u00A74\u00A7lERROR! (guild info couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
 command.setapikey=该命令中缺少api！
 command.doesn=不存在于Hytools中！
 command.currently=目前被设置为
@@ -10,7 +15,7 @@ command.mass=太多参数！ 你可能有一个轮胎。
 fcheck.nop=不是真正的玩家。
 fcheck.niu=不是 IGN 或 UUID！
 fcheck.api=Fcheck.java | 不是有效的 API 密钥！
-fcheck.sta=§4§l错误! (无法获取玩家数据) API密钥尚未设置。 请执行§c§l/api new§4§l 来解决这个问题。 请执行§c§l/api new§4§l 来解决这个问题。
+fcheck.sta=§4§l错误! (player data couldn't be fetched) The API key has not been set yet. 请执行§c§l/api new§4§l 来解决这个问题。
 fcheck.Tanearq=没有足够的论据！你可能打错了。 你可能有一个轮胎。 你可能有一个轮胎。
 fcheck.Tanearw=争论太多了！你可能打错了。 你可能有一个轮胎。
 command.help1=检查玩家的朋友
