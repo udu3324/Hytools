@@ -9,6 +9,7 @@ import com.udu3324.hytools.Config;
 import com.udu3324.hytools.Hytools;
 import com.udu3324.hytools.hyapi.HypixelApiKey;
 import com.udu3324.hytools.mcapi.UUID;
+import net.minecraft.client.resources.I18n;
 
 public class NickAlert extends Thread {
 	public static void run(String username) {
@@ -50,8 +51,7 @@ public class NickAlert extends Thread {
 
 				if (responseCode == 403) {
 					Hytools.log.info("NickAlert.java | Not a valid API key!");
-					Hytools.sendMessage(
-							"\u00A74\u00A7lFATAL ERROR! (this shouldn't even be possible, contact me on discord _._#3324) (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
+					Hytools.sendMessage(I18n.format("nickalert.error"));
 					joinedHypixel = true;
 					return;
 				}
@@ -68,8 +68,7 @@ public class NickAlert extends Thread {
 					Hytools.sendMessage("\u00A75" + username + " is a nicked user!");
 			} else {
 				Hytools.log.info("NickAlert.java | Not a valid API key!");
-				Hytools.sendMessage(
-						"\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
+				Hytools.sendMessage(I18n.format("nickalert.error1"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

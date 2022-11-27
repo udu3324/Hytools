@@ -9,6 +9,7 @@ import com.udu3324.hytools.hyapi.HypixelApiKey;
 import com.udu3324.hytools.hyapi.RankOfUUID;
 import com.udu3324.hytools.mcapi.IGN;
 import com.udu3324.hytools.mcapi.UUID;
+import net.minecraft.client.resources.I18n;
 
 public class FriendCheck {
 	// this array list contains the uuids scanning for friends that are in the list
@@ -59,7 +60,7 @@ public class FriendCheck {
         	fOUUID = FriendsOfUUID.get(currentUUID);
         } else {
             Hytools.log.info("FriendCheck.java | Not a valid API key!");
-        	Hytools.sendMessage("\u00A74\u00A7lERROR! (friends couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.");
+        	Hytools.sendMessage(I18n.format("friends.error"));
         	uuidArray.clear();
         	return null;
         }

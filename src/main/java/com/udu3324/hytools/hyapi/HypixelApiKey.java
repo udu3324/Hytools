@@ -6,6 +6,7 @@ import java.net.URL;
 
 import com.udu3324.hytools.Config;
 import com.udu3324.hytools.Hytools;
+import net.minecraft.client.resources.I18n;
 
 public class HypixelApiKey {
 	public static String apiKey;
@@ -28,7 +29,7 @@ public class HypixelApiKey {
             if (responseCode != 200) {
                 Hytools.log.info("HypixelApiKey.java | Not a valid API key!");
                 if (sendMessageInChat)
-                    Hytools.sendMessage("\u00A74\u00A7lERROR! API key from /api new did not work.");
+                    Hytools.sendMessage("\u00A74\u00A7l"+ I18n.format("error.api"));
                 apiKeySet = false;
                 return false;
             }
