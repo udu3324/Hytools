@@ -37,11 +37,10 @@ public class FriendCheck {
         }
         return matched;
     }
+
     public static String reset() {
-    	if (!Config.getPartyGuessFriend()) {
-    		//this is to disable party guess friends if it's disabled in config
-    		return null;
-    	}
+        //disable party guess friend
+    	if (!Config.getPartyGuessFriend()) return null;
     	
         int numOfUUIDS = uuidArray.size();
         if (numOfUUIDS == 1) {
@@ -75,8 +74,7 @@ public class FriendCheck {
         uuidArray.clear();
 
         //return if no friends in party
-        if (matchingFriendInParty.get(0).contains("None matching."))
-            return null;
+        if (matchingFriendInParty.get(0).contains("None matching.")) return null;
     
         uuidFriendsWith = currentUUID;
 
@@ -87,14 +85,11 @@ public class FriendCheck {
             e.printStackTrace();
         }
         
-        return uuidFriendsWith + matchingFriendInParty.toString().replace("[", "\u00A72 is friends with ").replace("]", "").replace(",", "\u00A72, ") + "\u00A72.";
+        return uuidFriendsWith + matchingFriendInParty.toString().replace("[", "\u00A72 " + I18n.format("partyguess.friendcheck") + " ").replace("]", "").replace(",", "\u00A72, ") + "\u00A72.";
     }
 
     public static void store(String username) {
-    	if (!Config.getPartyGuessFriend()) {
-    		//this is to disable party guess friends if it's disabled in config
-    		return;
-    	}
+    	if (!Config.getPartyGuessFriend()) return;
     	
         String uid = null;
         try {

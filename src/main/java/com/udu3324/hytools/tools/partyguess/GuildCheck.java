@@ -40,11 +40,9 @@ public class GuildCheck {
     }
 	
 	public static String reset() {
-		if (!Config.getPartyGuessGuild()) {
-    		//this is to disable party guess guilds if it's disabled in config
-    		return null;
-    	}
-		
+		//disable party guess guild if toggled
+		if (!Config.getPartyGuessGuild()) return null;
+    	
 		ArrayList<String> guildInfo;
 		if (HypixelApiKey.apiKeySet) {
 			 guildInfo = GuildOfUUID.get(firstUUID);
@@ -54,7 +52,6 @@ public class GuildCheck {
         	uuidArray.clear();
         	return null;
         }
-		
 		
 		//check if guildInfo is not null or empty
 		if (guildInfo == null) {
@@ -84,7 +81,7 @@ public class GuildCheck {
 		String returningString = null;
 		
 		try {
-			returningString = RankOfUUID.get(firstUUID) + IGN.get(firstUUID) + "\u00A76 is in the same guild as " + playerList + "\u00A76. (" + guildName + ")";
+			returningString = RankOfUUID.get(firstUUID) + IGN.get(firstUUID) + "\u00A76 " + I18n.format("partyguess.guildcheck") + " " + playerList + "\u00A76. (" + guildName + ")";
 			
 			if (playerList.equals(IGN.get(firstUUID))) returningString = null;
 			if (playerList.equals("")) returningString = null;
@@ -96,13 +93,11 @@ public class GuildCheck {
 		onlyDoOnce = true;
 		return returningString;
 	}
+	
 	public static void store(String username) {
-		//convert username to uuid
-		if (!Config.getPartyGuessGuild()) {
-    		//this is to disable party guess guilds if it's disabled in config
-    		return;
-    	}
+		if (!Config.getPartyGuessGuild()) return;
     	
+		//convert username to uuid
         String uid = null;
         try {
             uid = UUID.get(username);

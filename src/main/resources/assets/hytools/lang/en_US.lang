@@ -1,4 +1,5 @@
 error.api=ERROR! API key from /api new did not work.
+nickalert.isnicknamed=is a nicked user!
 nickalert.error=\u00A74\u00A7lFATAL ERROR! (this shouldn't even be possible, contact me on discord _._#3324) (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this
 nickalert.error1=\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
 friends.error=\u00A74\u00A7lERROR! (friends couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
@@ -30,3 +31,5 @@ fcheck.not=is not friends with
 hytools.api.new=^Your new API key is
 partyguess.party=are most likely in a party.
 partyguess.username=Added user to array
+partyguess.friendcheck=is friends with
+partyguess.guildcheck=is in the same guild as

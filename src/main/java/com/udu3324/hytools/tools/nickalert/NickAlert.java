@@ -14,8 +14,7 @@ import net.minecraft.client.resources.I18n;
 public class NickAlert extends Thread {
 	public static void run(String username) {
 		// if tool is toggled off, dont run it
-		if (!Config.getNickAlert())
-			return;
+		if (!Config.getNickAlert()) return;
 
 		String uuid = null;
 
@@ -28,7 +27,7 @@ public class NickAlert extends Thread {
 
 			if (uuid.equals("Not a IGN or UUID!")) {
 				// checks if username exists in minecraft api
-				Hytools.sendMessage("\u00A75" + username + " is a nicked user!");
+				Hytools.sendMessage("\u00A75" + username + " " + I18n.format("nickalert.isnicknamed"));
 				return;
 			}
 
@@ -65,7 +64,7 @@ public class NickAlert extends Thread {
 				// if it returns anything else, the player has joined before
 
 				if (!joinedHypixel)
-					Hytools.sendMessage("\u00A75" + username + " is a nicked user!");
+					Hytools.sendMessage("\u00A75" + username + " " + I18n.format("nickalert.isnicknamed"));
 			} else {
 				Hytools.log.info("NickAlert.java | Not a valid API key!");
 				Hytools.sendMessage(I18n.format("nickalert.error1"));
