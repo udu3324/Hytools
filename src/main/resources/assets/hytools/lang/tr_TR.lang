@@ -1,6 +1,6 @@
-error.api=ERROR! API key from /api new did not work.
-nickalert.isnicknamed=is a nicked user!
-nickalert.error=\u00A74\u00A7lFATAL ERROR! (this shouldn't even be possible, contact me on discord _._#3324) (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this
+error.api=HATA! /api new komutundan alınan API anahtarı çalışmadı.
+nickalert.isnicknamed=gerçek ismini değiştirmiş!
+nickalert.error=\u00A74\u00A7lKRİTİK HATA! (bunun mümkün olmaması gerekiyor, discord _._#3324 adresinden bana ulaşın) (oyuncu verileri alınamadı) API anahtarı henüz ayarlanmadı. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this
 nickalert.error1=\u00A74\u00A7lERROR! (oyuncu verileri elde edilemedi) API anahtarı henüz ayarlanmadı. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
 friends.error=\u00A74\u00A7lERROR! (friends couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
 guild.error=\u00A74\u00A7lERROR! (guild info couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
