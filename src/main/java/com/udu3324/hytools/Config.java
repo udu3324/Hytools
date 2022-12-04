@@ -76,10 +76,8 @@ public class Config {
 				}
 			}
 
-	        // write the lines to the config
-			configFile.createNewFile();
-
-			FileWriter writer = new FileWriter(configFile);
+	        //overwrite the rest
+            FileWriter writer = new FileWriter(configFile);
 
             //write array back to new file
             for (int i = 0; i < lines.size(); i++) {
@@ -156,11 +154,7 @@ public class Config {
 
 	public static Boolean getAutoFetchAPIKey() {
 		String str = getValueFromConfig("auto-fetch-api-key");
-		if (str.equals("true")) {
-			return true;
-		} else {
-			return false;
-		}
+		return str.equals("true");
 	}
 
 	public static void setAutoFetchAPIKey(Boolean bool) {
@@ -170,11 +164,7 @@ public class Config {
 	// party guess
 	public static Boolean getPartyGuess() {
 		String str = getValueFromConfig("party-guess_toggled");
-		if (str.equals("true")) {
-			return true;
-		} else {
-			return false;
-		}
+		return str.equals("true");
 	}
 	
 	public static void setPartyGuess(Boolean bool) {
@@ -184,11 +174,7 @@ public class Config {
 	// party guess friend
 	public static Boolean getPartyGuessFriend() {
 		String str = getValueFromConfig("party-guess-friendmsg_toggled");
-		if (str.equals("true")) {
-			return true;
-		} else {
-			return false;
-		}
+		return str.equals("true");
 	}
 
 	public static void setPartyGuessFriend(Boolean bool) {
@@ -198,10 +184,7 @@ public class Config {
 	// party guess guild
 	public static Boolean getPartyGuessGuild() {
 		String str = getValueFromConfig("party-guess-guildcheck_toggled");
-		if (str.equals("true"))
-			return true;
-		else
-			return false;
+		return str.equals("true");
 	}
 	
 	public static void setPartyGuessGuild(Boolean bool) {
@@ -211,10 +194,7 @@ public class Config {
 	// nick alert
 	public static Boolean getNickAlert() {
 		String str = getValueFromConfig("nick-alert_toggled");
-		if (str.equals("true"))
-			return true;
-		else
-			return false;
+		return str.equals("true");
 	}
 	
 	public static void setNickAlert(Boolean bool) {
@@ -224,10 +204,7 @@ public class Config {
 	// nick alert hypixel api
 	public static Boolean getNickAlertHypixelAPI() {
 		String str = getValueFromConfig("nick-alert-hypixel-api_toggled");
-		if (str.equals("true"))
-			return true;
-		else
-			return false;
+		return str.equals("true");
 	}
 	
 	public static void setNickAlertHypixelAPI(Boolean bool) {
