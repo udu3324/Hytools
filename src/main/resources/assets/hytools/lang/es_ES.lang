@@ -1,10 +1,10 @@
-error.api=ERROR! API key from /api new did not work.
-nickalert.isnicknamed=is a nicked user!
-nickalert.error=\u00A74\u00A7lFATAL ERROR! (this shouldn't even be possible, contact me on discord _._#3324) (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this
-nickalert.error1=\u00A74\u00A7lERROR! (player data couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
-friends.error=\u00A74\u00A7lERROR! (friends couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
-guild.error=\u00A74\u00A7lERROR! (guild info couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
-command.setapikey=You are missing the api key in this command!
+error-api=¡ERROR! La Clave API de /api new no funcionó.
+nickalert.isnicknamed=tiene puesto nickname!
+nickalert-error=\u00A74\u00A7l¡ERROR FATAL! (esto ni siquiera debería ser posible, contáctame en discord _._#3324) (no se pudieron obtener los datos del jugador) La clave API aún no ha sido establecida. Por favor haz \u00A7c\u00A7l/api new\u00A74\u00A7l para arreglarlo
+nickalert.error1=\u00A74\u00A7l¡ERROR! (los datos del jugador no pudieron ser obtenidos) La clave API aún no ha sido establecida. Por favor haz \u00A7c\u00A7l/api new\u00A74\u00A7l para arreglarlo.
+friends.error=\u00A74\u00A7l¡ERROR! (no se pudieron obtener los amigos) La clave API no ha sido configurada todavía. Por favor haz \u00A7c\u00A7l/api new\u00A74\u00A7l para arreglarlo.
+guild.error=\u00A74\u00A7l¡ERROR! (no se pudo obtener información acerca de la guild) La clave API aún no ha sido establecida. Por favor haz \u00A7c\u00A7l/api new\u00A74\u00A7l para arreglarlo.
+command.setapikey=¡Te falta la clave api en este comando!
 command.doesn=doesn't exist in Hytools!
 command.currently=is currently set to
 command.i2a=Invalid 2nd argument! Make sure it's either toggle, on, or off.
