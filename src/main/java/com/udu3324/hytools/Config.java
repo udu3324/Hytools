@@ -113,7 +113,6 @@ public class Config {
 				w.write(System.lineSeparator());
 				w.write("# Party Guess Config" + System.lineSeparator());
 				w.write("party-guess_toggled: true" + System.lineSeparator());
-				w.write("party-guess-friendmsg_toggled: true" + System.lineSeparator());
 				w.write("party-guess-guildcheck_toggled: true" + System.lineSeparator());
 				w.write(System.lineSeparator());
 				w.write("# Nick Alert Config" + System.lineSeparator());
@@ -169,16 +168,6 @@ public class Config {
 	
 	public static void setPartyGuess(Boolean bool) {
 		setValueFromConfig("party-guess_toggled", String.valueOf(bool));
-	}
-	
-	// party guess friend
-	public static Boolean getPartyGuessFriend() {
-		String str = getValueFromConfig("party-guess-friendmsg_toggled");
-		return str.equals("true");
-	}
-
-	public static void setPartyGuessFriend(Boolean bool) {
-		setValueFromConfig("party-guess-friendmsg_toggled", String.valueOf(bool));
 	}
 	
 	// party guess guild

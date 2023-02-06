@@ -27,7 +27,7 @@ public class Hytools {
 	
 	boolean isOnHypixel = false;
 	boolean requestApiKeyOnce = true;
-	boolean doOnceOnWorldLoaded = true;
+	boolean dontRun = false;
 	
 	boolean configAPIKeySet = false;
 	
@@ -59,40 +59,51 @@ public class Hytools {
         
         // register commands
         ClientCommandHandler.instance.registerCommand(new Command());
-		ClientCommandHandler.instance.registerCommand(new FCheck());
     }
 	
 	@SubscribeEvent
     public void onWorldLoaded(EntityJoinWorldEvent event) {
-		if (!doOnceOnWorldLoaded)
-			return;
+		if (dontRun) return;
 
-		// if minecraft world is multiplayer & server ip is hypixel.net
-        if (!Minecraft.getMinecraft().isSingleplayer()) {
-		//add this check in case you are on replay mod, where you are not on a singleplayer world, but also not multiplayer
-		if( Minecraft.getMinecraft().getCurrentServerData() == null){
-		    isOnHypixel = false;
-		    doOnceOnWorldLoaded = false;
-		    return;
-		}
-		String serverIP = Minecraft.getMinecraft().getCurrentServerData().serverIP;
-		if (serverIP.toLowerCase().contains("hypixel.net")) { 
-			configAPIKeySet = HypixelApiKey.setKeyFromConf();
-				isOnHypixel = true;
-		} else {
+		//// if minecraft world is multiplayer & server ip is hypixel.net
+        //if (!Minecraft.getMinecraft().isSingleplayer()) {
+		//	//add this check in case you are on replay mod, where you are not on a singleplayer world, but also not multiplayer
+		//	if (Minecraft.getMinecraft().getCurrentServerData() == null) {
+		//	    isOnHypixel = false;
+		//	    doOnceOnWorldLoaded = false;
+		//	    return;
+		//	}
+		//	String serverIP = Minecraft.getMinecraft().getCurrentServerData().serverIP;
+		//	if (serverIP.toLowerCase().contains("hypixel.net")) { 
+		//		configAPIKeySet = HypixelApiKey.setKeyFromConf();
+		//			isOnHypixel = true;
+		//	} else {
+		//		isOnHypixel = false;
+		//	}
+        //} else {
+    	//	isOnHypixel = false;
+    	//}
+
+		//add this check in case you are on replay mod, where you are not on a singleplayer world, but also not multiplayer (github/EmeraldWither)
+		if (Minecraft.getMinecraft().getCurrentServerData() == null) {
 			isOnHypixel = false;
+		} else if (Minecraft.getMinecraft().isSingleplayer()) {
+			isOnHypixel = false;
+		} else {
+			String serverIP = Minecraft.getMinecraft().getCurrentServerData().serverIP;
+			if (serverIP.toLowerCase().contains("hypixel.net")) { 
+				configAPIKeySet = HypixelApiKey.setKeyFromConf();
+				isOnHypixel = true;
+				dontRun = true;
+			} else {
+				isOnHypixel = false;
+			}
 		}
-		
-        } else {
-    		isOnHypixel = false;
-    	}
-        
+
         //TEMP!!! REMOVE AFTER DEVELOPMENT
         //configAPIKeySet = HypixelApiKey.setKeyFromConf();
         //isOnHypixel = true;
         //TEMP!!! REMOVE AFTER DEVELOPMENT
-        
-        doOnceOnWorldLoaded = false;
     }
 
 	void runTools(final String filtered, final Boolean hytillities) {

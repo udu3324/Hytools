@@ -31,17 +31,9 @@ A mod that has useful tools for Hypixel. Credit to the modding community for hel
 
   
 
-**FriendCheck**
-
-A tool that checks if a player is friends with another player.
-
-![](https://media.discordapp.net/attachments/956773599644090379/1004243687900983406/unknown.png)
-
-  
-
 **PartyGuess**
 
-A tool that looks at chat and guesses players that are in a party. PartyGuess also checks if the first player in that party is friends with anyone else in the party. This tool works about **90%** of the time. This could fail if Hypixel decides to join everyone at the same time.
+A tool that looks at chat and guesses players that are in a party. PartyGuess also checks if the first player in that party is in a guild with anyone else in the party. This tool works about **90%** of the time. This could fail if Hypixel decides to join everyone at the same time.
 
 ![](https://media.discordapp.net/attachments/956773599644090379/1004244515642671115/unknown.png)
 

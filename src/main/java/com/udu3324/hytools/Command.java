@@ -29,12 +29,11 @@ public class Command extends CommandBase {
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 		//put the commands in the collection
         collection.put("partyguess", "1");
-        collection.put("partyguessfriends", "2");
-        collection.put("partyguessguilds", "3");
-        collection.put("nickalert", "4");
-        collection.put("nickalerthypixelapi", "5");
-		collection.put("setapikey", "6");
-		collection.put("autofetchapikey", "7");
+        collection.put("partyguessguilds", "2");
+        collection.put("nickalert", "3");
+        collection.put("nickalerthypixelapi", "4");
+		collection.put("setapikey", "5");
+		collection.put("autofetchapikey", "6");
 
 		// /hytools
         if (args.length < 1) {
@@ -44,7 +43,6 @@ public class Command extends CommandBase {
 					+ EnumChatFormatting.RED + "/hytools setAPIKey - "+I18n.format("command.help2")+"\n"
 					+ EnumChatFormatting.RED + "/hytools autoFetchAPIKey [toggled|" + Config.getAutoFetchAPIKey() + "]\n"
             		+ EnumChatFormatting.DARK_AQUA + "/hytools partyguess [toggled|" + Config.getPartyGuess() + "]\n"
-            		+ EnumChatFormatting.DARK_GREEN + "/hytools partyguessfriends [toggled|" + Config.getPartyGuessFriend() +"] \n"
             		+ EnumChatFormatting.GOLD + "/hytools partyguessguilds [toggled|" + Config.getPartyGuessGuild() + "]\n"
             		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalert [toggled|" + Config.getNickAlert() + "]\n"
             		+ EnumChatFormatting.GRAY + I18n.format("command.help8.1") + " " + EnumChatFormatting.BOLD + I18n.format("command.help8.2")+"\n"
@@ -61,11 +59,6 @@ public class Command extends CommandBase {
             	if (Config.getPartyGuess()) 
             		data = "ON";
         		else 
-        			data = "OFF";
-            } else if (command.equals("PARTYGUESSFRIENDS")) {
-            	if (Config.getPartyGuessFriend())
-            		data = "ON";
-        		else
         			data = "OFF";
             } else if (command.equals("PARTYGUESSGUILDS")) {
             	if (Config.getPartyGuessGuild())
@@ -138,20 +131,6 @@ public class Command extends CommandBase {
             			data = "OFF";
             		} else { //would be off
             			Config.setPartyGuess(true);
-            			data = "ON";
-            		}
-            	}
-            } else if (command.equals("PARTYGUESSFRIENDS")) {
-            	if (data.equals("ON")) {
-            		Config.setPartyGuessFriend(true);
-            	} else if (data.equals("OFF")) {
-            		Config.setPartyGuessFriend(false);
-            	} else if (data.equals("TOGGLE")) {
-            		if (Config.getPartyGuessFriend()) {
-            			Config.setPartyGuessFriend(false);
-            			data = "OFF";
-            		} else { //would be off
-            			Config.setPartyGuessFriend(true);
             			data = "ON";
             		}
             	}
