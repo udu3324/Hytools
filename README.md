@@ -33,9 +33,9 @@ A mod that has useful tools for Hypixel. Credit to the modding community for hel
 
 **PartyGuess**
 
-A tool that looks at chat and guesses players that are in a party. PartyGuess also checks if the first player in that party is in a guild with anyone else in the party. This tool works about **90%** of the time. This could fail if Hypixel decides to join everyone at the same time.
+A tool that looks at chat and guesses players that are in a party. PartyGuess also checks if the first player in that party is in a guild with anyone else in the party. This tool works about **60%** of the time. This could fail if Hypixel decides to join everyone at the same time.
 
-![](https://media.discordapp.net/attachments/956773599644090379/1004244515642671115/unknown.png)
+![](https://cdn.modrinth.com/data/rZiwXEaU/images/e9f8f5f64e52005d750cb5a027153ee9f48d374b.png)
 
   
 
@@ -43,9 +43,9 @@ A tool that looks at chat and guesses players that are in a party. PartyGuess al
 
 A tool that alerts if someone joined is nicked. This tool **will not reveal the person** behind the nick, but will just alert it in chat. This tool will half of the time. (uses mc api to check if username exists) You can enable NickAlertHypixelAPI to get more accuracy. (using hypixel api for nickalert is in the gray zone of being allowed. use at your own risk)
 
-![](https://cdn.discordapp.com/attachments/956773599644090379/1004244058262220880/unknown.png)
+![](https://cdn.modrinth.com/data/rZiwXEaU/images/f5c311380dc62310d54e8c606d3f4c4f318b3b36.png)
 
-![](https://media.discordapp.net/attachments/956773599644090379/964672960873000980/unknown.png)
+![](https://cdn.modrinth.com/data/rZiwXEaU/images/6e247ac4e93bafe5e0bb3d451a28cb315e098f62.png)
 
   
 ## Translations
@@ -66,7 +66,7 @@ Go to your mods folder (.minecraft/mods) and drag Hytools-#.#.#.jar into it. Tad
 
 Here are the commands you can use to turn certain tools on and off with:
 
-![](https://cdn.discordapp.com/attachments/919010475679825960/1003739858184974416/unknown.png)
+![](https://cdn.modrinth.com/data/rZiwXEaU/images/6378dff5bddba6d46a6b1536333a7dba8fcdff36.png)
 
  
 

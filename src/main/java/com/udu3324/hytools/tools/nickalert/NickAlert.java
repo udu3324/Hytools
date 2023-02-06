@@ -36,7 +36,6 @@ public class NickAlert extends Thread {
 
 			// check if user has logged on before
 			if (HypixelApiKey.apiKeySet) {
-				boolean joinedHypixel = true;
 
 				URL obj = new URL("https://api.hypixel.net/player?key=" + Config.getStoredAPIKey() + "&uuid=" + uuid);
 
@@ -51,7 +50,6 @@ public class NickAlert extends Thread {
 				if (responseCode == 403) {
 					Hytools.log.info("NickAlert.java | Not a valid API key!");
 					Hytools.sendMessage(I18n.format("nickalert.error"));
-					joinedHypixel = true;
 					return;
 				}
 
@@ -60,11 +58,9 @@ public class NickAlert extends Thread {
 				in.close();
 
 				// if it contains the string below, the player hasn't joined hypixel before
-				joinedHypixel = bR.equals("{\"success\":true,\"player\":null}");
-				// if it returns anything else, the player has joined before
-
-				if (!joinedHypixel)
+				if (bR.equals("{\"success\":true,\"player\":null}"))
 					Hytools.sendMessage("\u00A75" + username + " " + I18n.format("nickalert.isnicknamed"));
+				
 			} else {
 				Hytools.log.info("NickAlert.java | Not a valid API key!");
 				Hytools.sendMessage(I18n.format("nickalert.error1"));
