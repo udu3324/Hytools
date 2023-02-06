@@ -69,20 +69,13 @@ public class Hytools {
 
 		// if minecraft world is multiplayer & server ip is hypixel.net
         if (!Minecraft.getMinecraft().isSingleplayer()) {
-		//add this check in case you are on replay mod, where you are not on a singleplayer world, but also not multiplayer
-		if( Minecraft.getMinecraft().getCurrentServerData() == null){
-		    isOnHypixel = false;
-		    doOnceOnWorldLoaded = false;
-		    return;
-		}
-		String serverIP = Minecraft.getMinecraft().getCurrentServerData().serverIP;
-		if (serverIP.toLowerCase().contains("hypixel.net")) { 
-			configAPIKeySet = HypixelApiKey.setKeyFromConf();
+        	String serverIP = Minecraft.getMinecraft().getCurrentServerData().serverIP;
+        	if (serverIP.toLowerCase().contains("hypixel.net")) { 
+        		configAPIKeySet = HypixelApiKey.setKeyFromConf();
 				isOnHypixel = true;
-		} else {
-			isOnHypixel = false;
-		}
-		
+        	} else {
+        		isOnHypixel = false;
+        	}
         } else {
     		isOnHypixel = false;
     	}
