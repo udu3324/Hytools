@@ -23,7 +23,7 @@ public class Config {
 		return false;
 	}
 
-	//example: getValueFromConfig("api-key") returns "thisIsTheApiKey"
+	//example: getValueFromConfig("val1") returns "this is val1"
 	public static String getValueFromConfig(String value) {
 		String data = null;
 		try {
@@ -48,7 +48,7 @@ public class Config {
 		return data;
 	}
 
-	//example: setValueFromConfig("api-key", "thisIsTheApiKey")
+	//example: setValueFromConfig("val1", "this is val1") sets val1 to be "this is val1" in config
 	public static void setValueFromConfig(String value, String data) {
 		try {
 			// get the lines in the config
@@ -107,17 +107,12 @@ public class Config {
 				w.write("# Hey! I suggest you use the ingame commands "
 						+ "instead of editing the config directly instead." + System.lineSeparator());
 				w.write(System.lineSeparator());
-				w.write("# Hypixel API Key" + System.lineSeparator());
-				w.write("api-key: empty" + System.lineSeparator());
-				w.write("auto-fetch-api-key: true" + System.lineSeparator());
-				w.write(System.lineSeparator());
 				w.write("# Party Guess Config" + System.lineSeparator());
 				w.write("party-guess_toggled: true" + System.lineSeparator());
 				w.write("party-guess-guildcheck_toggled: true" + System.lineSeparator());
 				w.write(System.lineSeparator());
 				w.write("# Nick Alert Config" + System.lineSeparator());
 				w.write("nick-alert_toggled: true" + System.lineSeparator());
-				w.write("nick-alert-hypixel-api_toggled: false" + System.lineSeparator());
 				w.close();
 				
 				Hytools.log.info(I18n.format("config.new"));
@@ -141,25 +136,7 @@ public class Config {
 			e.printStackTrace();
 		}
 	}
-	
-	// hypixel api key
-	public static String getStoredAPIKey() {
-		return getValueFromConfig("api-key");
-	}
-	
-	public static void setStoredAPIKey(String key) {
-		setValueFromConfig("api-key", key);
-	}
 
-	public static Boolean getAutoFetchAPIKey() {
-		String str = getValueFromConfig("auto-fetch-api-key");
-		return str.equals("true");
-	}
-
-	public static void setAutoFetchAPIKey(Boolean bool) {
-		setValueFromConfig("auto-fetch-api-key", String.valueOf(bool));
-	}
-	
 	// party guess
 	public static Boolean getPartyGuess() {
 		String str = getValueFromConfig("party-guess_toggled");
@@ -188,15 +165,5 @@ public class Config {
 	
 	public static void setNickAlert(Boolean bool) {
 		setValueFromConfig("nick-alert_toggled", String.valueOf(bool));
-	}
-	
-	// nick alert hypixel api
-	public static Boolean getNickAlertHypixelAPI() {
-		String str = getValueFromConfig("nick-alert-hypixel-api_toggled");
-		return str.equals("true");
-	}
-	
-	public static void setNickAlertHypixelAPI(Boolean bool) {
-		setValueFromConfig("nick-alert-hypixel-api_toggled", String.valueOf(bool));
 	}
 }

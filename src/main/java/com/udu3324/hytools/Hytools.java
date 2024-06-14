@@ -26,10 +26,9 @@ import com.udu3324.hytools.tools.partyguess.PartyGuess;
 public class Hytools {
 	
 	boolean isOnHypixel = false;
-	boolean requestApiKeyOnce = true;
-	boolean dontRun = false;
-	
-	boolean configAPIKeySet = false;
+
+	//stops worldLoaded checks
+	boolean stopChecks = false;
 	
 	public static Logger log;
 
@@ -63,26 +62,7 @@ public class Hytools {
 	
 	@SubscribeEvent
     public void onWorldLoaded(EntityJoinWorldEvent event) {
-		if (dontRun) return;
-
-		//// if minecraft world is multiplayer & server ip is hypixel.net
-        //if (!Minecraft.getMinecraft().isSingleplayer()) {
-		//	//add this check in case you are on replay mod, where you are not on a singleplayer world, but also not multiplayer
-		//	if (Minecraft.getMinecraft().getCurrentServerData() == null) {
-		//	    isOnHypixel = false;
-		//	    doOnceOnWorldLoaded = false;
-		//	    return;
-		//	}
-		//	String serverIP = Minecraft.getMinecraft().getCurrentServerData().serverIP;
-		//	if (serverIP.toLowerCase().contains("hypixel.net")) { 
-		//		configAPIKeySet = HypixelApiKey.setKeyFromConf();
-		//			isOnHypixel = true;
-		//	} else {
-		//		isOnHypixel = false;
-		//	}
-        //} else {
-    	//	isOnHypixel = false;
-    	//}
+		if (stopChecks) return;
 
 		//add this check in case you are on replay mod, where you are not on a singleplayer world, but also not multiplayer (github/EmeraldWither)
 		if (Minecraft.getMinecraft().getCurrentServerData() == null) {
@@ -91,23 +71,21 @@ public class Hytools {
 			isOnHypixel = false;
 		} else {
 			String serverIP = Minecraft.getMinecraft().getCurrentServerData().serverIP;
-			if (serverIP.toLowerCase().contains("hypixel.net")) { 
-				configAPIKeySet = HypixelApiKey.setKeyFromConf();
+			if (serverIP.toLowerCase().contains("hypixel.net")) {
 				isOnHypixel = true;
-				dontRun = true;
+				stopChecks = true;
 			} else {
 				isOnHypixel = false;
 			}
 		}
 
         //TEMP!!! REMOVE AFTER DEVELOPMENT
-        //configAPIKeySet = HypixelApiKey.setKeyFromConf();
         //isOnHypixel = true;
-        //TEMP!!! REMOVE AFTER DEVELOPMENT
     }
 
 	void runTools(final String filtered, final Boolean hytillities) {
 		String user;
+
         //parse username depending on if user is using hytilities
         if (hytillities) {
             user = filtered.substring(filtered.indexOf(" ", 3) + 1, filtered.length());
@@ -137,20 +115,9 @@ public class Hytools {
     	
 		//return if message contains obfuscation
 		if (event.message.getFormattedText().contains("\u00A7k")) return;
-
-    	//request for new api key if allowed
-    	if (Config.getAutoFetchAPIKey() && requestApiKeyOnce && !configAPIKeySet) {
-			Minecraft.getMinecraft().thePlayer.sendChatMessage("/api new");
-			requestApiKeyOnce = false;
-		}
     	
 		//get chat without the formatting (color codes)
         String filtered = event.message.getUnformattedText();
-        
-        //recieve messages from command "/api new" and parse
-        Matcher m = Pattern.compile(I18n.format("hytools.api.new")).matcher(filtered);
-        if (m.find() && filtered.length() == 56)
-        	HypixelApiKey.setKey(filtered.substring(20), true);
 
 		// ^\+ \([0-9]+\/[0-9]+\) [a-zA-Z0-9_]{1,16}$ | "+ (23/24) NintendoOS"
 		Matcher hytillitiesJoined = Pattern.compile("^\\+ \\([0-9]+\\/[0-9]+\\) [a-zA-Z0-9_]{1,16}$").matcher(filtered);

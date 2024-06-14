@@ -43,26 +43,17 @@ public class GuildCheck {
 		//disable party guess guild if toggled
 		if (!Config.getPartyGuessGuild()) return null;
     	
-		ArrayList<String> guildInfo;
-		if (HypixelApiKey.apiKeySet) {
-			 guildInfo = GuildOfUUID.get(firstUUID);
-        } else {
-			Hytools.log.info("GuildCheck.java | Not a valid API key!");
-        	Hytools.sendMessage(I18n.format("guild.error"));
-        	uuidArray.clear();
-        	return null;
-        }
-		
+		ArrayList<String> guildInfo = GuildOfUUID.get(firstUUID);
+		//todo
 		//check if guildInfo is not null or empty
 		if (guildInfo == null) {
 			return null;
-		} if (guildInfo.isEmpty()) {
+		} else if (guildInfo.isEmpty()) {
 			return null;
 		}
 		
 		String guildName = guildInfo.get(0);
 		guildInfo.remove(0);
-		
 		
 		ArrayList<String> uuidOfSameGuild = checkIfAnyStringInArrayMatch(guildInfo, uuidArray);
 		

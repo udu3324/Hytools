@@ -30,41 +30,6 @@ public class NickAlert extends Thread {
 				Hytools.sendMessage("\u00A75" + username + " " + I18n.format("nickalert.isnicknamed"));
 				return;
 			}
-
-			// dont use hypixel api if it's toggled off
-			if (!Config.getNickAlertHypixelAPI()) return;
-
-			// check if user has logged on before
-			if (HypixelApiKey.apiKeySet) {
-
-				URL obj = new URL("https://api.hypixel.net/player?key=" + Config.getStoredAPIKey() + "&uuid=" + uuid);
-
-				// get player's data using uuid
-				HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-				con.setRequestMethod("GET");
-
-				int responseCode = con.getResponseCode();
-				Hytools.log.info("Request Type: " + con.getRequestMethod() + " | Response Code: " + responseCode
-						+ " | URL Requested " + obj.toString());
-
-				if (responseCode == 403) {
-					Hytools.log.info("NickAlert.java | Not a valid API key!");
-					Hytools.sendMessage(I18n.format("nickalert.error"));
-					return;
-				}
-
-				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-				String bR = in.readLine();
-				in.close();
-
-				// if it contains the string below, the player hasn't joined hypixel before
-				if (bR.equals("{\"success\":true,\"player\":null}"))
-					Hytools.sendMessage("\u00A75" + username + " " + I18n.format("nickalert.isnicknamed"));
-				
-			} else {
-				Hytools.log.info("NickAlert.java | Not a valid API key!");
-				Hytools.sendMessage(I18n.format("nickalert.error1"));
-			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -31,22 +31,15 @@ public class Command extends CommandBase {
         collection.put("partyguess", "1");
         collection.put("partyguessguilds", "2");
         collection.put("nickalert", "3");
-        collection.put("nickalerthypixelapi", "4");
-		collection.put("setapikey", "5");
-		collection.put("autofetchapikey", "6");
 
 		// /hytools
         if (args.length < 1) {
             sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "[+]= Hytools v" + Reference.VERSION + " =[+]\n"
 					+ EnumChatFormatting.GOLD + "Credits: Mod-udu3324 I18n-lroj Original-wateTina\n\n"
-					+ EnumChatFormatting.GREEN + "/fcheck (player1) (player2) - "+I18n.format("command.help1")+"\n"
-					+ EnumChatFormatting.RED + "/hytools setAPIKey - "+I18n.format("command.help2")+"\n"
-					+ EnumChatFormatting.RED + "/hytools autoFetchAPIKey [toggled|" + Config.getAutoFetchAPIKey() + "]\n"
             		+ EnumChatFormatting.DARK_AQUA + "/hytools partyguess [toggled|" + Config.getPartyGuess() + "]\n"
             		+ EnumChatFormatting.GOLD + "/hytools partyguessguilds [toggled|" + Config.getPartyGuessGuild() + "]\n"
             		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalert [toggled|" + Config.getNickAlert() + "]\n"
-            		+ EnumChatFormatting.GRAY + I18n.format("command.help8.1") + " " + EnumChatFormatting.BOLD + I18n.format("command.help8.2")+"\n"
-            		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalerthypixelapi [toggled|" + Config.getNickAlertHypixelAPI() + "]"));
+            		+ EnumChatFormatting.GRAY + I18n.format("command.help8.1") + " " + EnumChatFormatting.BOLD + I18n.format("command.help8.2")));
             return;
         }
         
@@ -70,19 +63,6 @@ public class Command extends CommandBase {
             		data = "ON";
         		else 
         			data = "OFF";
-            } else if (command.equals("NICKALERTHYPIXELAPI")) { 
-            	if (Config.getNickAlertHypixelAPI())
-            		data = "ON";
-        		else
-        			data = "OFF";
-            } else if (command.equals("AUTOFETCHAPIKEY")) { 
-            	if (Config.getAutoFetchAPIKey())
-            		data = "ON";
-        		else
-        			data = "OFF";
-            } else if (command.equals("SETAPIKEY")) { 
-            	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("command.setapikey")));
-                return;
             } else {
             	sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + command + " " + 
             			I18n.format("command.doesn")));
@@ -113,8 +93,9 @@ public class Command extends CommandBase {
 				data = "ON";
 			} else if (data.equals("FALSE"))
 				data = "OFF";
-            
-            if (!data.equals("TOGGLE") && !data.equals("ON") && !data.equals("OFF") && !command.equals("SETAPIKEY")) {
+
+			// return if argument is not valid
+            if (!data.equals("TOGGLE") && !data.equals("ON") && !data.equals("OFF")) {
             	sender.addChatMessage(new ChatComponentText(
                         EnumChatFormatting.RED + I18n.format("command.i2a")));
             	return;
@@ -162,41 +143,7 @@ public class Command extends CommandBase {
             			data = "ON";
             		}
             	}
-            } else if (command.equals("NICKALERTHYPIXELAPI")) { 
-            	if (data.equals("ON")) {
-            		Config.setNickAlertHypixelAPI(true);
-            	} else if (data.equals("OFF")) {
-            		Config.setNickAlertHypixelAPI(false);
-            	} else if (data.equals("TOGGLE")) {
-            		if (Config.getNickAlertHypixelAPI()) {
-            			Config.setNickAlertHypixelAPI(false);
-            			data = "OFF";
-            		} else { //would be off
-            			Config.setNickAlertHypixelAPI(true);
-            			data = "ON";
-            		}
-            	}
-            } else if (command.equals("AUTOFETCHAPIKEY")) { 
-            	if (data.equals("ON")) {
-            		Config.setAutoFetchAPIKey(true);
-            	} else if (data.equals("OFF")) {
-            		Config.setAutoFetchAPIKey(false);
-            	} else if (data.equals("TOGGLE")) {
-            		if (Config.getAutoFetchAPIKey()) {
-            			Config.setAutoFetchAPIKey(false);
-            			data = "OFF";
-            		} else { //would be off
-            			Config.setAutoFetchAPIKey(true);
-            			data = "ON";
-            		}
-            	}
-            } else if (command.equals("SETAPIKEY")) {
-				if (HypixelApiKey.setKey(data, false)) {
-					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + I18n.format("command.apiset")));
-				} else {
-					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + I18n.format("command.apiad")));
-				}
-			}
+            }
             
             //commands that are successful end up here
             sender.addChatMessage(new ChatComponentText(
