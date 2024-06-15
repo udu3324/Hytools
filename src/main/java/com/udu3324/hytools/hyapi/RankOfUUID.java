@@ -31,7 +31,6 @@ public class RankOfUUID {
 
             // return if response is not 200 (ok)
             if (responseCode != 200) {
-                //todo
                 Hytools.log.info("RankOfUUID.java | Internal developer key bad. Please report an issue to udu3324.");
                 return symbol + "7";
             }

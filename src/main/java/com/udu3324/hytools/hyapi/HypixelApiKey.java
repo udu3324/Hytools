@@ -13,7 +13,6 @@ public class HypixelApiKey {
 	
     // setKey() sets the hypixel api key in config and updates it realtime for the other mods
     public static Boolean setKey(String key, boolean sendMessageInChat) {
-        //todo
         return null;
     }
 }

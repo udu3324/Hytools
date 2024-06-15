@@ -44,7 +44,7 @@ public class GuildCheck {
 		if (!Config.getPartyGuessGuild()) return null;
     	
 		ArrayList<String> guildInfo = GuildOfUUID.get(firstUUID);
-		//todo
+		
 		//check if guildInfo is not null or empty
 		if (guildInfo == null) {
 			return null;

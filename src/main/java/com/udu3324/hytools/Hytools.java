@@ -18,7 +18,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.udu3324.hytools.hyapi.HypixelApiKey;
 import com.udu3324.hytools.tools.nickalert.NickAlert;
 import com.udu3324.hytools.tools.partyguess.PartyGuess;
 

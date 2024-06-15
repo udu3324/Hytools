@@ -34,12 +34,11 @@ public class Command extends CommandBase {
 
 		// /hytools
         if (args.length < 1) {
-            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "[+]= Hytools v" + Reference.VERSION + " =[+]\n"
+            sender.addChatMessage(new ChatComponentText("\n" + EnumChatFormatting.GOLD + "[+]= Hytools v" + Reference.VERSION + " =[+]\n"
 					+ EnumChatFormatting.GOLD + "Credits: Mod-udu3324 I18n-lroj Original-wateTina\n\n"
             		+ EnumChatFormatting.DARK_AQUA + "/hytools partyguess [toggled|" + Config.getPartyGuess() + "]\n"
             		+ EnumChatFormatting.GOLD + "/hytools partyguessguilds [toggled|" + Config.getPartyGuessGuild() + "]\n"
-            		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalert [toggled|" + Config.getNickAlert() + "]\n"
-            		+ EnumChatFormatting.GRAY + I18n.format("command.help8.1") + " " + EnumChatFormatting.BOLD + I18n.format("command.help8.2")));
+            		+ EnumChatFormatting.DARK_PURPLE + "/hytools nickalert [toggled|" + Config.getNickAlert()));
             return;
         }
         
