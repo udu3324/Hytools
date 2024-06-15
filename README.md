@@ -31,7 +31,7 @@ A tool that alerts if someone joined is nicked. This tool **will not reveal the 
 
 These are the commands to toggle certain tools in Hytools.
 
-![](https://cdn.modrinth.com/data/rZiwXEaU/images/6378dff5bddba6d46a6b1536333a7dba8fcdff36.png)
+![](https://cdn.modrinth.com/data/rZiwXEaU/images/fcd0d95faeb663472687dffc9b4e93f921689460.png)
 
  
 ## 📜 Translations

@@ -1,6 +1,5 @@
 package com.udu3324.hytools;
 
-import net.minecraft.client.resources.I18n;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.client.Minecraft;

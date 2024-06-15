@@ -3,9 +3,7 @@ package com.udu3324.hytools.tools.partyguess;
 import java.util.ArrayList;
 
 import com.udu3324.hytools.Config;
-import com.udu3324.hytools.Hytools;
 import com.udu3324.hytools.hyapi.GuildOfUUID;
-import com.udu3324.hytools.hyapi.HypixelApiKey;
 import com.udu3324.hytools.hyapi.RankOfUUID;
 import com.udu3324.hytools.mcapi.IGN;
 import com.udu3324.hytools.mcapi.UUID;

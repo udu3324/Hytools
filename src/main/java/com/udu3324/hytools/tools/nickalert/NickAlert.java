@@ -1,13 +1,7 @@
 package com.udu3324.hytools.tools.nickalert;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import com.udu3324.hytools.Config;
 import com.udu3324.hytools.Hytools;
-import com.udu3324.hytools.hyapi.HypixelApiKey;
 import com.udu3324.hytools.mcapi.UUID;
 import net.minecraft.client.resources.I18n;
 
