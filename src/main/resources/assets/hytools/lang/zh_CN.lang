@@ -1,9 +1,9 @@
-error.api=错误！ 来自/api new的API密钥不起作用
+error.api=ERROR! error.api=错误！ 来自/api new的API密钥不起作用
 nickalert.isnicknamed=是一个nick用户！
-nickalert.error=§4§l致命错误！ （这甚至是不可能的，请通过Discord：_._#3324 与我联系）（无法获取玩家数据）API 密钥尚未设置。 请执行 §c§l/api new§4§l 来解决此问题。
-nickalert.error1=§4§l错误！ （无法获取玩家数据）API 密钥尚未设置。 请执行 §c§l/api new§4§l 来解决此问题。
-friends.error=§4§l错误！ （无法获取好友）API 密钥尚未设置。 请执行 §c§l/api new§4§l 来解决此问题。
-guild.error=§4§l错误！ （无法获取公会信息）API 密钥尚未设置。 请执行 §c§l/api new§4§l 来解决此问题
+nickalert.error=\u00A74\u00A7lFATAL ERROR! nickalert.error=§4§l致命错误！ （这甚至是不可能的，请通过Discord：_._#3324 与我联系）（无法获取玩家数据）API 密钥尚未设置。 请执行 §c§l/api new§4§l 来解决此问题。 Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this
+nickalert.error1=\u00A74\u00A7lERROR! fcheck.sta=§4§l错误！ (无法获取玩家数据) API密钥尚未设置。 请执行§c§l/api new§4§l 来解决这个问题。 Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
+friends.error=\u00A74\u00A7lERROR! friends.error=§4§l错误！ （无法获取好友）API 密钥尚未设置。 请执行 §c§l/api new§4§l 来解决此问题。 Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
+guild.error=§4§l错误！ （无法获取公会信息）API 密钥尚未设置。 请执行 §c§l/api new§4§l 来解决此问题 (guild info couldn't be fetched) The API key has not been set yet. Please do \u00A7c\u00A7l/api new\u00A74\u00A7l to fix this.
 command.setapikey=该命令中缺少api！
 command.doesn=不存在于Hytools中！
 command.currently=目前被设置为
@@ -16,7 +16,7 @@ command.mass=太多参数！ 你可能有一个轮胎。
 fcheck.nop=不是真正的玩家。
 fcheck.niu=不是 IGN 或 UUID！
 fcheck.api=Fcheck.java | 不是有效的 API 密钥！
-fcheck.sta=§4§l错误！ (无法获取玩家数据) API密钥尚未设置。 请执行§c§l/api new§4§l 来解决这个问题。
+fcheck.Tanearw=太多参数！ 你可能有一个轮胎。 nickalert.error1=§4§l错误！ （无法获取玩家数据）API 密钥尚未设置。 请执行 §c§l/api new§4§l 来解决此问题。 Please do §c§l/api new§4§l to fix this.
 fcheck.Tanearq=没有足够的参数！ 你可能有一个轮胎。
 fcheck.Tanearw=太多参数！ 你可能有一个轮胎。
 command.help1=检查玩家的朋友
