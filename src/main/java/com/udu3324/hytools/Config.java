@@ -123,12 +123,9 @@ public class Config {
 			    if (isNotCurrentVersion()) {
 			    	Hytools.log.info(I18n.format("config.bed"));
 			    	//delete and create the new one with the right version
-			    	String apiKey = getStoredAPIKey();
-			    	
+					
 			    	delete();
 			    	create();
-			    	
-			    	setStoredAPIKey(apiKey);
 			    }
 			  }
 		} catch (IOException e) {
