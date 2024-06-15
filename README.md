@@ -1,11 +1,11 @@
 <img align="right" src="https://raw.githubusercontent.com/udu3324/Hytools/main/src/main/resources/logo.png" height="200"  width="200">
 
-![Mod Loader: Forge](https://img.shields.io/badge/mod%20loader-Forge%201.8.9-e04e14)
-[![Latest Release](https://img.shields.io/github/v/release/udu3324/Hytools)](https://github.com/udu3324/Hytools/releases/latest)
-![License](https://img.shields.io/github/license/udu3324/hytools)
-[![Localization](https://badges.crowdin.net/slimefunaddon/localized.svg)](https://crowdin.com/project/slimefunaddon)
-![Github Clones](https://img.shields.io/github/downloads/udu3324/hytools/total)
-[![Modrinth Downloads](https://img.shields.io/badge/dynamic/json?color=1bd96a&label=modrinth&query=downloads&suffix=%20downloads&url=https%3A%2F%2Fapi.modrinth.com%2Fv2%2Fproject%2Fhytools)
+![Mod Loader: Forge](https://img.shields.io/badge/mod%20loader-Forge%201.8.9-e04e14)    
+[![Latest Release](https://img.shields.io/github/v/release/udu3324/Hytools)](https://github.com/udu3324/Hytools/releases/latest)    
+![License](https://img.shields.io/github/license/udu3324/hytools)    
+[![Localization](https://badges.crowdin.net/slimefunaddon/localized.svg)](https://crowdin.com/project/slimefunaddon)    
+![Github Clones](https://img.shields.io/github/downloads/udu3324/hytools/total)    
+[![Latest Release](https://img.shields.io/badge/dynamic/json?color=1bd96a&label=modrinth&query=downloads&suffix=%20downloads&url=https%3A%2F%2Fapi.modrinth.com%2Fv2%2Fproject%2Fhytools)](https://modrinth.com/mod/hytools)      
 
 # Hytools
 Hytools is a forge mod that adds useful client sided features to make the experience better on Hypixel. 
