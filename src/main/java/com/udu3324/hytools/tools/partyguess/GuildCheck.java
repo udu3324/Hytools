@@ -2,7 +2,7 @@ package com.udu3324.hytools.tools.partyguess;
 
 import java.util.ArrayList;
 
-import com.udu3324.hytools.Config;
+import com.udu3324.hytools.HytoolsConfig;
 import com.udu3324.hytools.hyapi.GuildOfUUID;
 import com.udu3324.hytools.hyapi.RankOfUUID;
 import com.udu3324.hytools.mcapi.IGN;
@@ -39,7 +39,7 @@ public class GuildCheck {
 	
 	public static String reset() {
 		//disable party guess guild if toggled
-		if (!Config.getPartyGuessGuild()) return null;
+		if (!HytoolsConfig.partyGuessGuild) return null;
     	
 		ArrayList<String> guildInfo = GuildOfUUID.get(firstUUID);
 		
@@ -84,7 +84,7 @@ public class GuildCheck {
 	}
 	
 	public static void store(String username) {
-		if (!Config.getPartyGuessGuild()) return;
+		if (!HytoolsConfig.partyGuessGuild) return;
     	
 		//convert username to uuid
         String uid = null;

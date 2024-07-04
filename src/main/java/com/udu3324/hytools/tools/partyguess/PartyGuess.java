@@ -1,6 +1,6 @@
 package com.udu3324.hytools.tools.partyguess;
 
-import com.udu3324.hytools.Config;
+import com.udu3324.hytools.HytoolsConfig;
 import com.udu3324.hytools.Hytools;
 import com.udu3324.hytools.hyapi.RankOfUUID;
 import com.udu3324.hytools.mcapi.UUID;
@@ -21,8 +21,8 @@ public class PartyGuess {
     public static int delay = 10; // ms
 
     public static void guessMessageParty(String username) {
-        //if tool is toggled off, dont run it
-        if (!Config.getPartyGuess()) return;
+        //if tool is toggled off, don't run it
+        if (!HytoolsConfig.partyGuess) return;
 
         //run once and start timer 
         if (doOnceBeforeTimeReset) {
@@ -90,6 +90,5 @@ public class PartyGuess {
 
         tempUserArray.add(username);
         Hytools.log.info(I18n.format("partyguess.username") + tempUserArray.toString());
-        return;
     }
 }
