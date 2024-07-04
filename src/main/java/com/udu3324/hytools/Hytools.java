@@ -20,8 +20,11 @@ import java.util.regex.Pattern;
 import com.udu3324.hytools.tools.nickalert.NickAlert;
 import com.udu3324.hytools.tools.partyguess.PartyGuess;
 
-@Mod(modid = Reference.MODID,name = Reference.NAME, version = Reference.VERSION)
+@Mod(modid = Hytools.MOD_ID, name = Hytools.MOD_NAME, version = Hytools.VERSION)
 public class Hytools {
+	public static final String MOD_ID = "@ID@";
+	public static final String MOD_NAME = "@NAME@";
+	public static final String VERSION = "@VER@";
 	
 	boolean isOnHypixel = false;
 
@@ -49,7 +52,7 @@ public class Hytools {
 	
 	@EventHandler
     public void init(FMLInitializationEvent event) {
-		log.info("Hytools v" + Reference.VERSION + " has loaded! (by udu3324)");
+		log.info("Hytools v" + Hytools.VERSION + " has loaded! (by udu3324)");
 		
         // register subscribe events
         MinecraftForge.EVENT_BUS.register(this);

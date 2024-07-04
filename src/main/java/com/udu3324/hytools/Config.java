@@ -19,7 +19,7 @@ public class Config {
 		String text = brTest.readLine();
 		brTest.close();
 		
-		if (!text.contains(Reference.VERSION)) return true;
+		if (!text.contains(Hytools.VERSION)) return true;
 		return false;
 	}
 
@@ -103,7 +103,7 @@ public class Config {
 		try {
 			if (configFile.createNewFile()) {
 				FileWriter w = new FileWriter(configFile, true);
-				w.write("# Hytools v" + Reference.VERSION + " Config" + System.lineSeparator());
+				w.write("# Hytools v" + Hytools.VERSION + " Config" + System.lineSeparator());
 				w.write("# Hey! I suggest you use the ingame commands "
 						+ "instead of editing the config directly instead." + System.lineSeparator());
 				w.write(System.lineSeparator());

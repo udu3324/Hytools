@@ -1,12 +1,15 @@
 [{
-  "modid": "Hytools",
-  "name": "Hytools",
+  "modid": "${id}",
+  "name": "${name}",
   "description": "A mod that has useful tools for Hypixel.",
-  "version": "1.7",
+  "version": "${version}",
   "mcversion": "1.8.9",
   "url": "https://github.com/udu3324/Hytools",
   "updateUrl": "",
-  "authorList": ["wateTina","udu3324"],
+  "authorList": [
+    "wateTina",
+    "udu3324"
+  ],
   "credits": "Credit to Hypixel for the logo and the modding community for helping me :>",
   "logoFile": "logo.png",
   "screenshots": [],

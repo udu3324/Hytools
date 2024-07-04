@@ -1,86 +1,94 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+plugins {
+    id "gg.essential.loom" version "0.10.0.5"
+    id "net.kyori.blossom" version "1.3.0"
+    id "java"
+}
+
+version = mod_version
+archivesBaseName = mod_name
+
+blossom {
+    String className = "src/main/java/com/udu3324/hytools/Hytools.java"
+    replaceToken("@VER@", project.version, className)
+    replaceToken("@NAME@", mod_name, className)
+    replaceToken("@ID@", mod_id, className)
+}
+
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+compileJava.options.encoding = 'UTF-8'
+
+loom {
+    launchConfigs {
+        client {
+            arg("--tweakClass", "cc.polyfrost.oneconfigwrapper.OneConfigWrapper")
         }
     }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
+
+    runConfigs {
+        client {
+            ideConfigGenerated = true
+        }
+    }
+
+    forge {
+        pack200Provider = new dev.architectury.pack200.java.Pack200Adapter()
+        mixinConfig("mixins.${mod_id}.json")
+        mixin.defaultRefmapName.set("mixins.${mod_id}.refmap.json")
     }
 }
-apply plugin: 'maven-publish'
-apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: "eclipse"
-apply plugin: 'com.github.johnrengelman.shadow'
 
-repositories {
-    maven { url 'https://repo.hypixel.net/repository/Hypixel/' }
+configurations {
+    include
+    implementation.extendsFrom(include)
 }
 
-version = "1.7"
-group= "com.udu3324.hytools" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "Hytools"
-
-minecraft {
-    version = "1.8.9-11.15.1.2318-1.8.9"
-    runDir = "run"
-    
-    mappings = "stable_22"
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.polyfrost.cc/releases' }
 }
 
 dependencies {
-    //for later on
-}
+    minecraft("com.mojang:minecraft:1.8.9")
+    mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
+    forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
 
-shadowJar {
-    // Only shadow fluent-hc
-    dependencies {
-        //for later on
-    }
-    
-    classifier '' // Replace the default JAR
-}
-
-reobf {
-    shadowJar {} // Reobfuscate the shadowed JAR
+    compileOnly('cc.polyfrost:oneconfig-1.8.9-forge:0.2.2-alpha+')
+    include('cc.polyfrost:oneconfig-wrapper-launchwrapper:1.0.0-beta17')
 }
 
 processResources {
     // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+    inputs.property "version", version
+    inputs.property "name", mod_name
+    inputs.property "id", mod_id
 
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+    filesMatching("mcmod.info") {
+        expand(
+                "id": mod_id,
+                "name": mod_name,
+                "version": version
+        )
     }
-        
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+
+    rename '(.+_at.cfg)', 'META-INF/$1'
+}
+
+sourceSets {
+    main {
+        output.resourcesDir = java.classesDirectory
     }
 }
-tasks.withType(JavaCompile) {
-   it.options.encoding = 'UTF-8'
-}
-publishing {
-    publications {
-      mavenJava(MavenPublication) {
-         from components.java
-    }
-   }
 
-   // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-   repositories {
-   // Add repositories to publish to here.
-   // Notice: This block does NOT have the same function as the block in the top level.
-   // The repositories here will be used for publishing your artifact, not for
-   // retrieving dependencies.
-   }
+jar {
+    from(configurations.include.collect { file ->
+        println "Including file: ${file.name}" // Debug output
+        zipTree(file)
+    })
+    manifest.attributes(
+            'ModSide': 'CLIENT',
+            'ForceLoadAsMod': true,
+            'TweakClass': "cc.polyfrost.oneconfig.loader.stage0.LaunchWrapperTweaker",
+            "TweakOrder": "0",
+            "Manifest-Version": 1.0
+    )
 }
