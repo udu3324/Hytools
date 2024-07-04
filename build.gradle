@@ -20,7 +20,7 @@ compileJava.options.encoding = 'UTF-8'
 loom {
     launchConfigs {
         client {
-            arg("--tweakClass", "cc.polyfrost.oneconfigwrapper.OneConfigWrapper")
+            arg("--tweakClass", "cc.polyfrost.oneconfig.loader.stage0.LaunchWrapperTweaker")
         }
     }
 
@@ -64,9 +64,9 @@ processResources {
 
     filesMatching("mcmod.info") {
         expand(
-                "id": mod_id,
-                "name": mod_name,
-                "version": version
+            "id": mod_id,
+            "name": mod_name,
+            "version": version
         )
     }
 

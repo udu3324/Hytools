@@ -56,7 +56,9 @@ If you want to build your own jar of Hytools, you can!
  4. Open a terminal and navigate to all of the mod's files. (`cd` on windows)
  5. Run `gradlew build` or `.\gradlew build` depending on your OS.
  6. The artifacts should now be in the `/build/libs` folder
- 7. (optional) Set up a dev workflow by opening the repo in your favorite IDE (vsc recommended) and run `gradlew runClient` to start minecraft with the mod. Add [ReAuth](https://www.curseforge.com/minecraft/mc-mods/reauth/files/4407996) to `/run/mods` to allow logging into Hypixel.
+ 7. (optional) Set up a dev workflow by opening the repo in Intellij (sorry vsc users) and run Intellij MC Run Config to start minecraft with the mod. Add [ReAuth](https://www.curseforge.com/minecraft/mc-mods/reauth/files/4407996) to `/run/mods` to allow logging into Hypixel.      
+       
+![Intellij MC Run Config](https://cdn.modrinth.com/data/rZiwXEaU/images/4d32c3e55fad1564e1b3dc59581ef4aaad1bdccd.png)
 
 ## ❤️ Contribute
 
