@@ -7,7 +7,7 @@ jobs:
       matrix:
         # 使用这些Java版本
         java: [
-          8
+          17
         ]
         # 并同时在Linux和Windows上运行
         os: [ubuntu-20.04, windows-latest]
@@ -28,7 +28,7 @@ jobs:
       - name: build
         run: ./gradlew build
       - name: capture build artifacts
-        if: ${{ runner.os == 'Linux' && matrix.java == '8' }} # 只上传由一个操作系统上的LTS java构建的工件
+        if: ${{ runner.os == 'Linux' && matrix.java == '17' }} # 只上传由一个操作系统上的LTS java构建的工件
         uses: actions/upload-artifact@v3
         with:
           name: Artifacts
