@@ -29,6 +29,9 @@ public class EventListener {
     public void onWorldLoaded(WorldEvent.Load event) {
         ScanForNicks.usernames.clear();
 
+        //TEMP!!! REMOVE AFTER DEVELOPMENT
+        //isOnHypixel = true;
+
         //add this check in case you are on replay mod, where you are not on a single-player world, but also not multiplayer (GitHub/EmeraldWither)
         if (Minecraft.getMinecraft().getCurrentServerData() == null) {
             isOnHypixel = false;
@@ -44,9 +47,6 @@ public class EventListener {
         //they are in a server, but check the ip
         String serverIP = Minecraft.getMinecraft().getCurrentServerData().serverIP;
         isOnHypixel = serverIP.toLowerCase().contains("hypixel.net");
-
-        //TEMP!!! REMOVE AFTER DEVELOPMENT
-        //isOnHypixel = true;
     }
 
     @SubscribeEvent
