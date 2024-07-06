@@ -15,7 +15,7 @@ public class PartyGuess {
     public static boolean doOnceBeforeTimeReset = true;
 
     // this array list contains the users in the time period
-    public static ArrayList<String> tempUserArray = new ArrayList<String>();
+    public static ArrayList<String> tempUserArray = new ArrayList<>();
 
     // time period for how many users can join
     public static int delay = 10; // ms
@@ -53,11 +53,11 @@ public class PartyGuess {
                         //create a string of the array and remove []
                         String raw = tempUserArray.toString().replace("[", "").replace("]", "");
 
-                        // user and user string if theres only 2 people
+                        // user and user string if there's only 2 people
                         if (tempUserArray.size() == 2) {
                             raw = raw.replace(",", "\u00A73 and");
                         } else if (tempUserArray.size() >= 3) {
-                            // user, user and user string if theres more than 3 people
+                            // user, user and user string if there's more than 3 people
 
                             // get the pos/index of the last comma in msg
                             int lastComma = raw.lastIndexOf(",");
@@ -76,7 +76,7 @@ public class PartyGuess {
                         if (guildCheck != null) Hytools.sendMessage("\u00A76" + guildCheck);
                     }
 
-                    Hytools.log.info("Reset party guess " + tempUserArray.toString());
+                    Hytools.log.info("Reset party guess {}", tempUserArray.toString());
 
                     doOnceBeforeTimeReset = true;
                 }
@@ -89,6 +89,6 @@ public class PartyGuess {
         }
 
         tempUserArray.add(username);
-        Hytools.log.info(I18n.format("partyguess.username") + tempUserArray.toString());
+        Hytools.log.info("{}{}", I18n.format("partyguess.username"), tempUserArray.toString());
     }
 }

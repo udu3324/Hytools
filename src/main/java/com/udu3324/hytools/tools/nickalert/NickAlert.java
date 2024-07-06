@@ -16,10 +16,7 @@ public class NickAlert extends Thread {
 			// check if the user exists in minecraft's database
 			uuid = UUID.get(username);
 
-			// broken wi-fi or something
-			if (uuid == null) return;
-
-			if (uuid.equals("Not a IGN or UUID!")) {
+			if (uuid == null) {
 				// checks if username exists in minecraft api
 				Hytools.sendMessage("\u00A75" + username + " " + I18n.format("nickalert.isnicknamed"));
 			}

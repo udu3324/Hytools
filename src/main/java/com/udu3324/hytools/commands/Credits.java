@@ -9,7 +9,7 @@ import com.udu3324.hytools.Hytools;
 public class Credits {
     @Main
     private void main() {
-        System.out.println("Sending Hytools Credits <3");
+        Hytools.log.info("Sending Hytools Credits <3");
 
         UChat.chat("\n&6[+]= Hytools v" + Hytools.VERSION + " =[+]\n" +
                 "&7Credits: &2Mod-udu3324 &9I18n-lroj &5Original-wateTina\n" +
