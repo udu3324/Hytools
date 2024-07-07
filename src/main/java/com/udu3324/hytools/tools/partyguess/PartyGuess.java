@@ -55,7 +55,7 @@ public class PartyGuess {
 
                         // user and user string if there's only 2 people
                         if (tempUserArray.size() == 2) {
-                            raw = raw.replace(",", "\u00A73 and");
+                            raw = raw.replace(",", "§3 and");
                         } else if (tempUserArray.size() >= 3) {
                             // user, user and user string if there's more than 3 people
 
@@ -65,15 +65,15 @@ public class PartyGuess {
                             // delete comma and replace with and
                             StringBuilder newString = new StringBuilder(raw);
                             newString.deleteCharAt(lastComma);
-                            newString.replace(lastComma, lastComma, "\u00A73 and");
+                            newString.replace(lastComma, lastComma, "§3 and");
                             raw = newString.toString();
                         }
-
-                        Hytools.sendMessage("\u00A73" + raw + "\u00A73 "+ I18n.format("partyguess.party"));
+                        raw = "§3" + raw + "§3";
+                        Hytools.sendMessage(I18n.format("partyguess.party", raw));
 
                         // guild check
                         String guildCheck = GuildCheck.reset();
-                        if (guildCheck != null) Hytools.sendMessage("\u00A76" + guildCheck);
+                        if (guildCheck != null) Hytools.sendMessage("§6" + guildCheck);
                     }
 
                     Hytools.log.info("Reset party guess {}", tempUserArray.toString());

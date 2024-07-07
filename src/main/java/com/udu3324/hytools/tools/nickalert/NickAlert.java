@@ -18,7 +18,7 @@ public class NickAlert extends Thread {
 
 			if (uuid == null) {
 				// checks if username exists in minecraft api
-				Hytools.sendMessage("\u00A75" + username + " " + I18n.format("nickalert.isnicknamed"));
+				Hytools.sendMessage("§5" + I18n.format("nickalert.isnicknamed", username));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

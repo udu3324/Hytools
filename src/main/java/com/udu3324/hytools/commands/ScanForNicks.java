@@ -20,19 +20,19 @@ public class ScanForNicks {
     @Main
     private void main() {
         if (running) {
-            UChat.chat("&4Currently scanning through " + users.size() + " users. Please do not run the command.");
+            UChat.chat("&4" + I18n.format("scanfornicks.currently", users.size()));
             return;
         }
 
         if (usernames.size() > 20 && !HytoolsConfig.unlimitedScan) {
-            UChat.chat("&4You tried to scan a lobby with more than 20 players. (" + usernames.size() + ") This isn't recommended as you could be rate-limited by Mojang. Go to config (R-SHIFT) to remove this limit.");
+            UChat.chat("&4" + I18n.format("scanfornicks.limit", usernames.size()));
             return;
         }
 
         //save the usernames before another person could join and cause ConcurrentModificationException
         users = new ArrayList<>(usernames);
 
-        UChat.chat("&6Scanning " + users.size() + " users if they're nicked. Please wait.");
+        UChat.chat("&6" + I18n.format("scanfornicks.start", users.size()));
 
         new Thread(() -> {
             running = true;
@@ -49,7 +49,7 @@ public class ScanForNicks {
                     if (test == null) {
                         nicks.add(username);
                     } else if (test.equals("!!!RateLimited!!!")) {
-                        Hytools.log.info("Rate-limited while scanning for nicks. Retrying.");
+                        Hytools.log.info(I18n.format("scanfornicks.logratelimit"));
                         //try one more time, but slower
                         Thread.sleep(1000);
 
@@ -70,11 +70,11 @@ public class ScanForNicks {
             //add a string to all messages if there were failed requests
             String failedRequests = "";
             if (failedScans > 1) {
-                failedRequests = "&e" + failedScans + " player(s) couldn't be scanned.";
+                failedRequests = "&e" + I18n.format("scanfornicks.ratelimit", failedScans);
             }
 
             if (nicks.isEmpty()) {
-                UChat.chat("&2No nicked users found. " + failedRequests);
+                UChat.chat("&2" + I18n.format("scanfornicks.none") + " " + failedRequests);
                 return;
             }
 
@@ -88,18 +88,18 @@ public class ScanForNicks {
             }
 
             if (nicks.size() == 1) {
-                UChat.chat(nicks.get(0) + " &5" + I18n.format("nickalert.isnicknamed") + " " + failedRequests);
+                UChat.chat("&5" + I18n.format("nickalert.isnicknamed", nicks.get(0)) + " " + failedRequests);
                 return;
             }
 
             //big list, format it
             String delimiter = ", ";
-            String lastDelimiter = " and ";
+            String lastDelimiter = " & ";
             int listSize = nicks.size();
 
-            String formatArray = String.join(delimiter, nicks.subList(0, listSize - 1)) + lastDelimiter + nicks.get(listSize - 1);
+            String formatArray = String.join(delimiter, nicks.subList(0, listSize - 1)) + lastDelimiter + nicks.get(listSize - 1) + " &5";
 
-            UChat.chat(formatArray + "&5 are nicked. " + failedRequests);
+            UChat.chat(I18n.format("scanfornicks.many", formatArray) + " " + failedRequests);
         }).start();
     }
 }
