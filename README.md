@@ -29,7 +29,7 @@ A tool that alerts if someone joined is nicked. This tool **will not reveal the 
 
 This command takes all the players currently in the game and scans if they are nicked. It is recommended to scan right before the game starts as NPCs in the game will be scanned too.
 
-![](https://cdn.modrinth.com/data/rZiwXEaU/images/f5c311380dc62310d54e8c606d3f4c4f318b3b36.png)
+![](https://cdn.modrinth.com/data/rZiwXEaU/images/bd6107c3736541752b9ef42d2fb31a9e961d6a2c.png)
  
 ## 📜 Translations
 
