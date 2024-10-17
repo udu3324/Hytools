@@ -1,7 +1,7 @@
 nickalert.isnicknamed=%s ist ein genicketer Spieler!
 partyguess.party=%s sind wahrscheinlich in einer Party.
 partyguess.username=Spieler zum Array hinzugefügt
-partyguess.guildcheck=%s ist in der gleichen Gilde wie %s
+partyguess.guildcheck=%s ist in der selben Gilde wie %s
 credits.description=Hytools ist eine Mod, die nützliche Funktionen hinzufügt, um das Spielerlebnis auf Hypixel zu verbessern. Konfiguriere mit R-Shift.
 scanfornicks.description=Dies scannt alle Spieler im Spiel, um nach genickten Spielern zu suchen.
 scanfornicks.currently=Scanne aktuell %s Spieler. Bitte führe den Befehl nicht aus.
